@@ -2,12 +2,16 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.Http;
 using System;
 using System.IO;
 using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text;
+
 
 namespace DayZ_Server_Tool
 {
@@ -23,6 +27,8 @@ namespace DayZ_Server_Tool
         private bool isManualStop = false; // Flag to control manual stop
         private System.Threading.Timer restartTimer;
         private DateTime endTime; // To track when the countdown ends
+        private string WebhookURL;
+
         public Form1()
         {
             InitializeComponent();
@@ -34,6 +40,209 @@ namespace DayZ_Server_Tool
             comboBoxProfiles.SelectedIndex = -1;
             ToggleTimerFields();
         }
+        private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(comboBoxProfiles.Text))
+            {
+                MessageBox.Show("Profile name cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string profileName = comboBoxProfiles.Text;
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(directoryPath, profileName + ".json");
+
+            // Create an object to hold the profile data
+            var profileData = new
+            {
+                ModsDir = modDir.Text,
+                ExecutablePath = textBoxExePath.Text,
+                Parameters = textBoxParameters.Text,
+                Port = textBoxPort.Text,
+                Config = textBoxConfig.Text,
+                Cpu = comboBoxCpu.SelectedItem?.ToString(),
+                CheckBox1 = checkBox1.Checked,
+                CheckBoxDoLogs = checkBoxDoLogs.Checked,
+                CheckBoxAdminLog = checkBoxAdminLog.Checked,
+                CheckBoxNetLog = checkBoxNetLog.Checked,
+                CheckBoxAllowExtraParams = checkBoxAllowExtraParams.Checked,
+                TextBoxMods = textBoxMods.Text,
+                TimerEnabled = checkBoxEnableTimer.Checked,
+                Hours = numericUpDownHours.Value,
+                Minutes = numericUpDownMinutes.Value,
+                Seconds = numericUpDownSeconds.Value,
+                WebhookURL = webhookTextBox.Text,
+                WebhookCheckbox = EnableWebhookCheckbox.Checked,
+                StartWebhook = StartWebhookCheckbox.Checked,
+                StopWebhook = StopWebhookCheckbox.Checked,
+                RestartWebhook = RestartWebhookCheckbox.Checked,
+            };
+
+            // Serialize the profile data to JSON and save it to the file
+            string json = JsonConvert.SerializeObject(profileData, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+
+            // Refresh the profile list after saving
+            LoadProfilesFromDirectory();
+        }
+        private void LoadSelectedProfile()
+        {
+            if (comboBoxProfiles.SelectedItem != null)
+            {
+                string selectedFileName = comboBoxProfiles.SelectedItem.ToString();
+                string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+                string filePath = Path.Combine(directoryPath, selectedFileName + ".json");
+
+                if (File.Exists(filePath))
+                {
+                    string json = File.ReadAllText(filePath);
+                    var profileData = JsonConvert.DeserializeObject<dynamic>(json);
+
+                    // Populate the form fields with loaded data, using null-coalescing and explicit conversions
+                    textBoxExePath.Text = profileData?.ExecutablePath ?? string.Empty;
+                    textBoxParameters.Text = profileData?.Parameters ?? string.Empty;
+                    textBoxPort.Text = profileData?.Port ?? string.Empty;
+                    textBoxConfig.Text = profileData?.Config ?? string.Empty;
+                    modDir.Text = profileData?.ModsDir ?? string.Empty;
+                    comboBoxCpu.SelectedItem = profileData?.Cpu ?? string.Empty;
+
+                    // Safely load checkbox values (use 'true' or 'false' when null)
+                    checkBox1.Checked = (bool?)profileData?.CheckBox1 ?? false;
+                    checkBoxDoLogs.Checked = (bool?)profileData?.CheckBoxDoLogs ?? false;
+                    checkBoxAdminLog.Checked = (bool?)profileData?.CheckBoxAdminLog ?? false;
+                    checkBoxNetLog.Checked = (bool?)profileData?.CheckBoxNetLog ?? false;
+                    checkBoxAllowExtraParams.Checked = (bool?)profileData?.CheckBoxAllowExtraParams ?? false;
+
+                    // Load mods into textBoxMods
+                    textBoxMods.Text = profileData?.TextBoxMods ?? string.Empty;
+
+                    // Load timer settings
+                    checkBoxEnableTimer.Checked = (bool?)profileData?.TimerEnabled ?? false;
+                    numericUpDownHours.Value = (decimal)(profileData?.Hours ?? 0);
+                    numericUpDownMinutes.Value = (decimal)(profileData?.Minutes ?? 0);
+                    numericUpDownSeconds.Value = (decimal)(profileData?.Seconds ?? 0);
+
+                    // Clear and load ModsCheckedListBox with directories from modDir
+                    ModsCheckedListBox.Items.Clear();
+
+                    //Webhook Settings
+                    webhookTextBox.Text = profileData?.WebhookURL ?? string.Empty;
+                    EnableWebhookCheckbox.Checked = (bool?)profileData?.WebhookCheckbox ?? false;
+                    StartWebhookCheckbox.Checked = (bool?)profileData?.StartWebhook ?? false;
+                    StopWebhookCheckbox.Checked = (bool?)profileData?.StopWebhook ?? false;
+                    RestartWebhookCheckbox.Checked = (bool?)profileData?.RestartWebhook ?? false;
+
+                    string modsDirectory = modDir.Text;
+                    if (Directory.Exists(modsDirectory))
+                    {
+                        // Get all directories in modDir
+                        string[] directories = Directory.GetDirectories(modsDirectory);
+
+                        // Populate ModsCheckedListBox with folder names except the one to exclude
+                        foreach (string directory in directories)
+                        {
+                            string folderName = Path.GetFileName(directory);
+                            if (folderName != "!DO_NOT_CHANGE_FILES_IN_THESE_FOLDERS")
+                            {
+                                ModsCheckedListBox.Items.Add(folderName);
+                            }
+                        }
+
+                        // Now check the items in ModsCheckedListBox based on the mods in textBoxMods
+                        string modsFromTextBox = textBoxMods.Text;
+                        if (!string.IsNullOrWhiteSpace(modsFromTextBox))
+                        {
+                            // Split the mods string by semicolon (;) and trim the parts
+                            string[] selectedMods = modsFromTextBox.Split(';').Select(mod => mod.Trim()).ToArray();
+
+                            // Iterate over ModsCheckedListBox items and check those present in selectedMods
+                            for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
+                            {
+                                string currentMod = ModsCheckedListBox.Items[i].ToString();
+                                if (selectedMods.Contains(currentMod))
+                                {
+                                    ModsCheckedListBox.SetItemChecked(i, true);
+                                }
+                                UpdateButtonsState();
+                                ToggleTimerFields();
+                                ToggleTimerFields();
+                                ToggleWebhookField();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The mods directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selected profile file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No profile selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ToggleTextBoxParameters();
+        }
+        private void newProfileButton_Click(object sender, EventArgs e)
+        {
+            // Clear all fields to start a new profile
+            textBoxExePath.Clear();
+            textBoxParameters.Clear();
+            textBoxPort.Clear();
+            textBoxConfig.Clear();
+            comboBoxCpu.SelectedIndex = 3; // Reset to "Automatic"
+            checkBox1.Checked = false; // Reset Freezecheck
+            comboBoxProfiles.Items.Clear(); // Clear the profile list for new profile
+            LoadProfilesFromDirectory();
+            comboBoxProfiles.SelectedIndex = -1; // Clear the selection
+            textBoxMods.Clear();
+            modDir.Clear();
+
+            // Clear all entries from the CheckedListBox
+            ModsCheckedListBox.Items.Clear();
+            UpdateButtonsState();
+
+            // Uncheck all items in the CheckedListBox
+            for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
+            {
+                ModsCheckedListBox.SetItemChecked(i, false);
+            }
+
+            checkBoxDoLogs.Checked = false;
+            checkBoxAdminLog.Checked = false;
+            checkBoxNetLog.Checked = false;
+            checkBoxAllowExtraParams.Checked = false;
+            textBoxParameters.Clear();
+
+            // Timer Clear
+            checkBoxEnableTimer.Checked = false;
+            numericUpDownSeconds.Value = 0;
+            numericUpDownMinutes.Value = 0;
+            numericUpDownHours.Value = 0;
+
+            //Webhook
+            EnableWebhookCheckbox.Checked = false;
+            webhookTextBox.Clear();
+            StartWebhookCheckbox.Checked = false;
+            StopWebhookCheckbox.Checked = false;
+            RestartWebhookCheckbox.Checked = false;
+
+        }
+
+
+
+
+        /// <summary>
+        /// End of Profile Region      End of Profile Region      End of Profile Region      
+        /// </summary>
+
+
+
+
+
         private void InitializeCpuDropdown()
         {
             comboBoxCpu.Items.Clear();
@@ -121,47 +330,6 @@ namespace DayZ_Server_Tool
             }
         }
 
-        private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(comboBoxProfiles.Text))
-            {
-                MessageBox.Show("Profile name cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string profileName = comboBoxProfiles.Text;
-            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = Path.Combine(directoryPath, profileName + ".json");
-
-            // Create an object to hold the profile data
-            var profileData = new
-            {
-                ModsDir = modDir.Text,
-                ExecutablePath = textBoxExePath.Text,
-                Parameters = textBoxParameters.Text,
-                Port = textBoxPort.Text,
-                Config = textBoxConfig.Text,
-                Cpu = comboBoxCpu.SelectedItem?.ToString(),
-                CheckBox1 = checkBox1.Checked,
-                CheckBoxDoLogs = checkBoxDoLogs.Checked,
-                CheckBoxAdminLog = checkBoxAdminLog.Checked,
-                CheckBoxNetLog = checkBoxNetLog.Checked,
-                CheckBoxAllowExtraParams = checkBoxAllowExtraParams.Checked,
-                TextBoxMods = textBoxMods.Text,
-                TimerEnabled = checkBoxEnableTimer.Checked, //Timer
-                Hours = numericUpDownHours.Value,
-                Minutes = numericUpDownMinutes.Value,
-                Seconds = numericUpDownSeconds.Value,
-            };
-
-            // Serialize the profile data to JSON and save it to the file
-            string json = JsonConvert.SerializeObject(profileData, Formatting.Indented);
-            File.WriteAllText(filePath, json);
-
-            // Refresh the profile list after saving
-            LoadProfilesFromDirectory();
-        }
-
         private void comboBoxProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxProfiles.SelectedItem != null)
@@ -183,100 +351,6 @@ namespace DayZ_Server_Tool
                     comboBoxCpu.SelectedItem = profileData.Cpu;
                 }
             }
-        }
-
-        private void LoadSelectedProfile()
-        {
-            if (comboBoxProfiles.SelectedItem != null)
-            {
-                string selectedFileName = comboBoxProfiles.SelectedItem.ToString();
-                string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(directoryPath, selectedFileName + ".json");
-
-                if (File.Exists(filePath))
-                {
-                    string json = File.ReadAllText(filePath);
-                    var profileData = JsonConvert.DeserializeObject<dynamic>(json);
-
-                    // Populate the form fields with loaded data, using null-coalescing and explicit conversions
-                    textBoxExePath.Text = profileData?.ExecutablePath ?? string.Empty;
-                    textBoxParameters.Text = profileData?.Parameters ?? string.Empty;
-                    textBoxPort.Text = profileData?.Port ?? string.Empty;
-                    textBoxConfig.Text = profileData?.Config ?? string.Empty;
-                    modDir.Text = profileData?.ModsDir ?? string.Empty;
-                    comboBoxCpu.SelectedItem = profileData?.Cpu ?? string.Empty;
-
-                    // Safely load checkbox values (use 'true' or 'false' when null)
-                    checkBox1.Checked = (bool?)profileData?.CheckBox1 ?? false;
-                    checkBoxDoLogs.Checked = (bool?)profileData?.CheckBoxDoLogs ?? false;
-                    checkBoxAdminLog.Checked = (bool?)profileData?.CheckBoxAdminLog ?? false;
-                    checkBoxNetLog.Checked = (bool?)profileData?.CheckBoxNetLog ?? false;
-                    checkBoxAllowExtraParams.Checked = (bool?)profileData?.CheckBoxAllowExtraParams ?? false;
-
-                    // Load mods into textBoxMods
-                    textBoxMods.Text = profileData?.TextBoxMods ?? string.Empty;
-
-                    // Load timer settings
-                    checkBoxEnableTimer.Checked = (bool?)profileData?.TimerEnabled ?? false;
-                    numericUpDownHours.Value = (decimal)(profileData?.Hours ?? 0);
-                    numericUpDownMinutes.Value = (decimal)(profileData?.Minutes ?? 0);
-                    numericUpDownSeconds.Value = (decimal)(profileData?.Seconds ?? 0);
-
-                    // Clear and load ModsCheckedListBox with directories from modDir
-                    ModsCheckedListBox.Items.Clear();
-
-                    string modsDirectory = modDir.Text;
-                    if (Directory.Exists(modsDirectory))
-                    {
-                        // Get all directories in modDir
-                        string[] directories = Directory.GetDirectories(modsDirectory);
-
-                        // Populate ModsCheckedListBox with folder names except the one to exclude
-                        foreach (string directory in directories)
-                        {
-                            string folderName = Path.GetFileName(directory);
-                            if (folderName != "!DO_NOT_CHANGE_FILES_IN_THESE_FOLDERS")
-                            {
-                                ModsCheckedListBox.Items.Add(folderName);
-                            }
-                        }
-
-                        // Now check the items in ModsCheckedListBox based on the mods in textBoxMods
-                        string modsFromTextBox = textBoxMods.Text;
-                        if (!string.IsNullOrWhiteSpace(modsFromTextBox))
-                        {
-                            // Split the mods string by semicolon (;) and trim the parts
-                            string[] selectedMods = modsFromTextBox.Split(';').Select(mod => mod.Trim()).ToArray();
-
-                            // Iterate over ModsCheckedListBox items and check those present in selectedMods
-                            for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
-                            {
-                                string currentMod = ModsCheckedListBox.Items[i].ToString();
-                                if (selectedMods.Contains(currentMod))
-                                {
-                                    ModsCheckedListBox.SetItemChecked(i, true);
-                                }
-                                UpdateButtonsState();
-                                ToggleTimerFields();
-                                ToggleTimerFields();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("The mods directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Selected profile file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No profile selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            ToggleTextBoxParameters();
         }
 
         private void comboBoxProfiles_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -301,47 +375,6 @@ namespace DayZ_Server_Tool
                 }
             }
         }
-
-        private void newProfileButton_Click(object sender, EventArgs e)
-        {
-            // Clear all fields to start a new profile
-            textBoxExePath.Clear();
-            textBoxParameters.Clear();
-            textBoxPort.Clear();
-            textBoxConfig.Clear();
-            comboBoxCpu.SelectedIndex = 3; // Reset to "Automatic"
-            checkBox1.Checked = false; // Reset Freezecheck
-            comboBoxProfiles.Items.Clear(); // Clear the profile list for new profile
-            LoadProfilesFromDirectory();
-            comboBoxProfiles.SelectedIndex = -1; // Clear the selection
-            textBoxMods.Clear();
-            modDir.Clear();
-
-            // Clear all entries from the CheckedListBox
-            ModsCheckedListBox.Items.Clear();
-            UpdateButtonsState();
-
-            // Uncheck all items in the CheckedListBox
-            for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
-            {
-                ModsCheckedListBox.SetItemChecked(i, false);
-            }
-
-            checkBoxDoLogs.Checked = false;
-            checkBoxAdminLog.Checked = false;
-            checkBoxNetLog.Checked = false;
-            checkBoxAllowExtraParams.Checked = false;
-            textBoxParameters.Clear();
-
-            // Timer Clear
-            checkBoxEnableTimer.Checked = false;
-            numericUpDownSeconds.Value = 0;
-            numericUpDownMinutes.Value = 0;
-            numericUpDownHours.Value = 0;
-
-        }
-
-
         private void loadFileToolStripMenu_Click(object sender, EventArgs e)
         {
             // Call the LoadSelectedProfile function to load the selected profile from comboBoxProfiles
@@ -976,6 +1009,27 @@ namespace DayZ_Server_Tool
                     timeremaininglabel.Text = $"Time remaining: {remainingTime.Hours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
                 }));
             }
+        }
+
+
+
+        //        Discord Webhook        Discord Webhook        Discord Webhook        Discord Webhook
+        private void EnableWebhookCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleWebhookField();
+        }
+        private void ToggleWebhookField()
+        {
+            bool isWebhookEnabled = EnableWebhookCheckbox.Checked;
+            webhookTextBox.Enabled = isWebhookEnabled;
+            StartWebhookCheckbox.Enabled = isWebhookEnabled;
+            StopWebhookCheckbox.Enabled = isWebhookEnabled;
+            RestartWebhookCheckbox.Enabled = isWebhookEnabled;
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

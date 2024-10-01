@@ -41,7 +41,56 @@ namespace DayZ_Server_Tool
             discordServerToolStripMenuItem = new ToolStripMenuItem();
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
             version100ToolStripMenuItem = new ToolStripMenuItem();
-            tabControl1 = new TabControl();
+            tabPage7 = new TabPage();
+            label7 = new Label();
+            webhookTextBox = new TextBox();
+            StartWebhookCheckbox = new CheckBox();
+            label12 = new Label();
+            StopWebhookCheckbox = new CheckBox();
+            EnableWebhookCheckbox = new CheckBox();
+            RestartWebhookCheckbox = new CheckBox();
+            tabPage6 = new TabPage();
+            timeremaininglabel = new Label();
+            RestartProgressBar = new ProgressBar();
+            numericUpDownSeconds = new NumericUpDown();
+            label6 = new Label();
+            numericUpDownMinutes = new NumericUpDown();
+            label10 = new Label();
+            numericUpDownHours = new NumericUpDown();
+            label11 = new Label();
+            checkBoxEnableTimer = new CheckBox();
+            tabPage5 = new TabPage();
+            checkBoxAllowExtraParams = new CheckBox();
+            textBoxParameters = new TextBox();
+            label9 = new Label();
+            tabPage4 = new TabPage();
+            checkBoxNetLog = new CheckBox();
+            checkBoxAdminLog = new CheckBox();
+            checkBoxDoLogs = new CheckBox();
+            tabPage3 = new TabPage();
+            progressBar1 = new ProgressBar();
+            progressBar = new ProgressBar();
+            modDir = new TextBox();
+            textBoxMods = new TextBox();
+            Mods = new Button();
+            Keys = new Button();
+            label4 = new Label();
+            ModsCheckedListBox = new CheckedListBox();
+            buttonUpdateMods = new Button();
+            buttonBrowseMods = new Button();
+            label8 = new Label();
+            tabPage2 = new TabPage();
+            label3 = new Label();
+            comboBoxCpu = new ComboBox();
+            textBoxConfig = new TextBox();
+            textBoxPort = new TextBox();
+            textBoxExePath = new TextBox();
+            checkBox1 = new CheckBox();
+            label5 = new Label();
+            ConfigLabel = new Label();
+            PortLabel = new Label();
+            buttonBrowseExe = new Button();
+            label2 = new Label();
             tabPage1 = new TabPage();
             DeleteProfile = new Button();
             loadFileToolStripMenu = new Button();
@@ -51,69 +100,19 @@ namespace DayZ_Server_Tool
             newProfileButton = new Button();
             saveFileToolStripMenuItem = new Button();
             label1 = new Label();
-            tabPage2 = new TabPage();
-            label3 = new Label();
-            comboBoxCpu = new ComboBox();
-            textBoxConfig = new TextBox();
-            textBoxPort = new TextBox();
-            checkBox1 = new CheckBox();
-            label5 = new Label();
-            ConfigLabel = new Label();
-            PortLabel = new Label();
-            buttonBrowseExe = new Button();
-            textBoxExePath = new TextBox();
-            label2 = new Label();
-            tabPage3 = new TabPage();
-            progressBar1 = new ProgressBar();
-            progressBar = new ProgressBar();
-            modDir = new TextBox();
-            Mods = new Button();
-            Keys = new Button();
-            label4 = new Label();
-            ModsCheckedListBox = new CheckedListBox();
-            buttonUpdateMods = new Button();
-            buttonBrowseMods = new Button();
-            label8 = new Label();
-            textBoxMods = new TextBox();
-            tabPage4 = new TabPage();
-            checkBoxNetLog = new CheckBox();
-            checkBoxAdminLog = new CheckBox();
-            checkBoxDoLogs = new CheckBox();
-            tabPage5 = new TabPage();
-            checkBoxAllowExtraParams = new CheckBox();
-            textBoxParameters = new TextBox();
-            label9 = new Label();
-            tabPage6 = new TabPage();
-            tabControl2 = new TabControl();
-            tabPage8 = new TabPage();
-            timeremaininglabel = new Label();
-            RestartProgressBar = new ProgressBar();
-            numericUpDownSeconds = new NumericUpDown();
-            numericUpDownMinutes = new NumericUpDown();
-            numericUpDownHours = new NumericUpDown();
-            checkBoxEnableTimer = new CheckBox();
-            label11 = new Label();
-            label10 = new Label();
-            label6 = new Label();
-            tabPage9 = new TabPage();
-            tabPage7 = new TabPage();
-            label7 = new Label();
-            label12 = new Label();
+            tabControl1 = new TabControl();
             menuStrip1.SuspendLayout();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
-            tabPage3.SuspendLayout();
-            tabPage4.SuspendLayout();
-            tabPage5.SuspendLayout();
+            tabPage7.SuspendLayout();
             tabPage6.SuspendLayout();
-            tabControl2.SuspendLayout();
-            tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownSeconds).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinutes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHours).BeginInit();
-            tabPage9.SuspendLayout();
-            tabPage7.SuspendLayout();
+            tabPage5.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage3.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabControl1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -171,37 +170,554 @@ namespace DayZ_Server_Tool
             // discordServerToolStripMenuItem
             // 
             discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            discordServerToolStripMenuItem.Size = new Size(224, 26);
+            discordServerToolStripMenuItem.Size = new Size(215, 26);
             discordServerToolStripMenuItem.Text = "Discord Server";
             discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(224, 26);
+            checkForUpdatesToolStripMenuItem.Size = new Size(215, 26);
             checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
             checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
             // version100ToolStripMenuItem
             // 
             version100ToolStripMenuItem.Name = "version100ToolStripMenuItem";
-            version100ToolStripMenuItem.Size = new Size(224, 26);
+            version100ToolStripMenuItem.Size = new Size(215, 26);
             version100ToolStripMenuItem.Text = "Version 2.0.0";
             // 
-            // tabControl1
+            // tabPage7
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Controls.Add(tabPage5);
-            tabControl1.Controls.Add(tabPage6);
-            tabControl1.Controls.Add(tabPage7);
-            tabControl1.Location = new Point(12, 31);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(591, 517);
-            tabControl1.TabIndex = 1;
+            tabPage7.Controls.Add(label7);
+            tabPage7.Controls.Add(webhookTextBox);
+            tabPage7.Controls.Add(StartWebhookCheckbox);
+            tabPage7.Controls.Add(label12);
+            tabPage7.Controls.Add(StopWebhookCheckbox);
+            tabPage7.Controls.Add(EnableWebhookCheckbox);
+            tabPage7.Controls.Add(RestartWebhookCheckbox);
+            tabPage7.Location = new Point(4, 29);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Size = new Size(583, 484);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Discord Webhook";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(55, 5);
+            label7.Name = "label7";
+            label7.Size = new Size(452, 31);
+            label7.TabIndex = 1;
+            label7.Text = "Discord Webhook Menue (Coming Soon)";
+            // 
+            // webhookTextBox
+            // 
+            webhookTextBox.Enabled = false;
+            webhookTextBox.Location = new Point(3, 100);
+            webhookTextBox.Name = "webhookTextBox";
+            webhookTextBox.Size = new Size(577, 27);
+            webhookTextBox.TabIndex = 2;
+            // 
+            // StartWebhookCheckbox
+            // 
+            StartWebhookCheckbox.AutoSize = true;
+            StartWebhookCheckbox.Enabled = false;
+            StartWebhookCheckbox.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StartWebhookCheckbox.ForeColor = Color.Green;
+            StartWebhookCheckbox.Location = new Point(55, 133);
+            StartWebhookCheckbox.Name = "StartWebhookCheckbox";
+            StartWebhookCheckbox.Size = new Size(104, 29);
+            StartWebhookCheckbox.TabIndex = 3;
+            StartWebhookCheckbox.Text = "On Start";
+            StartWebhookCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(209, 74);
+            label12.Name = "label12";
+            label12.Size = new Size(153, 23);
+            label12.TabIndex = 1;
+            label12.Text = "Discord Webhook :";
+            // 
+            // StopWebhookCheckbox
+            // 
+            StopWebhookCheckbox.AutoSize = true;
+            StopWebhookCheckbox.Enabled = false;
+            StopWebhookCheckbox.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StopWebhookCheckbox.ForeColor = Color.Red;
+            StopWebhookCheckbox.Location = new Point(196, 133);
+            StopWebhookCheckbox.Name = "StopWebhookCheckbox";
+            StopWebhookCheckbox.Size = new Size(181, 29);
+            StopWebhookCheckbox.TabIndex = 3;
+            StopWebhookCheckbox.Text = "On (Manual) Stop";
+            StopWebhookCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // EnableWebhookCheckbox
+            // 
+            EnableWebhookCheckbox.AutoSize = true;
+            EnableWebhookCheckbox.Enabled = false;
+            EnableWebhookCheckbox.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            EnableWebhookCheckbox.ForeColor = Color.Red;
+            EnableWebhookCheckbox.Location = new Point(144, 39);
+            EnableWebhookCheckbox.Name = "EnableWebhookCheckbox";
+            EnableWebhookCheckbox.Size = new Size(292, 32);
+            EnableWebhookCheckbox.TabIndex = 0;
+            EnableWebhookCheckbox.Text = "Enable Webhook Messaging";
+            EnableWebhookCheckbox.UseVisualStyleBackColor = true;
+            EnableWebhookCheckbox.CheckedChanged += EnableWebhookCheckbox_CheckedChanged;
+            // 
+            // RestartWebhookCheckbox
+            // 
+            RestartWebhookCheckbox.AutoSize = true;
+            RestartWebhookCheckbox.Enabled = false;
+            RestartWebhookCheckbox.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RestartWebhookCheckbox.ForeColor = Color.FromArgb(0, 0, 192);
+            RestartWebhookCheckbox.Location = new Point(409, 133);
+            RestartWebhookCheckbox.Name = "RestartWebhookCheckbox";
+            RestartWebhookCheckbox.Size = new Size(124, 29);
+            RestartWebhookCheckbox.TabIndex = 3;
+            RestartWebhookCheckbox.Text = "On Restart";
+            RestartWebhookCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            tabPage6.Controls.Add(timeremaininglabel);
+            tabPage6.Controls.Add(RestartProgressBar);
+            tabPage6.Controls.Add(numericUpDownSeconds);
+            tabPage6.Controls.Add(label6);
+            tabPage6.Controls.Add(numericUpDownMinutes);
+            tabPage6.Controls.Add(label10);
+            tabPage6.Controls.Add(numericUpDownHours);
+            tabPage6.Controls.Add(label11);
+            tabPage6.Controls.Add(checkBoxEnableTimer);
+            tabPage6.Location = new Point(4, 29);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Size = new Size(583, 484);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Restart";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // timeremaininglabel
+            // 
+            timeremaininglabel.AutoSize = true;
+            timeremaininglabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            timeremaininglabel.ForeColor = Color.FromArgb(0, 0, 192);
+            timeremaininglabel.Location = new Point(4, 208);
+            timeremaininglabel.Name = "timeremaininglabel";
+            timeremaininglabel.Size = new Size(230, 38);
+            timeremaininglabel.TabIndex = 5;
+            timeremaininglabel.Text = "Time Remaining";
+            // 
+            // RestartProgressBar
+            // 
+            RestartProgressBar.Location = new Point(12, 279);
+            RestartProgressBar.Name = "RestartProgressBar";
+            RestartProgressBar.Size = new Size(541, 33);
+            RestartProgressBar.TabIndex = 4;
+            // 
+            // numericUpDownSeconds
+            // 
+            numericUpDownSeconds.Enabled = false;
+            numericUpDownSeconds.Font = new Font("Segoe UI", 12F);
+            numericUpDownSeconds.Location = new Point(190, 68);
+            numericUpDownSeconds.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+            numericUpDownSeconds.Name = "numericUpDownSeconds";
+            numericUpDownSeconds.Size = new Size(63, 34);
+            numericUpDownSeconds.TabIndex = 3;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(11, 14);
+            label6.Name = "label6";
+            label6.Size = new Size(64, 28);
+            label6.TabIndex = 1;
+            label6.Text = "Hours";
+            // 
+            // numericUpDownMinutes
+            // 
+            numericUpDownMinutes.Enabled = false;
+            numericUpDownMinutes.Font = new Font("Segoe UI", 12F);
+            numericUpDownMinutes.Location = new Point(99, 68);
+            numericUpDownMinutes.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+            numericUpDownMinutes.Name = "numericUpDownMinutes";
+            numericUpDownMinutes.Size = new Size(63, 34);
+            numericUpDownMinutes.TabIndex = 3;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F);
+            label10.Location = new Point(89, 14);
+            label10.Name = "label10";
+            label10.Size = new Size(82, 28);
+            label10.TabIndex = 1;
+            label10.Text = "Minutes";
+            // 
+            // numericUpDownHours
+            // 
+            numericUpDownHours.Enabled = false;
+            numericUpDownHours.Font = new Font("Segoe UI", 12F);
+            numericUpDownHours.Location = new Point(12, 68);
+            numericUpDownHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
+            numericUpDownHours.Name = "numericUpDownHours";
+            numericUpDownHours.Size = new Size(63, 34);
+            numericUpDownHours.TabIndex = 3;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 12F);
+            label11.Location = new Point(177, 14);
+            label11.Name = "label11";
+            label11.Size = new Size(85, 28);
+            label11.TabIndex = 1;
+            label11.Text = "Seconds";
+            // 
+            // checkBoxEnableTimer
+            // 
+            checkBoxEnableTimer.AutoSize = true;
+            checkBoxEnableTimer.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkBoxEnableTimer.ForeColor = Color.Red;
+            checkBoxEnableTimer.Location = new Point(11, 141);
+            checkBoxEnableTimer.Name = "checkBoxEnableTimer";
+            checkBoxEnableTimer.Size = new Size(208, 35);
+            checkBoxEnableTimer.TabIndex = 2;
+            checkBoxEnableTimer.Text = "⚠Enable Timer";
+            checkBoxEnableTimer.UseVisualStyleBackColor = true;
+            checkBoxEnableTimer.CheckedChanged += checkBoxEnableTimer_CheckedChanged;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(checkBoxAllowExtraParams);
+            tabPage5.Controls.Add(textBoxParameters);
+            tabPage5.Controls.Add(label9);
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(583, 484);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Parameters";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAllowExtraParams
+            // 
+            checkBoxAllowExtraParams.AutoSize = true;
+            checkBoxAllowExtraParams.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkBoxAllowExtraParams.ForeColor = Color.Red;
+            checkBoxAllowExtraParams.Location = new Point(142, 13);
+            checkBoxAllowExtraParams.Name = "checkBoxAllowExtraParams";
+            checkBoxAllowExtraParams.Size = new Size(290, 32);
+            checkBoxAllowExtraParams.TabIndex = 6;
+            checkBoxAllowExtraParams.Text = "⚠️ Allow Extra Parameters";
+            checkBoxAllowExtraParams.UseVisualStyleBackColor = true;
+            // 
+            // textBoxParameters
+            // 
+            textBoxParameters.Location = new Point(18, 95);
+            textBoxParameters.Name = "textBoxParameters";
+            textBoxParameters.Size = new Size(513, 27);
+            textBoxParameters.TabIndex = 5;
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(243, 54);
+            label9.Name = "label9";
+            label9.Size = new Size(103, 25);
+            label9.TabIndex = 4;
+            label9.Text = "Parameters:";
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(checkBoxNetLog);
+            tabPage4.Controls.Add(checkBoxAdminLog);
+            tabPage4.Controls.Add(checkBoxDoLogs);
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(583, 484);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Logs";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNetLog
+            // 
+            checkBoxNetLog.AutoSize = true;
+            checkBoxNetLog.Location = new Point(22, 123);
+            checkBoxNetLog.Name = "checkBoxNetLog";
+            checkBoxNetLog.Size = new Size(90, 24);
+            checkBoxNetLog.TabIndex = 2;
+            checkBoxNetLog.Text = "Net Logs";
+            checkBoxNetLog.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAdminLog
+            // 
+            checkBoxAdminLog.AutoSize = true;
+            checkBoxAdminLog.Location = new Point(22, 73);
+            checkBoxAdminLog.Name = "checkBoxAdminLog";
+            checkBoxAdminLog.Size = new Size(110, 24);
+            checkBoxAdminLog.TabIndex = 1;
+            checkBoxAdminLog.Text = "Admin Logs";
+            checkBoxAdminLog.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDoLogs
+            // 
+            checkBoxDoLogs.AutoSize = true;
+            checkBoxDoLogs.Location = new Point(22, 25);
+            checkBoxDoLogs.Name = "checkBoxDoLogs";
+            checkBoxDoLogs.Size = new Size(86, 24);
+            checkBoxDoLogs.TabIndex = 0;
+            checkBoxDoLogs.Text = "Do Logs";
+            checkBoxDoLogs.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(progressBar1);
+            tabPage3.Controls.Add(progressBar);
+            tabPage3.Controls.Add(modDir);
+            tabPage3.Controls.Add(textBoxMods);
+            tabPage3.Controls.Add(Mods);
+            tabPage3.Controls.Add(Keys);
+            tabPage3.Controls.Add(label4);
+            tabPage3.Controls.Add(ModsCheckedListBox);
+            tabPage3.Controls.Add(buttonUpdateMods);
+            tabPage3.Controls.Add(buttonBrowseMods);
+            tabPage3.Controls.Add(label8);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Size = new Size(583, 484);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Mods";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(399, 174);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(181, 29);
+            progressBar1.TabIndex = 12;
+            // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(399, 139);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(181, 29);
+            progressBar.TabIndex = 11;
+            // 
+            // modDir
+            // 
+            modDir.Location = new Point(3, 76);
+            modDir.Name = "modDir";
+            modDir.ReadOnly = true;
+            modDir.Size = new Size(577, 27);
+            modDir.TabIndex = 10;
+            // 
+            // textBoxMods
+            // 
+            textBoxMods.Location = new Point(3, 37);
+            textBoxMods.Name = "textBoxMods";
+            textBoxMods.Size = new Size(577, 27);
+            textBoxMods.TabIndex = 0;
+            // 
+            // Mods
+            // 
+            Mods.Enabled = false;
+            Mods.Location = new Point(132, 174);
+            Mods.Name = "Mods";
+            Mods.Size = new Size(261, 29);
+            Mods.TabIndex = 9;
+            Mods.Text = "Copy Paste Selected Mods";
+            Mods.UseVisualStyleBackColor = true;
+            Mods.Click += Mods_Click;
+            // 
+            // Keys
+            // 
+            Keys.Enabled = false;
+            Keys.Location = new Point(132, 139);
+            Keys.Name = "Keys";
+            Keys.Size = new Size(261, 29);
+            Keys.TabIndex = 8;
+            Keys.Text = "Copy Paste Keys Of Selected Mods";
+            Keys.UseVisualStyleBackColor = true;
+            Keys.Click += Keys_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(33, 106);
+            label4.Name = "label4";
+            label4.Size = new Size(447, 20);
+            label4.TabIndex = 7;
+            label4.Text = " Select !Workshop Folder in steamapps\\common\\DayZ\\!Workshop";
+            // 
+            // ModsCheckedListBox
+            // 
+            ModsCheckedListBox.FormattingEnabled = true;
+            ModsCheckedListBox.Location = new Point(3, 214);
+            ModsCheckedListBox.Name = "ModsCheckedListBox";
+            ModsCheckedListBox.Size = new Size(577, 268);
+            ModsCheckedListBox.TabIndex = 6;
+            // 
+            // buttonUpdateMods
+            // 
+            buttonUpdateMods.Location = new Point(3, 174);
+            buttonUpdateMods.Name = "buttonUpdateMods";
+            buttonUpdateMods.Size = new Size(123, 29);
+            buttonUpdateMods.TabIndex = 5;
+            buttonUpdateMods.Text = "Select Mods";
+            buttonUpdateMods.UseVisualStyleBackColor = true;
+            buttonUpdateMods.Click += buttonUpdateMods_Click;
+            // 
+            // buttonBrowseMods
+            // 
+            buttonBrowseMods.Location = new Point(3, 139);
+            buttonBrowseMods.Name = "buttonBrowseMods";
+            buttonBrowseMods.Size = new Size(123, 29);
+            buttonBrowseMods.TabIndex = 2;
+            buttonBrowseMods.Text = "Browse Mods";
+            buttonBrowseMods.UseVisualStyleBackColor = true;
+            buttonBrowseMods.Click += buttonBrowseMods_Click;
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(231, 9);
+            label8.Name = "label8";
+            label8.Size = new Size(93, 25);
+            label8.TabIndex = 4;
+            label8.Text = "Mods List:";
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(label3);
+            tabPage2.Controls.Add(comboBoxCpu);
+            tabPage2.Controls.Add(textBoxConfig);
+            tabPage2.Controls.Add(textBoxPort);
+            tabPage2.Controls.Add(textBoxExePath);
+            tabPage2.Controls.Add(checkBox1);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Controls.Add(ConfigLabel);
+            tabPage2.Controls.Add(PortLabel);
+            tabPage2.Controls.Add(buttonBrowseExe);
+            tabPage2.Controls.Add(label2);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(583, 484);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Main";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(350, 375);
+            label3.Name = "label3";
+            label3.Size = new Size(123, 20);
+            label3.TabIndex = 10;
+            label3.Text = "Default is 4 cores";
+            // 
+            // comboBoxCpu
+            // 
+            comboBoxCpu.FormattingEnabled = true;
+            comboBoxCpu.Location = new Point(193, 372);
+            comboBoxCpu.Name = "comboBoxCpu";
+            comboBoxCpu.Size = new Size(151, 28);
+            comboBoxCpu.TabIndex = 9;
+            // 
+            // textBoxConfig
+            // 
+            textBoxConfig.Location = new Point(6, 293);
+            textBoxConfig.Name = "textBoxConfig";
+            textBoxConfig.Size = new Size(571, 27);
+            textBoxConfig.TabIndex = 8;
+            // 
+            // textBoxPort
+            // 
+            textBoxPort.Location = new Point(6, 176);
+            textBoxPort.Name = "textBoxPort";
+            textBoxPort.Size = new Size(571, 27);
+            textBoxPort.TabIndex = 7;
+            // 
+            // textBoxExePath
+            // 
+            textBoxExePath.Location = new Point(6, 58);
+            textBoxExePath.Name = "textBoxExePath";
+            textBoxExePath.Size = new Size(571, 27);
+            textBoxExePath.TabIndex = 1;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(212, 441);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(117, 24);
+            checkBox1.TabIndex = 6;
+            checkBox1.Text = "Freeze Check";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(245, 335);
+            label5.Name = "label5";
+            label5.Size = new Size(49, 25);
+            label5.TabIndex = 5;
+            label5.Text = "CPU:";
+            // 
+            // ConfigLabel
+            // 
+            ConfigLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ConfigLabel.AutoSize = true;
+            ConfigLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ConfigLabel.Location = new Point(245, 239);
+            ConfigLabel.Name = "ConfigLabel";
+            ConfigLabel.Size = new Size(69, 25);
+            ConfigLabel.TabIndex = 4;
+            ConfigLabel.Text = "Config:";
+            // 
+            // PortLabel
+            // 
+            PortLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PortLabel.AutoSize = true;
+            PortLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PortLabel.Location = new Point(245, 133);
+            PortLabel.Name = "PortLabel";
+            PortLabel.Size = new Size(48, 25);
+            PortLabel.TabIndex = 3;
+            PortLabel.Text = "Port:";
+            // 
+            // buttonBrowseExe
+            // 
+            buttonBrowseExe.Location = new Point(223, 89);
+            buttonBrowseExe.Name = "buttonBrowseExe";
+            buttonBrowseExe.Size = new Size(94, 29);
+            buttonBrowseExe.TabIndex = 2;
+            buttonBrowseExe.Text = "Browse";
+            buttonBrowseExe.UseVisualStyleBackColor = true;
+            buttonBrowseExe.Click += buttonBrowseExe_Click;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(165, 28);
+            label2.Name = "label2";
+            label2.Size = new Size(200, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Server's Executable Path";
             // 
             // tabPage1
             // 
@@ -311,502 +827,21 @@ namespace DayZ_Server_Tool
             label1.TabIndex = 0;
             label1.Text = "Profile:";
             // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(comboBoxCpu);
-            tabPage2.Controls.Add(textBoxConfig);
-            tabPage2.Controls.Add(textBoxPort);
-            tabPage2.Controls.Add(checkBox1);
-            tabPage2.Controls.Add(label5);
-            tabPage2.Controls.Add(ConfigLabel);
-            tabPage2.Controls.Add(PortLabel);
-            tabPage2.Controls.Add(buttonBrowseExe);
-            tabPage2.Controls.Add(textBoxExePath);
-            tabPage2.Controls.Add(label2);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(583, 484);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Main";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(350, 375);
-            label3.Name = "label3";
-            label3.Size = new Size(123, 20);
-            label3.TabIndex = 10;
-            label3.Text = "Default is 4 cores";
-            // 
-            // comboBoxCpu
-            // 
-            comboBoxCpu.FormattingEnabled = true;
-            comboBoxCpu.Location = new Point(193, 372);
-            comboBoxCpu.Name = "comboBoxCpu";
-            comboBoxCpu.Size = new Size(151, 28);
-            comboBoxCpu.TabIndex = 9;
-            // 
-            // textBoxConfig
-            // 
-            textBoxConfig.Location = new Point(6, 293);
-            textBoxConfig.Name = "textBoxConfig";
-            textBoxConfig.Size = new Size(571, 27);
-            textBoxConfig.TabIndex = 8;
-            // 
-            // textBoxPort
-            // 
-            textBoxPort.Location = new Point(6, 176);
-            textBoxPort.Name = "textBoxPort";
-            textBoxPort.Size = new Size(571, 27);
-            textBoxPort.TabIndex = 7;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(212, 441);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(117, 24);
-            checkBox1.TabIndex = 6;
-            checkBox1.Text = "Freeze Check";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(245, 335);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 25);
-            label5.TabIndex = 5;
-            label5.Text = "CPU:";
-            // 
-            // ConfigLabel
-            // 
-            ConfigLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ConfigLabel.AutoSize = true;
-            ConfigLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ConfigLabel.Location = new Point(245, 239);
-            ConfigLabel.Name = "ConfigLabel";
-            ConfigLabel.Size = new Size(69, 25);
-            ConfigLabel.TabIndex = 4;
-            ConfigLabel.Text = "Config:";
-            // 
-            // PortLabel
-            // 
-            PortLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PortLabel.AutoSize = true;
-            PortLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PortLabel.Location = new Point(245, 133);
-            PortLabel.Name = "PortLabel";
-            PortLabel.Size = new Size(48, 25);
-            PortLabel.TabIndex = 3;
-            PortLabel.Text = "Port:";
-            // 
-            // buttonBrowseExe
-            // 
-            buttonBrowseExe.Location = new Point(223, 89);
-            buttonBrowseExe.Name = "buttonBrowseExe";
-            buttonBrowseExe.Size = new Size(94, 29);
-            buttonBrowseExe.TabIndex = 2;
-            buttonBrowseExe.Text = "Browse";
-            buttonBrowseExe.UseVisualStyleBackColor = true;
-            buttonBrowseExe.Click += buttonBrowseExe_Click;
-            // 
-            // textBoxExePath
-            // 
-            textBoxExePath.Location = new Point(6, 58);
-            textBoxExePath.Name = "textBoxExePath";
-            textBoxExePath.Size = new Size(571, 27);
-            textBoxExePath.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(165, 28);
-            label2.Name = "label2";
-            label2.Size = new Size(200, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Server's Executable Path";
-            // 
-            // tabPage3
-            // 
-            tabPage3.Controls.Add(progressBar1);
-            tabPage3.Controls.Add(progressBar);
-            tabPage3.Controls.Add(modDir);
-            tabPage3.Controls.Add(Mods);
-            tabPage3.Controls.Add(Keys);
-            tabPage3.Controls.Add(label4);
-            tabPage3.Controls.Add(ModsCheckedListBox);
-            tabPage3.Controls.Add(buttonUpdateMods);
-            tabPage3.Controls.Add(buttonBrowseMods);
-            tabPage3.Controls.Add(label8);
-            tabPage3.Controls.Add(textBoxMods);
-            tabPage3.Location = new Point(4, 29);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(583, 484);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Mods";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(399, 174);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(181, 29);
-            progressBar1.TabIndex = 12;
-            // 
-            // progressBar
-            // 
-            progressBar.Location = new Point(399, 139);
-            progressBar.Name = "progressBar";
-            progressBar.Size = new Size(181, 29);
-            progressBar.TabIndex = 11;
-            // 
-            // modDir
-            // 
-            modDir.Location = new Point(3, 76);
-            modDir.Name = "modDir";
-            modDir.ReadOnly = true;
-            modDir.Size = new Size(577, 27);
-            modDir.TabIndex = 10;
-            // 
-            // Mods
-            // 
-            Mods.Enabled = false;
-            Mods.Location = new Point(132, 174);
-            Mods.Name = "Mods";
-            Mods.Size = new Size(261, 29);
-            Mods.TabIndex = 9;
-            Mods.Text = "Copy Paste Selected Mods";
-            Mods.UseVisualStyleBackColor = true;
-            Mods.Click += Mods_Click;
-            // 
-            // Keys
-            // 
-            Keys.Enabled = false;
-            Keys.Location = new Point(132, 139);
-            Keys.Name = "Keys";
-            Keys.Size = new Size(261, 29);
-            Keys.TabIndex = 8;
-            Keys.Text = "Copy Paste Keys Of Selected Mods";
-            Keys.UseVisualStyleBackColor = true;
-            Keys.Click += Keys_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(33, 106);
-            label4.Name = "label4";
-            label4.Size = new Size(447, 20);
-            label4.TabIndex = 7;
-            label4.Text = " Select !Workshop Folder in steamapps\\common\\DayZ\\!Workshop";
-            // 
-            // ModsCheckedListBox
-            // 
-            ModsCheckedListBox.FormattingEnabled = true;
-            ModsCheckedListBox.Location = new Point(3, 214);
-            ModsCheckedListBox.Name = "ModsCheckedListBox";
-            ModsCheckedListBox.Size = new Size(577, 268);
-            ModsCheckedListBox.TabIndex = 6;
-            // 
-            // buttonUpdateMods
-            // 
-            buttonUpdateMods.Location = new Point(3, 174);
-            buttonUpdateMods.Name = "buttonUpdateMods";
-            buttonUpdateMods.Size = new Size(123, 29);
-            buttonUpdateMods.TabIndex = 5;
-            buttonUpdateMods.Text = "Select Mods";
-            buttonUpdateMods.UseVisualStyleBackColor = true;
-            buttonUpdateMods.Click += buttonUpdateMods_Click;
-            // 
-            // buttonBrowseMods
-            // 
-            buttonBrowseMods.Location = new Point(3, 139);
-            buttonBrowseMods.Name = "buttonBrowseMods";
-            buttonBrowseMods.Size = new Size(123, 29);
-            buttonBrowseMods.TabIndex = 2;
-            buttonBrowseMods.Text = "Browse Mods";
-            buttonBrowseMods.UseVisualStyleBackColor = true;
-            buttonBrowseMods.Click += buttonBrowseMods_Click;
-            // 
-            // label8
-            // 
-            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(231, 9);
-            label8.Name = "label8";
-            label8.Size = new Size(93, 25);
-            label8.TabIndex = 4;
-            label8.Text = "Mods List:";
-            // 
-            // textBoxMods
-            // 
-            textBoxMods.Location = new Point(3, 37);
-            textBoxMods.Name = "textBoxMods";
-            textBoxMods.Size = new Size(577, 27);
-            textBoxMods.TabIndex = 0;
-            // 
-            // tabPage4
-            // 
-            tabPage4.Controls.Add(checkBoxNetLog);
-            tabPage4.Controls.Add(checkBoxAdminLog);
-            tabPage4.Controls.Add(checkBoxDoLogs);
-            tabPage4.Location = new Point(4, 29);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(583, 484);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Logs";
-            tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxNetLog
-            // 
-            checkBoxNetLog.AutoSize = true;
-            checkBoxNetLog.Location = new Point(22, 123);
-            checkBoxNetLog.Name = "checkBoxNetLog";
-            checkBoxNetLog.Size = new Size(90, 24);
-            checkBoxNetLog.TabIndex = 2;
-            checkBoxNetLog.Text = "Net Logs";
-            checkBoxNetLog.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAdminLog
-            // 
-            checkBoxAdminLog.AutoSize = true;
-            checkBoxAdminLog.Location = new Point(22, 73);
-            checkBoxAdminLog.Name = "checkBoxAdminLog";
-            checkBoxAdminLog.Size = new Size(110, 24);
-            checkBoxAdminLog.TabIndex = 1;
-            checkBoxAdminLog.Text = "Admin Logs";
-            checkBoxAdminLog.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDoLogs
-            // 
-            checkBoxDoLogs.AutoSize = true;
-            checkBoxDoLogs.Location = new Point(22, 25);
-            checkBoxDoLogs.Name = "checkBoxDoLogs";
-            checkBoxDoLogs.Size = new Size(86, 24);
-            checkBoxDoLogs.TabIndex = 0;
-            checkBoxDoLogs.Text = "Do Logs";
-            checkBoxDoLogs.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            tabPage5.Controls.Add(checkBoxAllowExtraParams);
-            tabPage5.Controls.Add(textBoxParameters);
-            tabPage5.Controls.Add(label9);
-            tabPage5.Location = new Point(4, 29);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(583, 484);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Parameters";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAllowExtraParams
-            // 
-            checkBoxAllowExtraParams.AutoSize = true;
-            checkBoxAllowExtraParams.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBoxAllowExtraParams.ForeColor = Color.Red;
-            checkBoxAllowExtraParams.Location = new Point(142, 13);
-            checkBoxAllowExtraParams.Name = "checkBoxAllowExtraParams";
-            checkBoxAllowExtraParams.Size = new Size(290, 32);
-            checkBoxAllowExtraParams.TabIndex = 6;
-            checkBoxAllowExtraParams.Text = "⚠️ Allow Extra Parameters";
-            checkBoxAllowExtraParams.UseVisualStyleBackColor = true;
-            // 
-            // textBoxParameters
-            // 
-            textBoxParameters.Location = new Point(18, 95);
-            textBoxParameters.Name = "textBoxParameters";
-            textBoxParameters.Size = new Size(513, 27);
-            textBoxParameters.TabIndex = 5;
-            // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(243, 54);
-            label9.Name = "label9";
-            label9.Size = new Size(103, 25);
-            label9.TabIndex = 4;
-            label9.Text = "Parameters:";
-            // 
-            // tabPage6
-            // 
-            tabPage6.Controls.Add(tabControl2);
-            tabPage6.Location = new Point(4, 29);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(583, 484);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Restart";
-            tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabControl2
-            // 
-            tabControl2.Controls.Add(tabPage8);
-            tabControl2.Controls.Add(tabPage9);
-            tabControl2.Location = new Point(-1, -2);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(584, 490);
-            tabControl2.TabIndex = 1;
-            // 
-            // tabPage8
-            // 
-            tabPage8.Controls.Add(timeremaininglabel);
-            tabPage8.Controls.Add(RestartProgressBar);
-            tabPage8.Controls.Add(numericUpDownSeconds);
-            tabPage8.Controls.Add(numericUpDownMinutes);
-            tabPage8.Controls.Add(numericUpDownHours);
-            tabPage8.Controls.Add(checkBoxEnableTimer);
-            tabPage8.Controls.Add(label11);
-            tabPage8.Controls.Add(label10);
-            tabPage8.Controls.Add(label6);
-            tabPage8.Location = new Point(4, 29);
-            tabPage8.Name = "tabPage8";
-            tabPage8.Padding = new Padding(3);
-            tabPage8.Size = new Size(576, 457);
-            tabPage8.TabIndex = 0;
-            tabPage8.Text = "Restart Timer";
-            tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // timeremaininglabel
-            // 
-            timeremaininglabel.AutoSize = true;
-            timeremaininglabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            timeremaininglabel.ForeColor = Color.FromArgb(0, 0, 192);
-            timeremaininglabel.Location = new Point(6, 216);
-            timeremaininglabel.Name = "timeremaininglabel";
-            timeremaininglabel.Size = new Size(230, 38);
-            timeremaininglabel.TabIndex = 5;
-            timeremaininglabel.Text = "Time Remaining";
-            // 
-            // RestartProgressBar
-            // 
-            RestartProgressBar.Location = new Point(14, 287);
-            RestartProgressBar.Name = "RestartProgressBar";
-            RestartProgressBar.Size = new Size(541, 33);
-            RestartProgressBar.TabIndex = 4;
-            // 
-            // numericUpDownSeconds
-            // 
-            numericUpDownSeconds.Enabled = false;
-            numericUpDownSeconds.Font = new Font("Segoe UI", 12F);
-            numericUpDownSeconds.Location = new Point(192, 76);
-            numericUpDownSeconds.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
-            numericUpDownSeconds.Name = "numericUpDownSeconds";
-            numericUpDownSeconds.Size = new Size(63, 34);
-            numericUpDownSeconds.TabIndex = 3;
-            // 
-            // numericUpDownMinutes
-            // 
-            numericUpDownMinutes.Enabled = false;
-            numericUpDownMinutes.Font = new Font("Segoe UI", 12F);
-            numericUpDownMinutes.Location = new Point(101, 76);
-            numericUpDownMinutes.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
-            numericUpDownMinutes.Name = "numericUpDownMinutes";
-            numericUpDownMinutes.Size = new Size(63, 34);
-            numericUpDownMinutes.TabIndex = 3;
-            // 
-            // numericUpDownHours
-            // 
-            numericUpDownHours.Enabled = false;
-            numericUpDownHours.Font = new Font("Segoe UI", 12F);
-            numericUpDownHours.Location = new Point(14, 76);
-            numericUpDownHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
-            numericUpDownHours.Name = "numericUpDownHours";
-            numericUpDownHours.Size = new Size(63, 34);
-            numericUpDownHours.TabIndex = 3;
-            // 
-            // checkBoxEnableTimer
-            // 
-            checkBoxEnableTimer.AutoSize = true;
-            checkBoxEnableTimer.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBoxEnableTimer.ForeColor = Color.Red;
-            checkBoxEnableTimer.Location = new Point(13, 149);
-            checkBoxEnableTimer.Name = "checkBoxEnableTimer";
-            checkBoxEnableTimer.Size = new Size(208, 35);
-            checkBoxEnableTimer.TabIndex = 2;
-            checkBoxEnableTimer.Text = "⚠Enable Timer";
-            checkBoxEnableTimer.UseVisualStyleBackColor = true;
-            checkBoxEnableTimer.CheckedChanged += checkBoxEnableTimer_CheckedChanged;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 12F);
-            label11.Location = new Point(179, 22);
-            label11.Name = "label11";
-            label11.Size = new Size(85, 28);
-            label11.TabIndex = 1;
-            label11.Text = "Seconds";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(91, 22);
-            label10.Name = "label10";
-            label10.Size = new Size(82, 28);
-            label10.TabIndex = 1;
-            label10.Text = "Minutes";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(13, 22);
-            label6.Name = "label6";
-            label6.Size = new Size(64, 28);
-            label6.TabIndex = 1;
-            label6.Text = "Hours";
-            // 
-            // tabPage9
-            // 
-            tabPage9.Controls.Add(label12);
-            tabPage9.Location = new Point(4, 29);
-            tabPage9.Name = "tabPage9";
-            tabPage9.Padding = new Padding(3);
-            tabPage9.Size = new Size(576, 457);
-            tabPage9.TabIndex = 1;
-            tabPage9.Text = "Timed Executed XML";
-            tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // tabPage7
-            // 
-            tabPage7.Controls.Add(label7);
-            tabPage7.Location = new Point(4, 29);
-            tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(583, 484);
-            tabPage7.TabIndex = 6;
-            tabPage7.Text = "Mod Updates";
-            tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(151, 197);
-            label7.Name = "label7";
-            label7.Size = new Size(244, 38);
-            label7.TabIndex = 1;
-            label7.Text = "COMING SOON !!!";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(151, 197);
-            label12.Name = "label12";
-            label12.Size = new Size(244, 38);
-            label12.TabIndex = 2;
-            label12.Text = "COMING SOON !!!";
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage7);
+            tabControl1.Location = new Point(12, 31);
+            tabControl1.Multiline = true;
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(591, 517);
+            tabControl1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -825,28 +860,24 @@ namespace DayZ_Server_Tool
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
-            tabPage3.ResumeLayout(false);
-            tabPage3.PerformLayout();
-            tabPage4.ResumeLayout(false);
-            tabPage4.PerformLayout();
-            tabPage5.ResumeLayout(false);
-            tabPage5.PerformLayout();
+            tabPage7.ResumeLayout(false);
+            tabPage7.PerformLayout();
             tabPage6.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
-            tabPage8.ResumeLayout(false);
-            tabPage8.PerformLayout();
+            tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownSeconds).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinutes).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHours).EndInit();
-            tabPage9.ResumeLayout(false);
-            tabPage9.PerformLayout();
-            tabPage7.ResumeLayout(false);
-            tabPage7.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabControl1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -861,67 +892,73 @@ namespace DayZ_Server_Tool
         private ToolStripMenuItem discordServerToolStripMenuItem;
         private ToolStripMenuItem startToolStripMenuItem;
         private ToolStripMenuItem stopToolStripMenuItem;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
-        private TabPage tabPage3;
-        private TabPage tabPage4;
-        private TabPage tabPage5;
-        private TabPage tabPage6;
-        private TabPage tabPage7;
-        private Label label1;
-        private Button newProfileButton;
-        private Button saveFileToolStripMenuItem;
         private Button LoadProfile;
-        private Button buttonStop;
-        private Button buttonStart;
-        private Label label2;
-        private TextBox textBoxExePath;
-        private Button buttonBrowseExe;
-        private Label PortLabel;
-        private CheckBox checkBox1;
-        private Label label5;
-        private Label ConfigLabel;
-        private TextBox textBoxConfig;
-        private TextBox textBoxPort;
-        private ComboBox comboBoxCpu;
-        private Label label7;
-        private TextBox textBoxMods;
-        private Label label8;
-        private Button buttonUpdateMods;
-        private Button buttonBrowseMods;
-        private CheckBox checkBoxDoLogs;
-        private CheckBox checkBoxNetLog;
-        private CheckBox checkBoxAdminLog;
-        private CheckBox checkBoxAllowExtraParams;
-        private TextBox textBoxParameters;
-        private Label label9;
         private ToolStripMenuItem refreshProfilesToolStripMenuItem;
-        private ComboBox comboBoxProfiles;
-        private Button loadFileToolStripMenu;
-        private Button DeleteProfile;
-        private CheckedListBox ModsCheckedListBox;
         private ToolStripMenuItem checkForUpdatesToolStripMenuItem;
-        private Label label3;
-        private Label label4;
         private ToolStripMenuItem version100ToolStripMenuItem;
-        private Button Mods;
-        private Button Keys;
-        private TextBox modDir;
-        private ProgressBar progressBar;
-        private ProgressBar progressBar1;
-        private TabControl tabControl2;
-        private TabPage tabPage8;
-        private TabPage tabPage9;
+        private TabPage tabPage7;
+        private TabPage tabPage6;
+        private Label timeremaininglabel;
+        private ProgressBar RestartProgressBar;
+        private NumericUpDown numericUpDownSeconds;
+        private NumericUpDown numericUpDownMinutes;
+        private NumericUpDown numericUpDownHours;
+        private CheckBox checkBoxEnableTimer;
         private Label label11;
         private Label label10;
         private Label label6;
-        private CheckBox checkBoxEnableTimer;
-        private NumericUpDown numericUpDownHours;
-        private NumericUpDown numericUpDownSeconds;
-        private NumericUpDown numericUpDownMinutes;
-        private ProgressBar RestartProgressBar;
-        private Label timeremaininglabel;
+        private TabPage tabPage5;
+        private CheckBox checkBoxAllowExtraParams;
+        private TextBox textBoxParameters;
+        private Label label9;
+        private TabPage tabPage4;
+        private CheckBox checkBoxNetLog;
+        private CheckBox checkBoxAdminLog;
+        private CheckBox checkBoxDoLogs;
+        private TabPage tabPage3;
+        private ProgressBar progressBar1;
+        private ProgressBar progressBar;
+        private TextBox modDir;
+        private TextBox textBoxMods;
+        private Button Mods;
+        private Button Keys;
+        private Label label4;
+        private CheckedListBox ModsCheckedListBox;
+        private Button buttonUpdateMods;
+        private Button buttonBrowseMods;
+        private Label label8;
+        private TabPage tabPage2;
+        private Label label3;
+        private ComboBox comboBoxCpu;
+        private TextBox textBoxConfig;
+        private TextBox textBoxPort;
+        private TextBox textBoxExePath;
+        private CheckBox checkBox1;
+        private Label label5;
+        private Label ConfigLabel;
+        private Label PortLabel;
+        private Button buttonBrowseExe;
+        private Label label2;
+        private TabPage tabPage1;
+        private Button DeleteProfile;
+        private Button loadFileToolStripMenu;
+        private ComboBox comboBoxProfiles;
+        private Button buttonStop;
+        private Button buttonStart;
+        private Button newProfileButton;
+        private Button saveFileToolStripMenuItem;
+        private Label label1;
+        private TabControl tabControl1;
+        private TextBox webhookTextBox;
         private Label label12;
+        private Label label7;
+        private CheckBox EnableWebhookCheckbox;
+        private CheckBox RestartWebhookCheckbox;
+        private CheckBox StopWebhookCheckbox;
+        private CheckBox StartWebhookCheckbox;
+        private TextBox textBox4;
+        private TextBox textBox3;
+        private TextBox textBox2;
+        private Label webhookColor;
     }
 }
