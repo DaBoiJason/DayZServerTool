@@ -1,0 +1,18 @@
+{
+  "ModsDir": "D:\\SteamLibrary\\steamapps\\common\\DayZ\\!Workshop",
+  "ExecutablePath": "D:\\SteamLibrary\\steamapps\\common\\DayZServer\\DayZServer_x64.exe",
+  "Parameters": "",
+  "Port": "2302",
+  "Config": "serverDZ.cfg",
+  "Cpu": "4",
+  "CheckBox1": true,
+  "CheckBoxDoLogs": true,
+  "CheckBoxAdminLog": true,
+  "CheckBoxNetLog": true,
+  "CheckBoxAllowExtraParams": false,
+  "TextBoxMods": "@BadgersBarriers;@BaseBuildingPlus;@BuilderItems;@CF;@CZ Signs;@Dabs Framework;@DayZ Addicts Chernarus RP Content;@DayZ Editor Loader;@DayZ Life V2 Client (RP Framework);@DayZ-Bicycle;@Diesel Jerrycan;@Ear-Plugs;@Gas-Pump-Refueling;@HypeTrain;@ImmersiveStorages;@MoonShining;@Psyco Bus FIXED;@RedFalcon Flight System Heliz;@Sauwercrauds RolePlay Vehicles;@Smart Passport;@Survivor Animations;@Syndicate Items Pack;@Towing Service;@VanillaPlusPlusMap;@Vehicle3PP;@VPPAdminTools",
+  "TimerEnabled": true,
+  "Hours": 0.0,
+  "Minutes": 0.0,
+  "Seconds": 20.0
+}
