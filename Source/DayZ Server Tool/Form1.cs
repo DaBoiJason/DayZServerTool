@@ -247,12 +247,17 @@ namespace DayZ_Server_Tool
         {
             comboBoxCpu.Items.Clear();
 
+            // Get the number of logical processors (physical or virtual)
             int cpuCount = Environment.ProcessorCount;
+
+            // Populate the dropdown with CPU numbers from 1 up to the available CPU count
             for (int i = 1; i <= cpuCount; i++)
             {
                 comboBoxCpu.Items.Add(i.ToString());
             }
-            comboBoxCpu.SelectedIndex = 3; // Set default to "Automatic"
+
+            // Set default selection to either 4 cores (if available) or the maximum available
+            comboBoxCpu.SelectedIndex = (cpuCount >= 4) ? 3 : cpuCount - 1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
