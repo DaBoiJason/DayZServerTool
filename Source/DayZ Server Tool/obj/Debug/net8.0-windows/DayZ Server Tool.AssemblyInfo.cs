@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Apache-2.0 license")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("DayZ Server Tool in C# by DaBoiJason")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cbf5f1fe63d176cb009036cc26677adc5d5fab0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("DayZ Server Tool")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DayZ Server Tool")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -18,23 +18,3 @@ D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Deb
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.pdb
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.genruntimeconfig.cache
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\ref\DayZ Server Tool.dll
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.exe
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.deps.json
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.runtimeconfig.json
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.dll
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.pdb
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.AssemblyReference.cache
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ_Server_Tool.Form1.resources
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ_Server_Tool.Properties.Resources.resources
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.GenerateResource.cache
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.AssemblyInfoInputs.cache
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.AssemblyInfo.cs
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.CoreCompileInputs.cache
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Ser.1645FB7D.Up2Date
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.dll
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\refint\DayZ Server Tool.dll
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.pdb
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.genruntimeconfig.cache
-C:\Users\ASUS\Desktop\Source\DayZ Server Tool\obj\Debug\net8.0-windows\ref\DayZ Server Tool.dll

@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DayZ_Server_Tool
-build_property.ProjectDir = D:\GitHub Repos\DayZServerTool\Source\DayZ Server Tool\
+build_property.ProjectDir = D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

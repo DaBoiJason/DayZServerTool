@@ -46,7 +46,7 @@ The **DayZ Server Tool** is a Windows application designed to facilitate the con
 
 Here is a Preview Gif of the DayZ Server Tool Menue:
 
-![DayZ Server Tool Screenshot](https://raw.githubusercontent.com/DaBoiJason/DayZServerTool/refs/heads/main/Assets/menepreview.gif)
+![DayZ Server Tool Screenshot](https://raw.githubusercontent.com/DaBoiJason/DayZServerTool/refs/heads/main/Assets/Menuev2.0.0.gif)
 
 
 ## Contributing

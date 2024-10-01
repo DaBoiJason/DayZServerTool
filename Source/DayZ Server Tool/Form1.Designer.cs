@@ -30,7 +30,6 @@ namespace DayZ_Server_Tool
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -87,6 +86,7 @@ namespace DayZ_Server_Tool
             tabPage6 = new TabPage();
             tabControl2 = new TabControl();
             tabPage8 = new TabPage();
+            timeremaininglabel = new Label();
             RestartProgressBar = new ProgressBar();
             numericUpDownSeconds = new NumericUpDown();
             numericUpDownMinutes = new NumericUpDown();
@@ -98,7 +98,7 @@ namespace DayZ_Server_Tool
             tabPage9 = new TabPage();
             tabPage7 = new TabPage();
             label7 = new Label();
-            timeremaininglabel = new Label();
+            label12 = new Label();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -112,6 +112,7 @@ namespace DayZ_Server_Tool
             ((System.ComponentModel.ISupportInitialize)numericUpDownSeconds).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinutes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHours).BeginInit();
+            tabPage9.SuspendLayout();
             tabPage7.SuspendLayout();
             SuspendLayout();
             // 
@@ -150,13 +151,13 @@ namespace DayZ_Server_Tool
             // startToolStripMenuItem
             // 
             startToolStripMenuItem.Name = "startToolStripMenuItem";
-            startToolStripMenuItem.Size = new Size(224, 26);
+            startToolStripMenuItem.Size = new Size(123, 26);
             startToolStripMenuItem.Text = "Start";
             // 
             // stopToolStripMenuItem
             // 
             stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            stopToolStripMenuItem.Size = new Size(224, 26);
+            stopToolStripMenuItem.Size = new Size(123, 26);
             stopToolStripMenuItem.Text = "Stop";
             stopToolStripMenuItem.Click += stopToolStripMenuItem_Click;
             // 
@@ -170,22 +171,22 @@ namespace DayZ_Server_Tool
             // discordServerToolStripMenuItem
             // 
             discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            discordServerToolStripMenuItem.Size = new Size(215, 26);
+            discordServerToolStripMenuItem.Size = new Size(224, 26);
             discordServerToolStripMenuItem.Text = "Discord Server";
             discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(215, 26);
+            checkForUpdatesToolStripMenuItem.Size = new Size(224, 26);
             checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
             checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
             // version100ToolStripMenuItem
             // 
             version100ToolStripMenuItem.Name = "version100ToolStripMenuItem";
-            version100ToolStripMenuItem.Size = new Size(215, 26);
-            version100ToolStripMenuItem.Text = "Version 1.0.0";
+            version100ToolStripMenuItem.Size = new Size(224, 26);
+            version100ToolStripMenuItem.Text = "Version 2.0.0";
             // 
             // tabControl1
             // 
@@ -675,6 +676,17 @@ namespace DayZ_Server_Tool
             tabPage8.Text = "Restart Timer";
             tabPage8.UseVisualStyleBackColor = true;
             // 
+            // timeremaininglabel
+            // 
+            timeremaininglabel.AutoSize = true;
+            timeremaininglabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            timeremaininglabel.ForeColor = Color.FromArgb(0, 0, 192);
+            timeremaininglabel.Location = new Point(6, 216);
+            timeremaininglabel.Name = "timeremaininglabel";
+            timeremaininglabel.Size = new Size(230, 38);
+            timeremaininglabel.TabIndex = 5;
+            timeremaininglabel.Text = "Time Remaining";
+            // 
             // RestartProgressBar
             // 
             RestartProgressBar.Location = new Point(14, 287);
@@ -757,6 +769,7 @@ namespace DayZ_Server_Tool
             // 
             // tabPage9
             // 
+            tabPage9.Controls.Add(label12);
             tabPage9.Location = new Point(4, 29);
             tabPage9.Name = "tabPage9";
             tabPage9.Padding = new Padding(3);
@@ -785,16 +798,15 @@ namespace DayZ_Server_Tool
             label7.TabIndex = 1;
             label7.Text = "COMING SOON !!!";
             // 
-            // timeremaininglabel
+            // label12
             // 
-            timeremaininglabel.AutoSize = true;
-            timeremaininglabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            timeremaininglabel.ForeColor = Color.FromArgb(0, 0, 192);
-            timeremaininglabel.Location = new Point(6, 216);
-            timeremaininglabel.Name = "timeremaininglabel";
-            timeremaininglabel.Size = new Size(230, 38);
-            timeremaininglabel.TabIndex = 5;
-            timeremaininglabel.Text = "Time Remaining";
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(151, 197);
+            label12.Name = "label12";
+            label12.Size = new Size(244, 38);
+            label12.TabIndex = 2;
+            label12.Text = "COMING SOON !!!";
             // 
             // Form1
             // 
@@ -831,6 +843,8 @@ namespace DayZ_Server_Tool
             ((System.ComponentModel.ISupportInitialize)numericUpDownSeconds).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinutes).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHours).EndInit();
+            tabPage9.ResumeLayout(false);
+            tabPage9.PerformLayout();
             tabPage7.ResumeLayout(false);
             tabPage7.PerformLayout();
             ResumeLayout(false);
@@ -908,5 +922,6 @@ namespace DayZ_Server_Tool
         private NumericUpDown numericUpDownMinutes;
         private ProgressBar RestartProgressBar;
         private Label timeremaininglabel;
+        private Label label12;
     }
 }

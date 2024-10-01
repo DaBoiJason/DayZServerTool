@@ -928,32 +928,32 @@ namespace DayZ_Server_Tool
             }
         }
         private async void KillAndRestartServer()
+        {
+            try
             {
-                try
+                // Stop the server process
+                var runningProcesses = Process.GetProcessesByName("DayZServer_x64");
+
+                foreach (var process in runningProcesses)
                 {
-                    // Stop the server process
-                    var runningProcesses = Process.GetProcessesByName("DayZServer_x64");
-
-                    foreach (var process in runningProcesses)
-                    {
-                        process.Kill(); // Stop the process
-                        process.WaitForExit(); // Wait for the process to terminate
-                    }
-
-                    // Wait 5 seconds before restarting
-                    await Task.Delay(5000);
-
-                    // Restart the server
-                    Invoke(new Action(() =>
-                    {
-                        buttonStart_Click(null, null); // Call the button start function
-                    }));
+                    process.Kill(); // Stop the process
+                    process.WaitForExit(); // Wait for the process to terminate
                 }
-                catch (Exception ex)
+
+                // Wait 5 seconds before restarting
+                await Task.Delay(5000);
+
+                // Restart the server
+                Invoke(new Action(() =>
                 {
-                    MessageBox.Show($"Error during restart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    buttonStart_Click(null, null); // Call the button start function
+                }));
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during restart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void TimerTick(object state)
         {
             // Calculate the remaining time for the countdown
