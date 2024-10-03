@@ -39,6 +39,57 @@ namespace DayZ_Server_Tool
             modDir.Enabled = false;
             comboBoxProfiles.SelectedIndex = -1;
             ToggleTimerFields();
+            LoadLatestProfileOnStart();
+        }
+        public class LatestProfile
+        {
+            public string LatestProfileName { get; set; }
+        }
+        private void CheckModsInList(CheckedListBox checkedListBox, string modsText)
+        {
+            if (!string.IsNullOrWhiteSpace(modsText))
+            {
+                // Split the mods string by semicolon (;) and trim the parts
+                string[] selectedMods = modsText.Split(';').Select(mod => mod.Trim()).ToArray();
+
+                // Iterate over checkedListBox items and check those present in selectedMods
+                for (int i = 0; i < checkedListBox.Items.Count; i++)
+                {
+                    string currentMod = checkedListBox.Items[i].ToString();
+                    if (selectedMods.Contains(currentMod))
+                    {
+                        checkedListBox.SetItemChecked(i, true);
+                    }
+                }
+            }
+        }
+        private void SaveLatestProfile(string profileName)
+        {
+            LatestProfile latestProfile = new LatestProfile
+            {
+                LatestProfileName = profileName
+            };
+
+            string json = JsonConvert.SerializeObject(latestProfile, Formatting.Indented);
+            string latestProfilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LatestProfile.json");
+            File.WriteAllText(latestProfilePath, json);
+        }
+        private void LoadLatestProfileOnStart()
+        {
+            string latestProfilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LatestProfile.json");
+
+            if (File.Exists(latestProfilePath))
+            {
+                string json = File.ReadAllText(latestProfilePath);
+                var latestProfile = JsonConvert.DeserializeObject<LatestProfile>(json);
+
+                // Load the latest profile if it exists
+                if (!string.IsNullOrEmpty(latestProfile.LatestProfileName))
+                {
+                    comboBoxProfiles.SelectedItem = latestProfile.LatestProfileName; // Set selected item
+                    LoadSelectedProfile(); // Load the selected profile
+                }
+            }
         }
         private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -76,6 +127,8 @@ namespace DayZ_Server_Tool
                 StartWebhook = StartWebhookCheckbox.Checked,
                 StopWebhook = StopWebhookCheckbox.Checked,
                 RestartWebhook = RestartWebhookCheckbox.Checked,
+                textBoxServerMods = textBoxServerMods.Text,
+                profile = profileTextBox.Text,
             };
 
             // Serialize the profile data to JSON and save it to the file
@@ -105,6 +158,7 @@ namespace DayZ_Server_Tool
                     textBoxConfig.Text = profileData?.Config ?? string.Empty;
                     modDir.Text = profileData?.ModsDir ?? string.Empty;
                     comboBoxCpu.SelectedItem = profileData?.Cpu ?? string.Empty;
+                    profileTextBox.Text = profileData?.profile ?? string.Empty;
 
                     // Safely load checkbox values (use 'true' or 'false' when null)
                     checkBox1.Checked = (bool?)profileData?.CheckBox1 ?? false;
@@ -116,21 +170,21 @@ namespace DayZ_Server_Tool
                     // Load mods into textBoxMods
                     textBoxMods.Text = profileData?.TextBoxMods ?? string.Empty;
 
+                    // Load Servermods into textBoxServerMods
+                    textBoxServerMods.Text = profileData?.textBoxServerMods ?? string.Empty;
+
                     // Load timer settings
                     checkBoxEnableTimer.Checked = (bool?)profileData?.TimerEnabled ?? false;
                     numericUpDownHours.Value = (decimal)(profileData?.Hours ?? 0);
                     numericUpDownMinutes.Value = (decimal)(profileData?.Minutes ?? 0);
                     numericUpDownSeconds.Value = (decimal)(profileData?.Seconds ?? 0);
 
+                    // Save the latest profile name
+                    SaveLatestProfile(selectedFileName);
+
                     // Clear and load ModsCheckedListBox with directories from modDir
                     ModsCheckedListBox.Items.Clear();
-
-                    //Webhook Settings
-                    webhookTextBox.Text = profileData?.WebhookURL ?? string.Empty;
-                    EnableWebhookCheckbox.Checked = (bool?)profileData?.WebhookCheckbox ?? false;
-                    StartWebhookCheckbox.Checked = (bool?)profileData?.StartWebhook ?? false;
-                    StopWebhookCheckbox.Checked = (bool?)profileData?.StopWebhook ?? false;
-                    RestartWebhookCheckbox.Checked = (bool?)profileData?.RestartWebhook ?? false;
+                    ServerModsCheckedListBox.Items.Clear();
 
                     string modsDirectory = modDir.Text;
                     if (Directory.Exists(modsDirectory))
@@ -145,30 +199,22 @@ namespace DayZ_Server_Tool
                             if (folderName != "!DO_NOT_CHANGE_FILES_IN_THESE_FOLDERS")
                             {
                                 ModsCheckedListBox.Items.Add(folderName);
-                            }
-                        }
 
-                        // Now check the items in ModsCheckedListBox based on the mods in textBoxMods
-                        string modsFromTextBox = textBoxMods.Text;
-                        if (!string.IsNullOrWhiteSpace(modsFromTextBox))
-                        {
-                            // Split the mods string by semicolon (;) and trim the parts
-                            string[] selectedMods = modsFromTextBox.Split(';').Select(mod => mod.Trim()).ToArray();
-
-                            // Iterate over ModsCheckedListBox items and check those present in selectedMods
-                            for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
-                            {
-                                string currentMod = ModsCheckedListBox.Items[i].ToString();
-                                if (selectedMods.Contains(currentMod))
+                                // Populate ServerModsCheckedListBox only if the folder starts with "@"
+                                if (folderName.StartsWith("@"))
                                 {
-                                    ModsCheckedListBox.SetItemChecked(i, true);
+                                    ServerModsCheckedListBox.Items.Add(folderName);
                                 }
-                                UpdateButtonsState();
-                                ToggleTimerFields();
-                                ToggleTimerFields();
-                                ToggleWebhookField();
                             }
                         }
+
+                        // Check the items in ModsCheckedListBox based on the mods in textBoxMods
+                        CheckModsInList(ModsCheckedListBox, textBoxMods.Text);
+                        CheckModsInList(ServerModsCheckedListBox, textBoxServerMods.Text);
+
+                        UpdateButtonsState();
+                        ToggleTimerFields();
+                        ToggleWebhookField();
                     }
                     else
                     {
@@ -184,8 +230,10 @@ namespace DayZ_Server_Tool
             {
                 MessageBox.Show("No profile selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             ToggleTextBoxParameters();
         }
+
         private void newProfileButton_Click(object sender, EventArgs e)
         {
             // Clear all fields to start a new profile
@@ -199,16 +247,26 @@ namespace DayZ_Server_Tool
             LoadProfilesFromDirectory();
             comboBoxProfiles.SelectedIndex = -1; // Clear the selection
             textBoxMods.Clear();
+            textBoxServerMods.Clear();
             modDir.Clear();
+            profileTextBox.Clear();
 
-            // Clear all entries from the CheckedListBox
+            // Clear all entries from the CheckedListBox&ServerListBox
             ModsCheckedListBox.Items.Clear();
+            ServerModsCheckedListBox.Items.Clear();
             UpdateButtonsState();
 
-            // Uncheck all items in the CheckedListBox
+            // Uncheck all items in the ModsCheckedListBox
             for (int i = 0; i < ModsCheckedListBox.Items.Count; i++)
             {
                 ModsCheckedListBox.SetItemChecked(i, false);
+            }
+
+            // Uncheck all items in the Server ModsCheckedListBox
+
+            for (int i = 0; i < ServerModsCheckedListBox.Items.Count; i++)
+            {
+                ServerModsCheckedListBox.SetItemChecked(i, false);
             }
 
             checkBoxDoLogs.Checked = false;
@@ -270,6 +328,7 @@ namespace DayZ_Server_Tool
             string directoryPath = AppDomain.CurrentDomain.BaseDirectory; // Get the directory of the executable
             var jsonFiles = Directory.GetFiles(directoryPath, "*.json")
                                      .Where(file =>
+                                         !file.EndsWith("LatestProfile.json") &&
                                          !file.EndsWith("DayZ Server Tool.deps.json") &&
                                          !file.EndsWith("DayZ Server Tool.runtimeconfig.json"));
 
@@ -462,6 +521,27 @@ namespace DayZ_Server_Tool
             // Set the textBoxMods text to the concatenated folder names
             textBoxMods.Text = selectedMods;
         }
+        private void buttonUpdateServerMods_Click(object sender, EventArgs e)
+        {
+            // Create a string to hold the selected folder names
+            string selectedSMods = "";
+
+            // Iterate through CheckedListBox items
+            foreach (var item in ServerModsCheckedListBox.CheckedItems)
+            {
+                // Append the selected items to the string with a semicolon
+                selectedSMods += item.ToString() + ";";
+            }
+
+            // Remove the trailing semicolon if it exists
+            if (selectedSMods.EndsWith(";"))
+            {
+                selectedSMods = selectedSMods.Substring(0, selectedSMods.Length - 1);
+            }
+
+            // Set the textBoxMods text to the concatenated folder names
+            textBoxServerMods.Text = selectedSMods;
+        }
 
         private void discordServerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -501,7 +581,6 @@ namespace DayZ_Server_Tool
         {
             LoadProfilesFromDirectory();
         }
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
             try
@@ -521,7 +600,11 @@ namespace DayZ_Server_Tool
                 string port = textBoxPort.Text;
                 string cpuCount = comboBoxCpu.SelectedItem?.ToString() ?? "4"; // Default to 4 if not set
                 string config = textBoxConfig.Text;
-                string mods = textBoxMods.Text;
+                string profile = profileTextBox.Text;
+
+                // Retrieve mods and server mods from textBox
+                string mods = textBoxMods.Text; // Get the mod string directly
+                string serverMods = textBoxServerMods.Text; // Get the server mod string directly
 
                 // Construct the command line arguments
                 List<string> arguments = new List<string>
@@ -529,7 +612,10 @@ namespace DayZ_Server_Tool
             $"-port={port}",
             $"-cpuCount={cpuCount}",
             $"-config={config}",
-            $"-mod={mods}" // Always add the -mod parameter
+            $"-profiles={profile}",
+            $"\"-mod={mods}\"",
+            $"\"-servermod={serverMods}\"",
+
         };
 
                 // Add optional parameters based on checkbox states
@@ -538,14 +624,11 @@ namespace DayZ_Server_Tool
                 if (checkBoxNetLog.Checked) arguments.Add("-netlog");
                 if (checkBox1.Checked) arguments.Add("-freezecheck");
 
-                // Join the arguments into a single string
-                string argumentString = string.Join(" ", arguments);
-
                 // Start the process
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = exePath,
-                    Arguments = argumentString,
+                    Arguments = string.Join(" ", arguments), // Join the arguments into a single string with spaces
                     UseShellExecute = true // Use the shell to start the process
                 };
 
@@ -563,108 +646,6 @@ namespace DayZ_Server_Tool
                 MessageBox.Show($"Error starting the executable: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Check if DayZServer_x64.exe is already running
-                var runningProcesses = Process.GetProcessesByName("DayZServer_x64");
-                if (runningProcesses.Length > 0)
-                {
-                    MessageBox.Show("Warning: DayZServer_x64.exe is already running.", "Process Running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Exit the method to prevent starting a new instance
-                }
-
-                // Retrieve the path to the executable from textBoxExePath
-                string exePath = textBoxExePath.Text;
-
-                // Retrieve port, cpuCount, and config values
-                string port = textBoxPort.Text;
-                string cpuCount = comboBoxCpu.SelectedItem?.ToString() ?? "4"; // Default to 4 if not set
-                string config = textBoxConfig.Text;
-                string mods = textBoxMods.Text;
-
-                // Construct the command line arguments
-                List<string> arguments = new List<string>
-        {
-            $"-port={port}",
-            $"-cpuCount={cpuCount}",
-            $"-config={config}",
-            $"-mod={mods}" // Always add the -mod parameter
-        };
-
-                // Add optional parameters based on checkbox states
-                if (checkBoxDoLogs.Checked)
-                {
-                    arguments.Add("-doLogs");
-                }
-
-                if (checkBoxAdminLog.Checked)
-                {
-                    arguments.Add("-adminlog");
-                }
-
-                if (checkBoxNetLog.Checked)
-                {
-                    arguments.Add("-netlog");
-                }
-
-                if (checkBox1.Checked) // Assuming checkBox1 corresponds to -freezecheck
-                {
-                    arguments.Add("-freezecheck");
-                }
-
-                // Join the arguments into a single string
-                string argumentString = string.Join(" ", arguments);
-
-                // Start the process
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = exePath,
-                    Arguments = argumentString,
-                    UseShellExecute = true // Use the shell to start the process
-                };
-
-                Process.Start(startInfo);
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions (e.g., file not found, invalid path)
-                MessageBox.Show($"Error starting the executable: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Get all instances of DayZServer_x64
-                var runningProcesses = Process.GetProcessesByName("DayZServer_x64");
-
-                // Check if any instances are found
-                if (runningProcesses.Length == 0)
-                {
-                    MessageBox.Show("No instance of DayZServer_x64.exe is currently running.", "Process Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return; // Exit if no process is found
-                }
-
-                // Terminate each instance found
-                foreach (var process in runningProcesses)
-                {
-                    process.Kill(); // This will stop the process
-                    process.WaitForExit(); // Optionally wait for the process to exit
-                }
-
-                MessageBox.Show("DayZServer_x64.exe has been stopped.", "Process Stopped", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions that may occur during the process termination
-                MessageBox.Show($"Error stopping the executable: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
         private void buttonBrowseMods_Click(object sender, EventArgs e)
         {
             // Open a folder browser dialog
@@ -675,23 +656,30 @@ namespace DayZ_Server_Tool
                 // Show the dialog and check if the user clicked OK
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Clear previous items
+                    // Clear previous items in both CheckedListBoxes
                     ModsCheckedListBox.Items.Clear();
+                    ServerModsCheckedListBox.Items.Clear(); // Clear the new CheckedListBox
 
                     // Get all directories in the selected path
                     string[] directories = Directory.GetDirectories(folderBrowserDialog.SelectedPath);
 
-                    // Populate the CheckedListBox with folder names
+                    // Populate both CheckedListBoxes with folder names
                     foreach (string directory in directories)
                     {
                         // Extract the folder name
                         string folderName = Path.GetFileName(directory);
 
-                        // Check if the folder name is the one to exclude
+                        // Exclude certain folders (like "!DO_NOT_CHANGE_FILES_IN_THESE_FOLDERS")
                         if (folderName != "!DO_NOT_CHANGE_FILES_IN_THESE_FOLDERS")
                         {
-                            // Add to CheckedListBox if it's not the excluded folder
+                            // Add to ModsCheckedListBox
                             ModsCheckedListBox.Items.Add(folderName);
+
+                            // Add to ServerModsCheckedListBox only if it starts with "@"
+                            if (folderName.StartsWith("@"))
+                            {
+                                ServerModsCheckedListBox.Items.Add(folderName);
+                            }
                         }
                     }
 
@@ -712,6 +700,8 @@ namespace DayZ_Server_Tool
             // Enable or disable the buttons based on the presence of items
             Keys.Enabled = hasItems; // Assuming your button is named keysButton
             Mods.Enabled = hasItems;  // Assuming your button is named modsButton
+            ServerKeys.Enabled = hasItems; // Assuming your button is named keysButton
+            ServerMods.Enabled = hasItems;  // Assuming your button is named modsButton
         }
 
         // Optional: You may also want to call UpdateButtonsState when the CheckedListBox is cleared
@@ -801,6 +791,86 @@ namespace DayZ_Server_Tool
 
             MessageBox.Show("Key files copied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        private void ServerKeys_Click(object sender, EventArgs e)
+        {
+            // Ensure modDir and textBoxExePath are not empty
+            if (string.IsNullOrEmpty(modDir.Text) || string.IsNullOrEmpty(textBoxExePath.Text))
+            {
+                MessageBox.Show("Please make sure modDir and textBoxExePath fields are populated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string modDirectory = modDir.Text;
+            string destinationKeysPath = Path.Combine(Path.GetDirectoryName(textBoxExePath.Text), "keys");
+
+            // Create the destination keys folder if it doesn't exist
+            if (!Directory.Exists(destinationKeysPath))
+            {
+                Directory.CreateDirectory(destinationKeysPath);
+            }
+
+            // Collect selected mods from ModsCheckedListBox
+            List<string> selectedMods = new List<string>();
+
+            // Add checked items from ModsCheckedListBox
+            foreach (object item in ServerModsCheckedListBox.CheckedItems)
+            {
+                selectedMods.Add(item.ToString());
+            }
+
+            // Add mods from textBoxMods, split by ';'
+            if (!string.IsNullOrEmpty(textBoxServerMods.Text))
+            {
+                string[] modsFromTextBox = textBoxServerMods.Text.Split(';').Select(m => m.Trim()).ToArray();
+                selectedMods.AddRange(modsFromTextBox);
+            }
+
+            // Remove duplicates in case a mod is in both places
+            selectedMods = selectedMods.Distinct().ToList();
+
+            // Initialize the progress bar
+            progressBar2.Value = 0;
+            progressBar2.Maximum = selectedMods.Count;
+
+            // Iterate through each selected mod
+            foreach (string mod in selectedMods)
+            {
+                string modPath = Path.Combine(modDirectory, mod);
+
+                if (Directory.Exists(modPath))
+                {
+                    // Look for Keys/keys/key/Key folders within the mod directory
+                    string[] keyFolders = Directory.GetDirectories(modPath, "*", SearchOption.TopDirectoryOnly)
+                                                    .Where(dir => dir.EndsWith("Keys", StringComparison.OrdinalIgnoreCase) ||
+                                                                  dir.EndsWith("keys", StringComparison.OrdinalIgnoreCase) ||
+                                                                  dir.EndsWith("key", StringComparison.OrdinalIgnoreCase) ||
+                                                                  dir.EndsWith("Key", StringComparison.OrdinalIgnoreCase))
+                                                    .ToArray();
+
+                    foreach (string keyFolder in keyFolders)
+                    {
+                        try
+                        {
+                            // Copy the contents of the keyFolder to the destinationKeysPath
+                            CopyDirectoryContents(keyFolder, destinationKeysPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error copying files from {keyFolder}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Mod directory '{mod}' not found in '{modDirectory}'.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                // Update progress bar
+                progressBar2.Value += 1;
+            }
+
+            MessageBox.Show("Key files copied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void CopyDirectoryContents(string sourceDir, string destinationDir)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDir);
@@ -827,7 +897,52 @@ namespace DayZ_Server_Tool
                 CopyDirectoryContents(subdir.FullName, tempPath);
             }
         }
+        private void ServerMods_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(modDir.Text) || string.IsNullOrEmpty(textBoxExePath.Text))
+            {
+                MessageBox.Show("Please make sure modDir and textBoxExePath fields are populated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            string destinationDir = Path.GetDirectoryName(textBoxExePath.Text);
+            if (!Directory.Exists(destinationDir))
+            {
+                MessageBox.Show($"Destination directory '{destinationDir}' does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<string> selectedServerMods = new List<string>();
+            foreach (object item in ServerModsCheckedListBox.CheckedItems)
+            {
+                selectedServerMods.Add(item.ToString());
+            }
+
+            progressBar3.Value = 0;
+            progressBar3.Maximum = selectedServerMods.Count;
+
+            foreach (string mod in selectedServerMods)
+            {
+                string sourceModPath = Path.Combine(modDir.Text, mod);
+                string destinationModPath = Path.Combine(destinationDir, mod);
+
+                if (Directory.Exists(sourceModPath))
+                {
+                    try
+                    {
+                        CopyDirectory(sourceModPath, destinationModPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error copying server mod '{mod}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                progressBar3.Value += 1;
+            }
+
+            MessageBox.Show("Server mods copied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void Mods_Click(object sender, EventArgs e)
         {
             // Ensure modDir and textBoxExePath are not empty
@@ -1031,10 +1146,45 @@ namespace DayZ_Server_Tool
             StopWebhookCheckbox.Enabled = isWebhookEnabled;
             RestartWebhookCheckbox.Enabled = isWebhookEnabled;
         }
-
-        private void label20_Click(object sender, EventArgs e)
+        // Assuming your TabControl is named tabControl1
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (tabControl1.SelectedTab == tabPage3)
+            {
+                // When tabPage3 is selected, change the size to stretched
+                this.Size = new Size(1214, 603); // Window size
+                tabControl1.Size = new Size(1178, 519); // Tab size
+            }
+            else
+            {
+                // When any other tab is selected, revert to the normal size
+                this.Size = new Size(629, 603); // Window size
+                foreach (TabPage page in tabControl1.TabPages)
+                {
+                    if (page != tabPage3)
+                    {
+                        tabControl1.Size = new Size(592, 519); // Normal tab size
+                    }
+                }
+            }
         }
+        /*
+            When stretched
+            tabPage3 Size
+            1178, 519
+            Window Size
+            1214, 603
+
+            ===================
+            ===================
+            ===================
+
+            when normal
+            tabPageX size
+            592; 519
+            window size
+            629; 603
+         */
+
     }
 }

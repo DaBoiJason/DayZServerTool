@@ -34,9 +34,6 @@ namespace DayZ_Server_Tool
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             refreshProfilesToolStripMenuItem = new ToolStripMenuItem();
-            serverToolStripMenuItem = new ToolStripMenuItem();
-            startToolStripMenuItem = new ToolStripMenuItem();
-            stopToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             discordServerToolStripMenuItem = new ToolStripMenuItem();
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
@@ -68,26 +65,37 @@ namespace DayZ_Server_Tool
             checkBoxAdminLog = new CheckBox();
             checkBoxDoLogs = new CheckBox();
             tabPage3 = new TabPage();
-            progressBar1 = new ProgressBar();
-            progressBar = new ProgressBar();
             modDir = new TextBox();
-            textBoxMods = new TextBox();
-            Mods = new Button();
-            Keys = new Button();
-            label4 = new Label();
-            ModsCheckedListBox = new CheckedListBox();
-            buttonUpdateMods = new Button();
-            buttonBrowseMods = new Button();
+            label18 = new Label();
+            label13 = new Label();
+            label14 = new Label();
             label8 = new Label();
+            ServerKeys = new Button();
+            Keys = new Button();
+            progressBar3 = new ProgressBar();
+            progressBar1 = new ProgressBar();
+            ServerMods = new Button();
+            Mods = new Button();
+            buttonBrowseMods = new Button();
+            progressBar2 = new ProgressBar();
+            progressBar = new ProgressBar();
+            buttonUpdateServerMods = new Button();
+            buttonUpdateMods = new Button();
+            textBoxServerMods = new TextBox();
+            textBoxMods = new TextBox();
+            ServerModsCheckedListBox = new CheckedListBox();
+            ModsCheckedListBox = new CheckedListBox();
             tabPage2 = new TabPage();
             label3 = new Label();
             comboBoxCpu = new ComboBox();
             textBoxConfig = new TextBox();
+            profileTextBox = new TextBox();
             textBoxPort = new TextBox();
             textBoxExePath = new TextBox();
             checkBox1 = new CheckBox();
             label5 = new Label();
             ConfigLabel = new Label();
+            label4 = new Label();
             PortLabel = new Label();
             buttonBrowseExe = new Button();
             label2 = new Label();
@@ -119,10 +127,10 @@ namespace DayZ_Server_Tool
             // 
             menuStrip1.BackColor = Color.Gainsboro;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, serverToolStripMenuItem, aboutToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(612, 28);
+            menuStrip1.Size = new Size(611, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "Menu Strip Main";
             // 
@@ -140,26 +148,6 @@ namespace DayZ_Server_Tool
             refreshProfilesToolStripMenuItem.Text = "Refresh Profiles";
             refreshProfilesToolStripMenuItem.Click += refreshProfilesToolStripMenuItem_Click_1;
             // 
-            // serverToolStripMenuItem
-            // 
-            serverToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { startToolStripMenuItem, stopToolStripMenuItem });
-            serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            serverToolStripMenuItem.Size = new Size(64, 24);
-            serverToolStripMenuItem.Text = "Server";
-            // 
-            // startToolStripMenuItem
-            // 
-            startToolStripMenuItem.Name = "startToolStripMenuItem";
-            startToolStripMenuItem.Size = new Size(123, 26);
-            startToolStripMenuItem.Text = "Start";
-            // 
-            // stopToolStripMenuItem
-            // 
-            stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            stopToolStripMenuItem.Size = new Size(123, 26);
-            stopToolStripMenuItem.Text = "Stop";
-            stopToolStripMenuItem.Click += stopToolStripMenuItem_Click;
-            // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { discordServerToolStripMenuItem, checkForUpdatesToolStripMenuItem, version100ToolStripMenuItem });
@@ -170,22 +158,22 @@ namespace DayZ_Server_Tool
             // discordServerToolStripMenuItem
             // 
             discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            discordServerToolStripMenuItem.Size = new Size(215, 26);
+            discordServerToolStripMenuItem.Size = new Size(224, 26);
             discordServerToolStripMenuItem.Text = "Discord Server";
             discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(215, 26);
+            checkForUpdatesToolStripMenuItem.Size = new Size(224, 26);
             checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
             checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
             // version100ToolStripMenuItem
             // 
             version100ToolStripMenuItem.Name = "version100ToolStripMenuItem";
-            version100ToolStripMenuItem.Size = new Size(215, 26);
-            version100ToolStripMenuItem.Text = "Version 2.0.0";
+            version100ToolStripMenuItem.Size = new Size(224, 26);
+            version100ToolStripMenuItem.Text = "Version 2.2.0";
             // 
             // tabPage7
             // 
@@ -198,7 +186,7 @@ namespace DayZ_Server_Tool
             tabPage7.Controls.Add(RestartWebhookCheckbox);
             tabPage7.Location = new Point(4, 29);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(583, 484);
+            tabPage7.Size = new Size(584, 486);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "Discord Webhook";
             tabPage7.UseVisualStyleBackColor = true;
@@ -297,7 +285,7 @@ namespace DayZ_Server_Tool
             tabPage6.Controls.Add(checkBoxEnableTimer);
             tabPage6.Location = new Point(4, 29);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(583, 484);
+            tabPage6.Size = new Size(584, 486);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Restart";
             tabPage6.UseVisualStyleBackColor = true;
@@ -400,7 +388,7 @@ namespace DayZ_Server_Tool
             tabPage5.Controls.Add(label9);
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(583, 484);
+            tabPage5.Size = new Size(584, 486);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Parameters";
             tabPage5.UseVisualStyleBackColor = true;
@@ -442,7 +430,7 @@ namespace DayZ_Server_Tool
             tabPage4.Controls.Add(checkBoxDoLogs);
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(583, 484);
+            tabPage4.Size = new Size(584, 486);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Logs";
             tabPage4.UseVisualStyleBackColor = true;
@@ -479,68 +467,99 @@ namespace DayZ_Server_Tool
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(progressBar1);
-            tabPage3.Controls.Add(progressBar);
             tabPage3.Controls.Add(modDir);
-            tabPage3.Controls.Add(textBoxMods);
-            tabPage3.Controls.Add(Mods);
-            tabPage3.Controls.Add(Keys);
-            tabPage3.Controls.Add(label4);
-            tabPage3.Controls.Add(ModsCheckedListBox);
-            tabPage3.Controls.Add(buttonUpdateMods);
-            tabPage3.Controls.Add(buttonBrowseMods);
+            tabPage3.Controls.Add(label18);
+            tabPage3.Controls.Add(label13);
+            tabPage3.Controls.Add(label14);
             tabPage3.Controls.Add(label8);
+            tabPage3.Controls.Add(ServerKeys);
+            tabPage3.Controls.Add(Keys);
+            tabPage3.Controls.Add(progressBar3);
+            tabPage3.Controls.Add(progressBar1);
+            tabPage3.Controls.Add(ServerMods);
+            tabPage3.Controls.Add(Mods);
+            tabPage3.Controls.Add(buttonBrowseMods);
+            tabPage3.Controls.Add(progressBar2);
+            tabPage3.Controls.Add(progressBar);
+            tabPage3.Controls.Add(buttonUpdateServerMods);
+            tabPage3.Controls.Add(buttonUpdateMods);
+            tabPage3.Controls.Add(textBoxServerMods);
+            tabPage3.Controls.Add(textBoxMods);
+            tabPage3.Controls.Add(ServerModsCheckedListBox);
+            tabPage3.Controls.Add(ModsCheckedListBox);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(583, 484);
+            tabPage3.Size = new Size(584, 486);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Mods";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(399, 174);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(181, 29);
-            progressBar1.TabIndex = 12;
-            // 
-            // progressBar
-            // 
-            progressBar.Location = new Point(399, 139);
-            progressBar.Name = "progressBar";
-            progressBar.Size = new Size(181, 29);
-            progressBar.TabIndex = 11;
-            // 
             // modDir
             // 
-            modDir.Location = new Point(3, 76);
+            modDir.Location = new Point(304, 85);
             modDir.Name = "modDir";
             modDir.ReadOnly = true;
             modDir.Size = new Size(577, 27);
             modDir.TabIndex = 10;
             // 
-            // textBoxMods
+            // label18
             // 
-            textBoxMods.Location = new Point(3, 37);
-            textBoxMods.Name = "textBoxMods";
-            textBoxMods.Size = new Size(577, 27);
-            textBoxMods.TabIndex = 0;
+            label18.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI Black", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label18.ForeColor = Color.Red;
+            label18.Location = new Point(634, 12);
+            label18.Name = "label18";
+            label18.Size = new Size(194, 25);
+            label18.TabIndex = 4;
+            label18.Text = "⚠Server Mods List:";
             // 
-            // Mods
+            // label13
             // 
-            Mods.Enabled = false;
-            Mods.Location = new Point(132, 174);
-            Mods.Name = "Mods";
-            Mods.Size = new Size(261, 29);
-            Mods.TabIndex = 9;
-            Mods.Text = "Copy Paste Selected Mods";
-            Mods.UseVisualStyleBackColor = true;
-            Mods.Click += Mods_Click;
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.Location = new Point(228, 12);
+            label13.Name = "label13";
+            label13.Size = new Size(93, 25);
+            label13.TabIndex = 4;
+            label13.Text = "Mods List:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(350, 118);
+            label14.Name = "label14";
+            label14.Size = new Size(447, 20);
+            label14.TabIndex = 7;
+            label14.Text = " Select !Workshop Folder in steamapps\\common\\DayZ\\!Workshop";
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(228, 12);
+            label8.Name = "label8";
+            label8.Size = new Size(93, 25);
+            label8.TabIndex = 4;
+            label8.Text = "Mods List:";
+            // 
+            // ServerKeys
+            // 
+            ServerKeys.Enabled = false;
+            ServerKeys.Location = new Point(714, 147);
+            ServerKeys.Name = "ServerKeys";
+            ServerKeys.Size = new Size(290, 29);
+            ServerKeys.TabIndex = 8;
+            ServerKeys.Text = "Copy Paste Keys Of Selected Server Mods";
+            ServerKeys.UseVisualStyleBackColor = true;
+            ServerKeys.Click += ServerKeys_Click;
             // 
             // Keys
             // 
             Keys.Enabled = false;
-            Keys.Location = new Point(132, 139);
+            Keys.Location = new Point(129, 147);
             Keys.Name = "Keys";
             Keys.Size = new Size(261, 29);
             Keys.TabIndex = 8;
@@ -548,36 +567,45 @@ namespace DayZ_Server_Tool
             Keys.UseVisualStyleBackColor = true;
             Keys.Click += Keys_Click;
             // 
-            // label4
+            // progressBar3
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(33, 106);
-            label4.Name = "label4";
-            label4.Size = new Size(447, 20);
-            label4.TabIndex = 7;
-            label4.Text = " Select !Workshop Folder in steamapps\\common\\DayZ\\!Workshop";
+            progressBar3.Location = new Point(1006, 181);
+            progressBar3.Name = "progressBar3";
+            progressBar3.Size = new Size(156, 29);
+            progressBar3.TabIndex = 12;
             // 
-            // ModsCheckedListBox
+            // progressBar1
             // 
-            ModsCheckedListBox.FormattingEnabled = true;
-            ModsCheckedListBox.Location = new Point(3, 214);
-            ModsCheckedListBox.Name = "ModsCheckedListBox";
-            ModsCheckedListBox.Size = new Size(577, 268);
-            ModsCheckedListBox.TabIndex = 6;
+            progressBar1.Location = new Point(396, 182);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(181, 29);
+            progressBar1.TabIndex = 12;
             // 
-            // buttonUpdateMods
+            // ServerMods
             // 
-            buttonUpdateMods.Location = new Point(3, 174);
-            buttonUpdateMods.Name = "buttonUpdateMods";
-            buttonUpdateMods.Size = new Size(123, 29);
-            buttonUpdateMods.TabIndex = 5;
-            buttonUpdateMods.Text = "Select Mods";
-            buttonUpdateMods.UseVisualStyleBackColor = true;
-            buttonUpdateMods.Click += buttonUpdateMods_Click;
+            ServerMods.Enabled = false;
+            ServerMods.Location = new Point(714, 182);
+            ServerMods.Name = "ServerMods";
+            ServerMods.Size = new Size(290, 29);
+            ServerMods.TabIndex = 9;
+            ServerMods.Text = "Copy Paste Selected Server Mods";
+            ServerMods.UseVisualStyleBackColor = true;
+            ServerMods.Click += ServerMods_Click;
+            // 
+            // Mods
+            // 
+            Mods.Enabled = false;
+            Mods.Location = new Point(129, 182);
+            Mods.Name = "Mods";
+            Mods.Size = new Size(261, 29);
+            Mods.TabIndex = 9;
+            Mods.Text = "Copy Paste Selected Mods";
+            Mods.UseVisualStyleBackColor = true;
+            Mods.Click += Mods_Click;
             // 
             // buttonBrowseMods
             // 
-            buttonBrowseMods.Location = new Point(3, 139);
+            buttonBrowseMods.Location = new Point(3, 147);
             buttonBrowseMods.Name = "buttonBrowseMods";
             buttonBrowseMods.Size = new Size(123, 29);
             buttonBrowseMods.TabIndex = 2;
@@ -585,34 +613,90 @@ namespace DayZ_Server_Tool
             buttonBrowseMods.UseVisualStyleBackColor = true;
             buttonBrowseMods.Click += buttonBrowseMods_Click;
             // 
-            // label8
+            // progressBar2
             // 
-            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(231, 9);
-            label8.Name = "label8";
-            label8.Size = new Size(93, 25);
-            label8.TabIndex = 4;
-            label8.Text = "Mods List:";
+            progressBar2.Location = new Point(1006, 146);
+            progressBar2.Name = "progressBar2";
+            progressBar2.Size = new Size(156, 29);
+            progressBar2.TabIndex = 11;
+            // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(396, 147);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(181, 29);
+            progressBar.TabIndex = 11;
+            // 
+            // buttonUpdateServerMods
+            // 
+            buttonUpdateServerMods.Location = new Point(585, 147);
+            buttonUpdateServerMods.Name = "buttonUpdateServerMods";
+            buttonUpdateServerMods.Size = new Size(123, 64);
+            buttonUpdateServerMods.TabIndex = 5;
+            buttonUpdateServerMods.Text = "Select Server Mods";
+            buttonUpdateServerMods.UseVisualStyleBackColor = true;
+            buttonUpdateServerMods.Click += buttonUpdateServerMods_Click;
+            // 
+            // buttonUpdateMods
+            // 
+            buttonUpdateMods.Location = new Point(0, 182);
+            buttonUpdateMods.Name = "buttonUpdateMods";
+            buttonUpdateMods.Size = new Size(123, 29);
+            buttonUpdateMods.TabIndex = 5;
+            buttonUpdateMods.Text = "Select Mods";
+            buttonUpdateMods.UseVisualStyleBackColor = true;
+            buttonUpdateMods.Click += buttonUpdateMods_Click;
+            // 
+            // textBoxServerMods
+            // 
+            textBoxServerMods.Location = new Point(585, 40);
+            textBoxServerMods.Name = "textBoxServerMods";
+            textBoxServerMods.Size = new Size(577, 27);
+            textBoxServerMods.TabIndex = 0;
+            // 
+            // textBoxMods
+            // 
+            textBoxMods.Location = new Point(0, 40);
+            textBoxMods.Name = "textBoxMods";
+            textBoxMods.Size = new Size(577, 27);
+            textBoxMods.TabIndex = 0;
+            // 
+            // ServerModsCheckedListBox
+            // 
+            ServerModsCheckedListBox.FormattingEnabled = true;
+            ServerModsCheckedListBox.Location = new Point(585, 217);
+            ServerModsCheckedListBox.Name = "ServerModsCheckedListBox";
+            ServerModsCheckedListBox.Size = new Size(577, 268);
+            ServerModsCheckedListBox.TabIndex = 6;
+            // 
+            // ModsCheckedListBox
+            // 
+            ModsCheckedListBox.FormattingEnabled = true;
+            ModsCheckedListBox.Location = new Point(0, 217);
+            ModsCheckedListBox.Name = "ModsCheckedListBox";
+            ModsCheckedListBox.RightToLeft = RightToLeft.No;
+            ModsCheckedListBox.Size = new Size(577, 268);
+            ModsCheckedListBox.TabIndex = 6;
             // 
             // tabPage2
             // 
             tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(comboBoxCpu);
             tabPage2.Controls.Add(textBoxConfig);
+            tabPage2.Controls.Add(profileTextBox);
             tabPage2.Controls.Add(textBoxPort);
             tabPage2.Controls.Add(textBoxExePath);
             tabPage2.Controls.Add(checkBox1);
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(ConfigLabel);
+            tabPage2.Controls.Add(label4);
             tabPage2.Controls.Add(PortLabel);
             tabPage2.Controls.Add(buttonBrowseExe);
             tabPage2.Controls.Add(label2);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(583, 484);
+            tabPage2.Size = new Size(584, 486);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Main";
             tabPage2.UseVisualStyleBackColor = true;
@@ -620,7 +704,7 @@ namespace DayZ_Server_Tool
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(350, 375);
+            label3.Location = new Point(347, 375);
             label3.Name = "label3";
             label3.Size = new Size(123, 20);
             label3.TabIndex = 10;
@@ -629,28 +713,35 @@ namespace DayZ_Server_Tool
             // comboBoxCpu
             // 
             comboBoxCpu.FormattingEnabled = true;
-            comboBoxCpu.Location = new Point(193, 372);
+            comboBoxCpu.Location = new Point(190, 372);
             comboBoxCpu.Name = "comboBoxCpu";
             comboBoxCpu.Size = new Size(151, 28);
             comboBoxCpu.TabIndex = 9;
             // 
             // textBoxConfig
             // 
-            textBoxConfig.Location = new Point(6, 293);
+            textBoxConfig.Location = new Point(7, 289);
             textBoxConfig.Name = "textBoxConfig";
             textBoxConfig.Size = new Size(571, 27);
             textBoxConfig.TabIndex = 8;
             // 
+            // profileTextBox
+            // 
+            profileTextBox.Location = new Point(7, 173);
+            profileTextBox.Name = "profileTextBox";
+            profileTextBox.Size = new Size(571, 27);
+            profileTextBox.TabIndex = 7;
+            // 
             // textBoxPort
             // 
-            textBoxPort.Location = new Point(6, 176);
+            textBoxPort.Location = new Point(7, 231);
             textBoxPort.Name = "textBoxPort";
             textBoxPort.Size = new Size(571, 27);
             textBoxPort.TabIndex = 7;
             // 
             // textBoxExePath
             // 
-            textBoxExePath.Location = new Point(6, 58);
+            textBoxExePath.Location = new Point(6, 78);
             textBoxExePath.Name = "textBoxExePath";
             textBoxExePath.Size = new Size(571, 27);
             textBoxExePath.TabIndex = 1;
@@ -658,7 +749,7 @@ namespace DayZ_Server_Tool
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(212, 441);
+            checkBox1.Location = new Point(209, 441);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(117, 24);
             checkBox1.TabIndex = 6;
@@ -670,7 +761,7 @@ namespace DayZ_Server_Tool
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(245, 335);
+            label5.Location = new Point(242, 335);
             label5.Name = "label5";
             label5.Size = new Size(49, 25);
             label5.TabIndex = 5;
@@ -681,18 +772,29 @@ namespace DayZ_Server_Tool
             ConfigLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ConfigLabel.AutoSize = true;
             ConfigLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ConfigLabel.Location = new Point(245, 239);
+            ConfigLabel.Location = new Point(239, 261);
             ConfigLabel.Name = "ConfigLabel";
             ConfigLabel.Size = new Size(69, 25);
             ConfigLabel.TabIndex = 4;
             ConfigLabel.Text = "Config:";
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(216, 143);
+            label4.Name = "label4";
+            label4.Size = new Size(125, 25);
+            label4.TabIndex = 3;
+            label4.Text = "Server Profile :";
             // 
             // PortLabel
             // 
             PortLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PortLabel.AutoSize = true;
             PortLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PortLabel.Location = new Point(245, 133);
+            PortLabel.Location = new Point(249, 203);
             PortLabel.Name = "PortLabel";
             PortLabel.Size = new Size(48, 25);
             PortLabel.TabIndex = 3;
@@ -700,7 +802,7 @@ namespace DayZ_Server_Tool
             // 
             // buttonBrowseExe
             // 
-            buttonBrowseExe.Location = new Point(223, 89);
+            buttonBrowseExe.Location = new Point(228, 111);
             buttonBrowseExe.Name = "buttonBrowseExe";
             buttonBrowseExe.Size = new Size(94, 29);
             buttonBrowseExe.TabIndex = 2;
@@ -712,10 +814,10 @@ namespace DayZ_Server_Tool
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(165, 28);
+            label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(118, 37);
             label2.Name = "label2";
-            label2.Size = new Size(200, 25);
+            label2.Size = new Size(336, 38);
             label2.TabIndex = 0;
             label2.Text = "Server's Executable Path";
             // 
@@ -734,7 +836,7 @@ namespace DayZ_Server_Tool
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(583, 484);
+            tabPage1.Size = new Size(584, 486);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Server";
             // 
@@ -836,18 +938,20 @@ namespace DayZ_Server_Tool
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
             tabControl1.Controls.Add(tabPage7);
+            tabControl1.ItemSize = new Size(60, 25);
             tabControl1.Location = new Point(12, 31);
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(591, 517);
+            tabControl1.Size = new Size(592, 519);
             tabControl1.TabIndex = 1;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.DarkGray;
-            ClientSize = new Size(612, 556);
+            ClientSize = new Size(611, 556);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -887,11 +991,8 @@ namespace DayZ_Server_Tool
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem serverToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem discordServerToolStripMenuItem;
-        private ToolStripMenuItem startToolStripMenuItem;
-        private ToolStripMenuItem stopToolStripMenuItem;
         private Button LoadProfile;
         private ToolStripMenuItem refreshProfilesToolStripMenuItem;
         private ToolStripMenuItem checkForUpdatesToolStripMenuItem;
@@ -922,10 +1023,8 @@ namespace DayZ_Server_Tool
         private TextBox textBoxMods;
         private Button Mods;
         private Button Keys;
-        private Label label4;
         private CheckedListBox ModsCheckedListBox;
         private Button buttonUpdateMods;
-        private Button buttonBrowseMods;
         private Label label8;
         private TabPage tabPage2;
         private Label label3;
@@ -956,9 +1055,21 @@ namespace DayZ_Server_Tool
         private CheckBox RestartWebhookCheckbox;
         private CheckBox StopWebhookCheckbox;
         private CheckBox StartWebhookCheckbox;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
         private Label webhookColor;
+        private Label label13;
+        private Label label14;
+        private Label label18;
+        private Label label16;
+        private TextBox textBoxServerMods;
+        private TextBox textBox2;
+        private CheckedListBox ServerModsCheckedListBox;
+        private Button buttonBrowseMods;
+        private Button ServerKeys;
+        private ProgressBar progressBar3;
+        private Button ServerMods;
+        private ProgressBar progressBar2;
+        private Button buttonUpdateServerMods;
+        private TextBox profileTextBox;
+        private Label label4;
     }
 }

@@ -19,5 +19,7 @@
   "WebhookCheckbox": false,
   "StartWebhook": false,
   "StopWebhook": false,
-  "RestartWebhook": false
+  "RestartWebhook": false,
+  "textBoxServerMods": "@DayZ Life V2 Client (RP Framework)",
+  "profile": "AMONGUS"
 }
