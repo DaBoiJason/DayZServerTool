@@ -18,3 +18,23 @@ D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Deb
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.pdb
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.genruntimeconfig.cache
 D:\Visual studio slutions\DaBoiJason's DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\ref\DayZ Server Tool.dll
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.exe
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.deps.json
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.runtimeconfig.json
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.dll
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\DayZ Server Tool.pdb
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.AssemblyReference.cache
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ_Server_Tool.Form1.resources
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ_Server_Tool.Properties.Resources.resources
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.GenerateResource.cache
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.GeneratedMSBuildEditorConfig.editorconfig
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.AssemblyInfoInputs.cache
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.AssemblyInfo.cs
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.csproj.CoreCompileInputs.cache
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Ser.1645FB7D.Up2Date
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.dll
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\refint\DayZ Server Tool.dll
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.pdb
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\DayZ Server Tool.genruntimeconfig.cache
+D:\VScode repos\DaBoiJason_s DayZ Server Tool\DayZ Server Tool\obj\Debug\net8.0-windows\ref\DayZ Server Tool.dll

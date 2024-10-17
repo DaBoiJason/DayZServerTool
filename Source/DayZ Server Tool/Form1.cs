@@ -1,33 +1,38 @@
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using System.Net.Http;
 using System;
 using System.IO;
+using System.Text;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Diagnostics;
+using System.Net.Sockets;
+using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Text;
+using System.Drawing.Text;
+using System.Runtime.CompilerServices;
+
 
 
 namespace DayZ_Server_Tool
 {
     public partial class Form1 : Form
     {
-        // Properties to hold profile data
+        // Properties to hold profile data NO TALL INCLUDED
         private string executablePath;
         private string parameters;
         private string port;
+
         private string config;
         private string cpu;
         private TimeSpan userDefinedInterval; // To store the interval
         private bool isManualStop = false; // Flag to control manual stop
         private System.Threading.Timer restartTimer;
         private DateTime endTime; // To track when the countdown ends
-        private string WebhookURL;
+        private string webhookUrl;
 
         public Form1()
         {
@@ -40,6 +45,8 @@ namespace DayZ_Server_Tool
             comboBoxProfiles.SelectedIndex = -1;
             ToggleTimerFields();
             LoadLatestProfileOnStart();
+            tabControl1_SelectedIndexChanged(null, null);
+            InitializeTooltip();
         }
         public class LatestProfile
         {
@@ -87,7 +94,7 @@ namespace DayZ_Server_Tool
                 if (!string.IsNullOrEmpty(latestProfile.LatestProfileName))
                 {
                     comboBoxProfiles.SelectedItem = latestProfile.LatestProfileName; // Set selected item
-                    LoadSelectedProfile(); // Load the selected profile
+                    loadFileToolStripMenu_Click(null, null); // Load the selected profile
                 }
             }
         }
@@ -125,10 +132,43 @@ namespace DayZ_Server_Tool
                 WebhookURL = webhookTextBox.Text,
                 WebhookCheckbox = EnableWebhookCheckbox.Checked,
                 StartWebhook = StartWebhookCheckbox.Checked,
-                StopWebhook = StopWebhookCheckbox.Checked,
                 RestartWebhook = RestartWebhookCheckbox.Checked,
                 textBoxServerMods = textBoxServerMods.Text,
                 profile = profileTextBox.Text,
+                EnableRcon = enableRconCheckBox.Checked,
+                BEPath = textboxBePath.Text,
+                // ON START
+                SavedEmbedOnStartDisplayTime = OnStartDisplayTime.Checked,
+                SavedEmbedOnStartColor = OnStartEmbedColor.Text,
+                SavedEmbedOnStartBotName = OnStartBotName.Text,
+                SavedEmbedOnStartBotAvatar = OnStartBotAvatar.Text,
+                SavedEmbedOnStartMessagePrior = OnStartMessagePrior.Text,
+                SavedEmbedOnStartServerName = OnStartServerName.Text,
+                SavedEmbedOnStartServerIcon = OnStartServerIcon.Text,
+                SavedEmbedOnStartServerNameURL = OnStartServerNameURL.Text,
+                SavedEmbedOnStartTitle = OnStartTitle.Text,
+                SavedEmbedOnStartTitleURL = OnStartTitleURL.Text,
+                SavedEmbedOnStartBottomTitle = OnStartBottomTitle.Text,
+                SavedEmbedOnStartBottomText = OnStartBottomText.Text,
+                SavedEmbedOnStartBottomTextURL = OnStartBottomTextURL.Text,
+                SavedEmbedOnStartContentImage = OnStartContentImage.Text,
+                SavedEmbedOnStartBigLogo = OnStartBigLogo.Text,
+                // ON RESTART
+                SavedEmbedOnRestartDisplayTime = OnRestartDisplayTime.Checked,
+                SavedEmbedOnRestartColor = OnRestartEmbedColor.Text,
+                SavedEmbedOnRestartBotName = OnRestartBotName.Text,
+                SavedEmbedOnRestartBotAvatar = OnRestartBotAvatar.Text,
+                SavedEmbedOnRestartMessagePrior = OnRestartMessagePrior.Text,
+                SavedEmbedOnRestartServerName = OnRestartServerName.Text,
+                SavedEmbedOnRestartServerIcon = OnRestartServerIcon.Text,
+                SavedEmbedOnRestartServerNameURL = OnRestartServerNameURL.Text,
+                SavedEmbedOnRestartTitle = OnRestartTitle.Text,
+                SavedEmbedOnRestartTitleURL = OnRestartTitleURL.Text,
+                SavedEmbedOnRestartBottomTitle = OnRestartBottomTitle.Text,
+                SavedEmbedOnRestartBottomText = OnRestartBottomText.Text,
+                SavedEmbedOnRestartBottomTextURL = OnRestartBottomTextURL.Text,
+                SavedEmbedOnRestartContentImage = OnRestartContentImage.Text,
+                SavedEmbedOnRestartBigLogo = OnRestartBigLogo.Text,
             };
 
             // Serialize the profile data to JSON and save it to the file
@@ -138,7 +178,7 @@ namespace DayZ_Server_Tool
             // Refresh the profile list after saving
             LoadProfilesFromDirectory();
         }
-        private void LoadSelectedProfile()
+        private void loadFileToolStripMenu_Click(object sender, EventArgs e)
         {
             if (comboBoxProfiles.SelectedItem != null)
             {
@@ -179,12 +219,59 @@ namespace DayZ_Server_Tool
                     numericUpDownMinutes.Value = (decimal)(profileData?.Minutes ?? 0);
                     numericUpDownSeconds.Value = (decimal)(profileData?.Seconds ?? 0);
 
+                    //RCON
+                    enableRconCheckBox.Checked = (bool?)profileData?.EnableRcon ?? false;
+                    textboxBePath.Text = profileData?.BEPath ?? string.Empty;
+
                     // Save the latest profile name
                     SaveLatestProfile(selectedFileName);
 
                     // Clear and load ModsCheckedListBox with directories from modDir
                     ModsCheckedListBox.Items.Clear();
                     ServerModsCheckedListBox.Items.Clear();
+
+                    //Webhook
+                    webhookTextBox.Text = profileData?.WebhookURL ?? string.Empty;
+                    EnableWebhookCheckbox.Checked = (bool?)profileData?.WebhookCheckbox ?? false;
+                    StartWebhookCheckbox.Checked = (bool?)profileData?.StartWebhook ?? false;
+                    RestartWebhookCheckbox.Checked = (bool?)profileData?.RestartWebhook ?? false;
+
+                    // ON START
+
+                    OnStartDisplayTime.Checked = (bool?)profileData?.SavedEmbedOnStartDisplayTime ?? false;
+                    OnStartEmbedColor.Text = profileData?.SavedEmbedOnStartColor ?? string.Empty;
+                    OnStartBotName.Text = profileData?.SavedEmbedOnStartBotName ?? string.Empty;
+                    OnStartBotAvatar.Text = profileData?.SavedEmbedOnStartBotAvatar ?? string.Empty;
+                    OnStartMessagePrior.Text = profileData?.SavedEmbedOnStartMessagePrior ?? string.Empty;
+                    OnStartServerName.Text = profileData?.SavedEmbedOnStartServerName ?? string.Empty;
+                    OnStartServerIcon.Text = profileData?.SavedEmbedOnStartServerIcon ?? string.Empty;
+                    OnStartServerNameURL.Text = profileData?.SavedEmbedOnStartServerNameURL ?? string.Empty;
+                    OnStartTitle.Text = profileData?.SavedEmbedOnStartTitle ?? string.Empty;
+                    OnStartTitleURL.Text = profileData?.SavedEmbedOnStartTitleURL ?? string.Empty;
+                    OnStartBottomTitle.Text = profileData?.SavedEmbedOnStartBottomTitle ?? string.Empty;
+                    OnStartBottomText.Text = profileData?.SavedEmbedOnStartBottomText ?? string.Empty;
+                    OnStartBottomTextURL.Text = profileData?.SavedEmbedOnStartBottomTextURL ?? string.Empty;
+                    OnStartContentImage.Text = profileData?.SavedEmbedOnStartContentImage ?? string.Empty;
+                    OnStartBigLogo.Text = profileData?.SavedEmbedOnStartBigLogo ?? string.Empty;
+
+                    // ON RESTART
+
+                    OnRestartDisplayTime.Checked = (bool?)profileData?.SavedEmbedOnRestartDisplayTime ?? false;
+                    OnRestartEmbedColor.Text = profileData?.SavedEmbedOnRestartColor ?? string.Empty;
+                    OnRestartBotName.Text = profileData?.SavedEmbedOnRestartBotName ?? string.Empty;
+                    OnRestartBotAvatar.Text = profileData?.SavedEmbedOnRestartBotAvatar ?? string.Empty;
+                    OnRestartMessagePrior.Text = profileData?.SavedEmbedOnRestartMessagePrior ?? string.Empty;
+                    OnRestartServerName.Text = profileData?.SavedEmbedOnRestartServerName ?? string.Empty;
+                    OnRestartServerIcon.Text = profileData?.SavedEmbedOnRestartServerIcon ?? string.Empty;
+                    OnRestartServerNameURL.Text = profileData?.SavedEmbedOnRestartServerNameURL ?? string.Empty;
+                    OnRestartTitle.Text = profileData?.SavedEmbedOnRestartTitle ?? string.Empty;
+                    OnRestartTitleURL.Text = profileData?.SavedEmbedOnRestartTitleURL ?? string.Empty;
+                    OnRestartBottomTitle.Text = profileData?.SavedEmbedOnRestartBottomTitle ?? string.Empty;
+                    OnRestartBottomText.Text = profileData?.SavedEmbedOnRestartBottomText ?? string.Empty;
+                    OnRestartBottomTextURL.Text = profileData?.SavedEmbedOnRestartBottomTextURL ?? string.Empty;
+                    OnRestartContentImage.Text = profileData?.SavedEmbedOnRestartContentImage ?? string.Empty;
+                    OnRestartBigLogo.Text = profileData?.SavedEmbedOnRestartBigLogo ?? string.Empty;
+
 
                     string modsDirectory = modDir.Text;
                     if (Directory.Exists(modsDirectory))
@@ -285,8 +372,46 @@ namespace DayZ_Server_Tool
             EnableWebhookCheckbox.Checked = false;
             webhookTextBox.Clear();
             StartWebhookCheckbox.Checked = false;
-            StopWebhookCheckbox.Checked = false;
             RestartWebhookCheckbox.Checked = false;
+
+            //Rcon
+            enableRconCheckBox.Checked = false;
+
+            //BE
+            BePathCheckbox.Checked = false;
+            textboxBePath.Clear();
+
+            //WEBHOOK
+            OnStartDisplayTime.Checked = false;
+            OnStartEmbedColor.Clear();
+            OnStartBotName.Clear();
+            OnStartBotAvatar.Clear();
+            OnStartMessagePrior.Clear();
+            OnStartServerName.Clear();
+            OnStartServerIcon.Clear();
+            OnStartServerNameURL.Clear();
+            OnStartTitle.Clear();
+            OnStartTitleURL.Clear();
+            OnStartBottomTitle.Clear();
+            OnStartBottomText.Clear();
+            OnStartBottomTextURL.Clear();
+            OnStartContentImage.Clear();
+            OnStartBigLogo.Clear();
+            OnRestartDisplayTime.Checked = false;
+            OnRestartEmbedColor.Clear();
+            OnRestartBotName.Clear();
+            OnRestartBotAvatar.Clear();
+            OnRestartMessagePrior.Clear();
+            OnRestartServerName.Clear();
+            OnRestartServerIcon.Clear();
+            OnRestartServerNameURL.Clear();
+            OnRestartTitle.Clear();
+            OnRestartTitleURL.Clear();
+            OnRestartBottomTitle.Clear();
+            OnRestartBottomText.Clear();
+            OnRestartBottomTextURL.Clear();
+            OnRestartContentImage.Clear();
+            OnRestartBigLogo.Clear();
 
         }
 
@@ -357,6 +482,11 @@ namespace DayZ_Server_Tool
 
                 // Get all instances of DayZServer_x64
                 var runningProcesses = Process.GetProcessesByName("DayZServer_x64");
+                // Stop the restart timer
+                restartTimer?.Change(Timeout.Infinite, Timeout.Infinite); // Disable the timer
+
+                // Update the label to show that the timer has been stopped
+                timeremaininglabel.Text = "Timer stopped manually.";
 
                 // Terminate each instance found
                 foreach (var process in runningProcesses)
@@ -364,12 +494,6 @@ namespace DayZ_Server_Tool
                     process.Kill(); // Stop the process
                     process.WaitForExit(); // Optionally wait for the process to exit
                 }
-
-                // Stop the restart timer
-                restartTimer?.Change(Timeout.Infinite, Timeout.Infinite); // Disable the timer
-
-                // Update the label to show that the timer has been stopped
-                timeremaininglabel.Text = "Timer stopped.";
             }
             catch (Exception ex)
             {
@@ -438,11 +562,6 @@ namespace DayZ_Server_Tool
                     comboBoxCpu.SelectedItem = profileData.Cpu;
                 }
             }
-        }
-        private void loadFileToolStripMenu_Click(object sender, EventArgs e)
-        {
-            // Call the LoadSelectedProfile function to load the selected profile from comboBoxProfiles
-            LoadSelectedProfile();
         }
 
         private void DeleteProfile_Click(object sender, EventArgs e)
@@ -581,7 +700,7 @@ namespace DayZ_Server_Tool
         {
             LoadProfilesFromDirectory();
         }
-        private void buttonStart_Click(object sender, EventArgs e)
+        private async void buttonStart_Click(object sender, EventArgs e)
         {
             try
             {
@@ -601,6 +720,7 @@ namespace DayZ_Server_Tool
                 string cpuCount = comboBoxCpu.SelectedItem?.ToString() ?? "4"; // Default to 4 if not set
                 string config = textBoxConfig.Text;
                 string profile = profileTextBox.Text;
+                string bepath = textboxBePath.Text;
 
                 // Retrieve mods and server mods from textBox
                 string mods = textBoxMods.Text; // Get the mod string directly
@@ -608,16 +728,18 @@ namespace DayZ_Server_Tool
 
                 // Construct the command line arguments
                 List<string> arguments = new List<string>
-        {
-            $"-port={port}",
-            $"-cpuCount={cpuCount}",
-            $"-config={config}",
-            $"-profiles={profile}",
-            $"\"-mod={mods}\"",
-            $"\"-servermod={serverMods}\"",
-
-        };
-
+                {
+                    $"-port={port}",
+                    $"-cpuCount={cpuCount}",
+                    $"-config={config}",
+                    $"-profiles={profile}",
+                    $"\"-mod={mods}\"",
+                    $"\"-servermod={serverMods}\"",
+                };
+                if (BePathCheckbox.Checked)
+                {
+                    arguments.Add($"-BEpath={bepath}");
+                };
                 // Add optional parameters based on checkbox states
                 if (checkBoxDoLogs.Checked) arguments.Add("-doLogs");
                 if (checkBoxAdminLog.Checked) arguments.Add("-adminlog");
@@ -631,10 +753,10 @@ namespace DayZ_Server_Tool
                     Arguments = string.Join(" ", arguments), // Join the arguments into a single string with spaces
                     UseShellExecute = true // Use the shell to start the process
                 };
-
                 Process.Start(startInfo);
-
-                // If the checkbox for enabling the timer is checked, start the restart loop
+                await Task.Delay(3000);
+                WebhookStartMessageSend();
+                await Task.Delay(3000);
                 if (checkBoxEnableTimer.Checked)
                 {
                     StartRestartTimer();
@@ -644,6 +766,122 @@ namespace DayZ_Server_Tool
             {
                 // Handle exceptions (e.g., file not found, invalid path)
                 MessageBox.Show($"Error starting the executable: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void WebhookStartMessageSend()
+        {
+            string EmbedOnStartBotName = OnStartBotName.Text;
+            string EmbedOnStartBotAvatar = OnStartBotAvatar.Text;
+            string EmbedOnStartMessagePrior = OnStartMessagePrior.Text;
+            string EmbedOnStartServerName = OnStartServerName.Text;
+            string EmbedOnStartServerIcon = OnStartServerIcon.Text;
+            string EmbedOnStartServerNameURL = OnStartServerNameURL.Text;
+            string EmbedOnStartTitle = OnStartTitle.Text;
+            string EmbedOnStartTitleURL = OnStartTitleURL.Text;
+            string EmbedOnStartBottomTitle = OnStartBottomTitle.Text;
+            string EmbedOnStartBottomText = OnStartBottomText.Text;
+            string EmbedOnStartBottomTextURL = OnStartBottomTextURL.Text;
+            string EmbedOnStartContentImage = OnStartContentImage.Text;
+            string EmbedOnStartBigLogo = OnStartBigLogo.Text;
+            int EmbedOnStartColor = int.Parse(OnStartEmbedColor.Text.Trim(), System.Globalization.NumberStyles.HexNumber);
+
+            if (EnableWebhookCheckbox.Checked)
+            {
+                if (StartWebhookCheckbox.Checked)
+                {
+                    // Get and validate webhook URL
+                    string webhookUrl = webhookTextBox.Text.Trim();
+                    if (string.IsNullOrEmpty(webhookUrl) || !Uri.IsWellFormedUriString(webhookUrl, UriKind.Absolute))
+                    {
+                        MessageBox.Show("Invalid webhook URL provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Create fields array dynamically based on the checkbox
+                    var fieldsList = new List<object>
+                        {
+                            new
+                            {
+                                name = "Status",
+                                value = "Server Is Starting",
+                                inline = true
+                            }
+                        };
+
+                    // Only add the time field if the checkbox is checked
+                    if (OnStartDisplayTime.Checked)
+                    {
+                        fieldsList.Add(new
+                        {
+                            name = "Server Time",
+                            value = DateTime.Now.ToString("HH:mm:ss"),
+                            inline = true
+                        });
+                    }
+
+                    // Add other fields if needed
+                    fieldsList.Add(new
+                    {
+                        name = $"{EmbedOnStartBottomTitle}",
+                        value = $"[{EmbedOnStartBottomText}]({EmbedOnStartBottomTextURL})",
+                        inline = false
+                    });
+
+                    // Build the full payload
+                    var payload = new
+                    {
+                        username = EmbedOnStartBotName,
+                        avatar_url = EmbedOnStartBotAvatar,
+                        content = EmbedOnStartMessagePrior,
+
+                        embeds = new[]
+                        {
+                                new
+                                {
+                                    title = EmbedOnStartTitle,
+                                    description = "The DayZ server is starting.",
+                                    url = EmbedOnStartTitleURL,
+                                    color = EmbedOnStartColor, // Pass integer color
+                                    author = new
+                                    {
+                                        name = EmbedOnStartServerName,
+                                        icon_url = EmbedOnStartServerIcon,
+                                        url = EmbedOnStartServerNameURL
+                                    },
+                                    image = new
+                                    {
+                                        url = EmbedOnStartContentImage
+                                    },
+                                    thumbnail = new
+                                    {
+                                        url = EmbedOnStartBigLogo
+                                    },
+                                    fields = fieldsList.ToArray(),
+                                    footer = new
+                                    {
+                                        text = "Powered By | DzST | DayZ Server Tool by DaBoiJason",
+                                        icon_url = "https://media.discordapp.net/attachments/1290605906689527828/1290605948049555486/images.png?ex=67118134&is=67102fb4&hm=349c22bc1c1c19e5f5aa6d4f2a57661121363ae8edb12b3d830f0825d866532f&=&format=webp&quality=lossless"
+                                    },
+                                    timestamp = DateTime.UtcNow.ToString("o")
+                                }
+                            }
+                    };
+
+                    // Send the webhook using HttpClient
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var jsonPayload = JsonConvert.SerializeObject(payload);
+                        var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage response = await client.PostAsync(webhookUrl, content);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show($"Error sending webhook: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
             }
         }
         private void buttonBrowseMods_Click(object sender, EventArgs e)
@@ -791,6 +1029,81 @@ namespace DayZ_Server_Tool
 
             MessageBox.Show("Key files copied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        // Assuming your TabControl is named tabControl1
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage3)
+            {
+
+                this.Size = new Size(1214, 603); // Window size
+                tabControl1.Size = new Size(1178, 519); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage4)
+            {
+
+                this.Size = new Size(629, 191); // Window size
+                tabControl1.Size = new Size(592, 108); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage5)
+            {
+
+                this.Size = new Size(629, 260); // Window size
+                tabControl1.Size = new Size(592, 174); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage1)
+            {
+
+                this.Size = new Size(881, 362); // Window size
+                tabControl1.Size = new Size(841, 272); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+
+                this.Size = new Size(1263, 470); // Window size
+                tabControl1.Size = new Size(1222, 384); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage7)
+            {
+
+                this.Size = new Size(635, 708); // Window size
+                tabControl1.Size = new Size(596, 632); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage11)
+            {
+
+                this.Size = new Size(635, 708); // Window size
+                tabControl1.Size = new Size(596, 632); // Tab size
+            }
+            else if (tabControl1.SelectedTab == tabPage12)
+            {
+
+                this.Size = new Size(635, 708); // Window size
+                tabControl1.Size = new Size(596, 632); // Tab size
+            }
+            else  // NORMAL  ====================   NORMAL   ==============
+            {
+                // When any other tab is selected, revert to the normal size
+                this.Size = new Size(629, 603); // Window size
+                tabControl1.Size = new Size(592, 519); // Normal tab size
+            }
+        }
+        /*
+            When stretched
+            tabPage3 Size
+            1178, 519
+            Window Size
+            1214, 603
+
+            ===================
+            ===================
+            ===================
+
+            when normal
+            tabPageX size
+            592; 519
+            window size
+            629; 603
+         */
         private void ServerKeys_Click(object sender, EventArgs e)
         {
             // Ensure modDir and textBoxExePath are not empty
@@ -1089,13 +1402,13 @@ namespace DayZ_Server_Tool
 
                 foreach (var process in runningProcesses)
                 {
-                    process.Kill(); // Stop the process
+                    await Task.Delay(1000);
+                    process.Kill();
                     process.WaitForExit(); // Wait for the process to terminate
+                    SendRestartingWebhook();
                 }
 
-                // Wait 5 seconds before restarting
-                await Task.Delay(5000);
-
+                await Task.Delay(10000);
                 // Restart the server
                 Invoke(new Action(() =>
                 {
@@ -1107,6 +1420,121 @@ namespace DayZ_Server_Tool
                 MessageBox.Show($"Error during restart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private async void SendRestartingWebhook()
+        {
+            string EmbedOnRestartBotName = OnRestartBotName.Text;
+            string EmbedOnRestartBotAvatar = OnRestartBotAvatar.Text;
+            string EmbedOnRestartMessagePrior = OnRestartMessagePrior.Text;
+            string EmbedOnRestartServerName = OnRestartServerName.Text;
+            string EmbedOnRestartServerIcon = OnRestartServerIcon.Text;
+            string EmbedOnRestartServerNameURL = OnRestartServerNameURL.Text;
+            string EmbedOnRestartTitle = OnRestartTitle.Text;
+            string EmbedOnRestartTitleURL = OnRestartTitleURL.Text;
+            string EmbedOnRestartBottomTitle = OnRestartBottomTitle.Text;
+            string EmbedOnRestartBottomText = OnRestartBottomText.Text;
+            string EmbedOnRestartBottomTextURL = OnRestartBottomTextURL.Text;
+            string EmbedOnRestartContentImage = OnRestartContentImage.Text;
+            string EmbedOnRestartBigLogo = OnRestartBigLogo.Text;
+            int EmbedOnRestartColor = int.Parse(OnRestartEmbedColor.Text.Trim(), System.Globalization.NumberStyles.HexNumber);
+
+            if (EnableWebhookCheckbox.Checked)
+            {
+                if (RestartWebhookCheckbox.Checked)
+                {
+                    // Get and validate webhook URL
+                    string webhookUrl = webhookTextBox.Text.Trim();
+                    if (string.IsNullOrEmpty(webhookUrl) || !Uri.IsWellFormedUriString(webhookUrl, UriKind.Absolute))
+                    {
+                        MessageBox.Show("Invalid webhook URL provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Create fields array dynamically based on the checkbox
+                    var fieldsList = new List<object>
+                        {
+                            new
+                            {
+                                name = "Status",
+                                value = "Server Is Preparing For Restart",
+                                inline = true
+                            }
+                        };
+
+                    // Only add the time field if the checkbox is checked
+                    if (OnRestartDisplayTime.Checked)
+                    {
+                        fieldsList.Add(new
+                        {
+                            name = "Server Time",
+                            value = DateTime.Now.ToString("HH:mm:ss"),
+                            inline = true
+                        });
+                    }
+
+                    // Add other fields if needed
+                    fieldsList.Add(new
+                    {
+                        name = $"{EmbedOnRestartBottomTitle}",
+                        value = $"[{EmbedOnRestartBottomText}]({EmbedOnRestartBottomTextURL})",
+                        inline = false
+                    });
+
+                    // Build the full payload
+                    var payload = new
+                    {
+                        username = EmbedOnRestartBotName,
+                        avatar_url = EmbedOnRestartBotAvatar,
+                        content = EmbedOnRestartMessagePrior,
+
+                        embeds = new[]
+                        {
+                                new
+                                {
+                                    title = EmbedOnRestartTitle,
+                                    description = "The DayZ server is currently preparing for restart.",
+                                    url = EmbedOnRestartTitleURL,
+                                    color = EmbedOnRestartColor, // Pass integer color
+                                    author = new
+                                    {
+                                        name = EmbedOnRestartServerName,
+                                        icon_url = EmbedOnRestartServerIcon,
+                                        url = EmbedOnRestartServerNameURL
+                                    },
+                                    image = new
+                                    {
+                                        url = EmbedOnRestartContentImage
+                                    },
+                                    thumbnail = new
+                                    {
+                                        url = EmbedOnRestartBigLogo
+                                    },
+                                    fields = fieldsList.ToArray(),
+                                    footer = new
+                                    {
+                                        text = "Powered By | DzST | DayZ Server Tool by DaBoiJason",
+                                        icon_url = "https://media.discordapp.net/attachments/1290605906689527828/1290605948049555486/images.png?ex=67118134&is=67102fb4&hm=349c22bc1c1c19e5f5aa6d4f2a57661121363ae8edb12b3d830f0825d866532f&=&format=webp&quality=lossless"
+                                    },
+                                    timestamp = DateTime.UtcNow.ToString("o")
+                                }
+                            }
+                    };
+                    // Send the webhook using HttpClient
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var jsonPayload = JsonConvert.SerializeObject(payload);
+                        var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage response = await client.PostAsync(webhookUrl, content);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show($"Error sending webhook: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+
         private void TimerTick(object state)
         {
             // Calculate the remaining time for the countdown
@@ -1116,7 +1544,7 @@ namespace DayZ_Server_Tool
             if (remainingTime.TotalSeconds <= 0)
             {
                 restartTimer?.Change(Timeout.Infinite, Timeout.Infinite); // Stop the timer
-                Invoke(new Action(() => timeremaininglabel.Text = "Restarting...")); // Update the UI
+                Invoke(new Action(() => timeremaininglabel.Text = "Waiting for XML attribute to \nshut down the server...")); // Update the UI
 
                 // Kill the process and restart the server
                 KillAndRestartServer();
@@ -1126,14 +1554,18 @@ namespace DayZ_Server_Tool
                 // Update the remaining time in the label
                 Invoke(new Action(() =>
                 {
-                    timeremaininglabel.Text = $"Time remaining: {remainingTime.Hours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
+                    timeremaininglabel.Text = $"Time remaining for override \nshutdown check: {remainingTime.Hours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
                 }));
             }
         }
 
 
 
+
         //        Discord Webhook        Discord Webhook        Discord Webhook        Discord Webhook
+
+
+
         private void EnableWebhookCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             ToggleWebhookField();
@@ -1143,48 +1575,52 @@ namespace DayZ_Server_Tool
             bool isWebhookEnabled = EnableWebhookCheckbox.Checked;
             webhookTextBox.Enabled = isWebhookEnabled;
             StartWebhookCheckbox.Enabled = isWebhookEnabled;
-            StopWebhookCheckbox.Enabled = isWebhookEnabled;
             RestartWebhookCheckbox.Enabled = isWebhookEnabled;
         }
-        // Assuming your TabControl is named tabControl1
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void buttonBrowseBeExe_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabPage3)
+            // Create a new instance of FolderBrowserDialog
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                // When tabPage3 is selected, change the size to stretched
-                this.Size = new Size(1214, 603); // Window size
-                tabControl1.Size = new Size(1178, 519); // Tab size
-            }
-            else
-            {
-                // When any other tab is selected, revert to the normal size
-                this.Size = new Size(629, 603); // Window size
-                foreach (TabPage page in tabControl1.TabPages)
+                // Optionally set a description for the dialog
+                folderBrowserDialog.Description = "Select the Server's BattleEye folder";
+
+                // Optionally set the root folder (default is Desktop)
+                folderBrowserDialog.RootFolder = Environment.SpecialFolder.Desktop;
+
+                // Show the dialog and check if the user selected a folder
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (page != tabPage3)
-                    {
-                        tabControl1.Size = new Size(592, 519); // Normal tab size
-                    }
+                    // Get the selected folder path and set it to the textbox
+                    textboxBePath.Text = folderBrowserDialog.SelectedPath;
                 }
             }
         }
-        /*
-            When stretched
-            tabPage3 Size
-            1178, 519
-            Window Size
-            1214, 603
 
-            ===================
-            ===================
-            ===================
+        private void InitializeTooltip()
+        {
+            // Create the tooltip instance
+            toolTip = new System.Windows.Forms.ToolTip();
+            // Set up the tooltip for the checkbox
+            toolTip.SetToolTip(checkBoxAllowExtraParams, "WARNING: Allowing extra parameters can cause issues if not used correctly.");
+        }
 
-            when normal
-            tabPageX size
-            592; 519
-            window size
-            629; 603
-         */
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void tabPage8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        ////////////      WORST ATTEMPT HUMANLY POSSIBLE TO MAKE RCON CONSOLE YOU HAVE BEEN WARNED (Jason)
     }
 }
