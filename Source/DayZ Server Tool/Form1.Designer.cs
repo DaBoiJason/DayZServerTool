@@ -38,14 +38,8 @@ namespace DayZ_Server_Tool
             aboutToolStripMenuItem = new ToolStripMenuItem();
             discordServerToolStripMenuItem = new ToolStripMenuItem();
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
-            version100ToolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            toolStripMenuItem3 = new ToolStripMenuItem();
-            toolStripMenuItem4 = new ToolStripMenuItem();
-            toolStripMenuItem5 = new ToolStripMenuItem();
-            toolStripMenuItem6 = new ToolStripMenuItem();
-            toolStripMenuItem7 = new ToolStripMenuItem();
-            wellDoneYouHaveFoundTheEasterEggToolStripMenuItem = new ToolStripMenuItem();
+            UpdateChecker = new ToolStripMenuItem();
+            VersionNumber = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
             tabPage7 = new TabPage();
             label28 = new Label();
@@ -186,6 +180,7 @@ namespace DayZ_Server_Tool
             label17 = new Label();
             label2 = new Label();
             tabPage1 = new TabPage();
+            label57 = new Label();
             DeleteProfile = new Button();
             loadFileToolStripMenu = new Button();
             comboBoxProfiles = new ComboBox();
@@ -223,7 +218,7 @@ namespace DayZ_Server_Tool
             // 
             menuStrip1.BackColor = Color.Gainsboro;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem, toolStripMenuItem1 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(619, 24);
@@ -246,7 +241,7 @@ namespace DayZ_Server_Tool
             // 
             // aboutToolStripMenuItem
             // 
-            aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { discordServerToolStripMenuItem, checkForUpdatesToolStripMenuItem, version100ToolStripMenuItem });
+            aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { discordServerToolStripMenuItem, checkForUpdatesToolStripMenuItem, UpdateChecker, VersionNumber });
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(52, 20);
             aboutToolStripMenuItem.Text = "About";
@@ -254,68 +249,30 @@ namespace DayZ_Server_Tool
             // discordServerToolStripMenuItem
             // 
             discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            discordServerToolStripMenuItem.Size = new Size(180, 22);
+            discordServerToolStripMenuItem.Size = new Size(176, 22);
             discordServerToolStripMenuItem.Text = "Discord Server";
             discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(180, 22);
-            checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
+            checkForUpdatesToolStripMenuItem.Size = new Size(176, 22);
+            checkForUpdatesToolStripMenuItem.Text = "Check Github Repo";
             checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
-            // version100ToolStripMenuItem
+            // UpdateChecker
             // 
-            version100ToolStripMenuItem.Name = "version100ToolStripMenuItem";
-            version100ToolStripMenuItem.Size = new Size(180, 22);
-            version100ToolStripMenuItem.Text = "Version 3.0.0";
+            UpdateChecker.Name = "UpdateChecker";
+            UpdateChecker.Size = new Size(176, 22);
+            UpdateChecker.Text = "Check For Updates";
+            UpdateChecker.Click += UpdateChecker_Click;
             // 
-            // toolStripMenuItem1
+            // VersionNumber
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem3 });
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(103, 20);
-            toolStripMenuItem1.Text = "                            ";
-            // 
-            // toolStripMenuItem3
-            // 
-            toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem4, toolStripMenuItem5 });
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(77, 22);
-            toolStripMenuItem3.Text = " ";
-            // 
-            // toolStripMenuItem4
-            // 
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(77, 22);
-            toolStripMenuItem4.Text = " ";
-            // 
-            // toolStripMenuItem5
-            // 
-            toolStripMenuItem5.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem6, toolStripMenuItem7 });
-            toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new Size(77, 22);
-            toolStripMenuItem5.Text = " ";
-            // 
-            // toolStripMenuItem6
-            // 
-            toolStripMenuItem6.Name = "toolStripMenuItem6";
-            toolStripMenuItem6.Size = new Size(77, 22);
-            toolStripMenuItem6.Text = " ";
-            // 
-            // toolStripMenuItem7
-            // 
-            toolStripMenuItem7.DropDownItems.AddRange(new ToolStripItem[] { wellDoneYouHaveFoundTheEasterEggToolStripMenuItem });
-            toolStripMenuItem7.Name = "toolStripMenuItem7";
-            toolStripMenuItem7.Size = new Size(77, 22);
-            toolStripMenuItem7.Text = " ";
-            // 
-            // wellDoneYouHaveFoundTheEasterEggToolStripMenuItem
-            // 
-            wellDoneYouHaveFoundTheEasterEggToolStripMenuItem.Name = "wellDoneYouHaveFoundTheEasterEggToolStripMenuItem";
-            wellDoneYouHaveFoundTheEasterEggToolStripMenuItem.Size = new Size(290, 22);
-            wellDoneYouHaveFoundTheEasterEggToolStripMenuItem.Text = "Well done you have found the Easter Egg";
+            VersionNumber.Enabled = false;
+            VersionNumber.Name = "VersionNumber";
+            VersionNumber.Size = new Size(176, 22);
+            VersionNumber.Text = "Version 3.0.0";
             // 
             // tabPage7
             // 
@@ -404,7 +361,6 @@ namespace DayZ_Server_Tool
             tabPage8.TabIndex = 0;
             tabPage8.Text = "On Start";
             tabPage8.UseVisualStyleBackColor = true;
-            tabPage8.Click += tabPage8_Click;
             // 
             // label33
             // 
@@ -508,7 +464,6 @@ namespace DayZ_Server_Tool
             label51.Size = new Size(99, 15);
             label51.TabIndex = 3;
             label51.Text = "4 Image Big Logo";
-            label51.Click += label51_Click;
             // 
             // label34
             // 
@@ -1687,6 +1642,7 @@ namespace DayZ_Server_Tool
             // tabPage1
             // 
             tabPage1.BackColor = Color.Transparent;
+            tabPage1.Controls.Add(label57);
             tabPage1.Controls.Add(DeleteProfile);
             tabPage1.Controls.Add(loadFileToolStripMenu);
             tabPage1.Controls.Add(comboBoxProfiles);
@@ -1702,6 +1658,16 @@ namespace DayZ_Server_Tool
             tabPage1.Size = new Size(588, 599);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Server";
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.ForeColor = Color.Gray;
+            label57.Location = new Point(335, 135);
+            label57.Name = "label57";
+            label57.Size = new Size(199, 30);
+            label57.TabIndex = 12;
+            label57.Text = "Do Not Use My Config As Your Main\r\nIt Get's Replaced By AutoUpdater\r\n";
             // 
             // DeleteProfile
             // 
@@ -1913,17 +1879,10 @@ namespace DayZ_Server_Tool
         private Button LoadProfile;
         private ToolStripMenuItem refreshProfilesToolStripMenuItem;
         private ToolStripMenuItem checkForUpdatesToolStripMenuItem;
-        private ToolStripMenuItem version100ToolStripMenuItem;
+        private ToolStripMenuItem VersionNumber;
         private Label webhookColor;
         private TextBox OnStartServerNameURL;
         private ToolTip toolTip;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem toolStripMenuItem4;
-        private ToolStripMenuItem toolStripMenuItem5;
-        private ToolStripMenuItem toolStripMenuItem6;
-        private ToolStripMenuItem toolStripMenuItem7;
-        private ToolStripMenuItem wellDoneYouHaveFoundTheEasterEggToolStripMenuItem;
         private TabPage tabPage7;
         private Label label7;
         private TextBox webhookTextBox;
@@ -2075,5 +2034,7 @@ namespace DayZ_Server_Tool
         private Label label55;
         private TabPage tabPage12;
         private Label label56;
+        private ToolStripMenuItem UpdateChecker;
+        private Label label57;
     }
 }

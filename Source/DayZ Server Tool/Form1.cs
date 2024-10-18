@@ -14,6 +14,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Drawing.Text;
 using System.Runtime.CompilerServices;
+using System.IO.Compression;
+using System.Net;
+using System.Reflection;
 
 
 
@@ -22,10 +25,11 @@ namespace DayZ_Server_Tool
     public partial class Form1 : Form
     {
         // Properties to hold profile data NO TALL INCLUDED
+        private string repoZipUrl = "https://github.com/DaBoiJason/DayZServerTool/archive/refs/heads/main.zip";
+        private string CurrentVersion = "3.1.0";
         private string executablePath;
         private string parameters;
         private string port;
-
         private string config;
         private string cpu;
         private TimeSpan userDefinedInterval; // To store the interval
@@ -47,6 +51,8 @@ namespace DayZ_Server_Tool
             LoadLatestProfileOnStart();
             tabControl1_SelectedIndexChanged(null, null);
             InitializeTooltip();
+            CheckForUpdatesAsync();
+            VersionNumber.Text = $"Version {CurrentVersion}";
         }
         public class LatestProfile
         {
@@ -1606,21 +1612,176 @@ namespace DayZ_Server_Tool
             toolTip.SetToolTip(checkBoxAllowExtraParams, "WARNING: Allowing extra parameters can cause issues if not used correctly.");
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        ////////////      UPDATE CHECKER      UPDATE CHECKER      UPDATE CHECKER      UPDATE CHECKER      
 
+        private async void UpdateChecker_Click(object sender, EventArgs e)
+        {
+            await CheckForUpdatesAsync();
         }
 
-        private void tabPage8_Click(object sender, EventArgs e)
+        // Function to check for updates from GitHub
+        private async Task CheckForUpdatesAsync()
         {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd("request");  // GitHub API requires a User-Agent header
 
+                    // GitHub API URL for the latest release
+                    string apiUrl = "https://api.github.com/repos/DaBoiJason/DayZServerTool/releases/latest";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Parse the response to get the latest version
+                        var jsonResponse = await response.Content.ReadAsStringAsync();
+                        dynamic releaseData = JsonConvert.DeserializeObject(jsonResponse);
+
+                        // Extract the tag_name (like DzSTv3.0.0) and remove the "DzSTv" prefix
+                        string latestVersion = releaseData.tag_name;
+                        latestVersion = latestVersion.Replace("DzSTv", ""); // Extract version number, e.g. 3.0.0
+
+                        // Compare the current version with the latest version
+                        if (IsNewerVersion(latestVersion, CurrentVersion))
+                        {
+                            // Prompt the user to update if a newer version is available
+                            var result = MessageBox.Show($"A new version ({latestVersion}) is available. Would you like to update now?",
+                                                         "Update Available",
+                                                         MessageBoxButtons.YesNo,
+                                                         MessageBoxIcon.Information);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                // Call the function to handle the update process (e.g., download and install)
+                                PerformUpdate(latestVersion);
+                            }
+                        }
+                        else
+                        {
+                            // Notify user that they are on the latest version
+                            MessageBox.Show("You're using the latest version!", "No Update Available", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error checking for updates.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while checking for updates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void label51_Click(object sender, EventArgs e)
+        // Compare version strings to determine if the new version is higher than the current version
+        private bool IsNewerVersion(string latestVersion, string currentVersion)
         {
-
+            Version latest = new Version(latestVersion);
+            Version current = new Version(currentVersion);
+            return latest.CompareTo(current) > 0;
         }
 
+        // Function to handle the update process (downloading and installing the new version)
+        private void PerformUpdate(string latestVersion)
+        {
+            // Implement your logic for downloading and applying the update
+            // For example, you might redirect the user to download the latest release from GitHub
+            string updateUrl = "https://github.com/DaBoiJason/DayZServerTool/releases/latest";
+            MessageBox.Show($"Updating the tool from {updateUrl} to install the latest version ({latestVersion}).",
+                            "Update Instructions", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DownloadAndUpdateRepo();
+        }
+        public void DownloadAndUpdateRepo()
+        {
+            try
+            {
+                // Get the directory where the program is running
+                string currentDir = AppDomain.CurrentDomain.BaseDirectory;
+
+                // Temp file to store the downloaded zip file
+                string tempZipPath = Path.Combine(Path.GetTempPath(), "DayZServerToolUpdate.zip");
+
+                // Download the zip file
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(repoZipUrl, tempZipPath);
+                }
+
+                // Directory where the zip will be extracted (temp folder)
+                string extractPath = Path.Combine(Path.GetTempPath(), "DayZServerToolUpdate");
+
+                // Extract the zip file
+                ZipFile.ExtractToDirectory(tempZipPath, extractPath);
+
+                // Path to the specific subdirectory (DayZServerTool/DayZServerTool)
+                string extractedRepoPath = Path.Combine(extractPath, "DayZServerTool-main", "DayZServerTool");
+
+                if (!Directory.Exists(extractedRepoPath))
+                {
+                    MessageBox.Show("The DayZServerTool directory could not be found in the extracted content.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Get current process ID
+                int currentProcessId = Process.GetCurrentProcess().Id;
+
+                // Create updater batch file
+                string updaterScriptPath = Path.Combine(currentDir, "Updater.bat");
+
+                File.WriteAllText(updaterScriptPath, CreateBatchScript(currentDir, extractedRepoPath, currentProcessId));
+
+                // Start the updater batch script
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = updaterScriptPath,
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                });
+
+                // Close the current app to allow file replacement
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show($"An error occurred while updating: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Function to generate the batch script content dynamically
+        private string CreateBatchScript(string appDir, string extractedRepoPath, int processId)
+        {
+            return $@"
+@echo off
+:: Kill the current process by PID
+taskkill /PID {processId} /F
+
+:: Wait until the process is completely killed
+:waitloop
+tasklist /FI ""PID eq {processId}"" | find /I ""{processId}""
+if not errorlevel 1 (
+    timeout /t 1 /nobreak
+    goto waitloop
+)
+
+:: Wait an additional second to be sure the process is terminated
+timeout /t 1 /nobreak
+
+:: Copy new files from temp folder to the main app directory
+xcopy /E /Y ""{extractedRepoPath}\*"" ""{appDir}""
+
+:: Clean up temp folder
+rmdir /S /Q ""{Path.GetTempPath()}DayZServerToolUpdate""
+
+:: Start the application again
+start """" ""{"DayZ Server Tool.exe"}""
+
+:: Log restart status to a file for debugging
+echo Application restarted at %date% %time% >> ""{Path.Combine(appDir, "update_log.txt")}""
+";
+        }
         ////////////      WORST ATTEMPT HUMANLY POSSIBLE TO MAKE RCON CONSOLE YOU HAVE BEEN WARNED (Jason)
     }
 }
