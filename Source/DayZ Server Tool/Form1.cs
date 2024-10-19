@@ -1782,6 +1782,6 @@ start """" ""{"DayZ Server Tool.exe"}""
 echo Application restarted at %date% %time% >> ""{Path.Combine(appDir, "update_log.txt")}""
 ";
         }
-        ////////////      WORST ATTEMPT HUMANLY POSSIBLE TO MAKE RCON CONSOLE YOU HAVE BEEN WARNED (Jason)
+        ///////////      WORST ATTEMPT HUMANLY POSSIBLE TO MAKE RCON CONSOLE YOU HAVE BEEN WARNED (Jason)
     }
 }
