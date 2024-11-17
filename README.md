@@ -63,4 +63,4 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 
 ## Contact
 
-For support, please reach out to the community via the [Discord Server](https://discord.gg/JYdvWZgaEb).
+For support, please reach out to me via Steam for now [Steam](https://steamcommunity.com/id/DaBoiJason/).
