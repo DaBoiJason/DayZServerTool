@@ -40,7 +40,73 @@ namespace DayZ_Server_Tool
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
             UpdateChecker = new ToolStripMenuItem();
             VersionNumber = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            youTubeTutorialVideoSoonToolStripMenuItem = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
+            timerUpdateUsage = new System.Windows.Forms.Timer(components);
+            tabPage12 = new TabPage();
+            label62 = new Label();
+            label56 = new Label();
+            tabPage11 = new TabPage();
+            tabControl3 = new TabControl();
+            tabPage13 = new TabPage();
+            label68 = new Label();
+            RconConfigFileComboBox = new ComboBox();
+            RconPortNumeric = new NumericUpDown();
+            OverWriteButtonRcon = new Button();
+            WriteRconCFG = new Button();
+            RandomGeneratePassowrd = new Button();
+            ShowRconPass = new Button();
+            label65 = new Label();
+            label61 = new Label();
+            label60 = new Label();
+            RestrictRcoComboBox = new ComboBox();
+            RconPasswordTextBox = new TextBox();
+            label59 = new Label();
+            label58 = new Label();
+            label66 = new Label();
+            label55 = new Label();
+            AntiDupeCheckbox = new CheckBox();
+            RconEnableCheckBox = new CheckBox();
+            tabPage14 = new TabPage();
+            label69 = new Label();
+            label67 = new Label();
+            MaxPingNumericUpDown = new NumericUpDown();
+            checkBox1 = new CheckBox();
+            RConsoleOutput = new TextBox();
+            AdminSoundTest = new Button();
+            AdminVolume = new TrackBar();
+            ConsoleSendButton = new Button();
+            RconCommandLineTextBox = new TextBox();
+            ClearConsoleButton = new Button();
+            RconDisconnectButton = new Button();
+            SetMaxPingButton = new Button();
+            UnlockServerButton = new Button();
+            ServerShutdownViaRcon = new Button();
+            LockServerButton = new Button();
+            RconConnectButton = new Button();
+            tabPage15 = new TabPage();
+            offlinePlayerListView = new ListView();
+            onlinePlayerContextMenu = new ContextMenuStrip(components);
+            ActionsHeader = new ToolStripMenuItem();
+            KickMenueItem = new ToolStripMenuItem();
+            BanMenueItem = new ToolStripMenuItem();
+            TimedBanMenueItem = new ToolStripMenuItem();
+            PrivateMessageMenuteItem = new ToolStripMenuItem();
+            CopyHeader = new ToolStripMenuItem();
+            CopyNameMenueItem = new ToolStripMenuItem();
+            CopyGUID = new ToolStripMenuItem();
+            CopyIP = new ToolStripMenuItem();
+            ProfilesHeader = new ToolStripMenuItem();
+            VPNChekerMenueItem = new ToolStripMenuItem();
+            label64 = new Label();
+            label63 = new Label();
+            onlinePlayerListView = new ListView();
+            PlayerIDHeader = new ColumnHeader();
+            PlayerNameHeader = new ColumnHeader();
+            GUIDHeadder = new ColumnHeader();
+            PlayersIP = new ColumnHeader();
+            PlayerPingHeader = new ColumnHeader();
             tabPage7 = new TabPage();
             label28 = new Label();
             label22 = new Label();
@@ -145,7 +211,7 @@ namespace DayZ_Server_Tool
             label14 = new Label();
             label8 = new Label();
             ServerKeys = new Button();
-            Keys = new Button();
+            ModKeys = new Button();
             progressBar3 = new ProgressBar();
             progressBar1 = new ProgressBar();
             ServerMods = new Button();
@@ -162,7 +228,6 @@ namespace DayZ_Server_Tool
             label21 = new Label();
             label20 = new Label();
             label19 = new Label();
-            enableRconCheckBox = new CheckBox();
             label3 = new Label();
             comboBoxCpu = new ComboBox();
             textBoxConfig = new TextBox();
@@ -170,7 +235,7 @@ namespace DayZ_Server_Tool
             textBoxPort = new TextBox();
             textboxBePath = new TextBox();
             textBoxExePath = new TextBox();
-            checkBox1 = new CheckBox();
+            FreezeCheckbox = new CheckBox();
             label5 = new Label();
             ConfigLabel = new Label();
             label4 = new Label();
@@ -180,6 +245,12 @@ namespace DayZ_Server_Tool
             label17 = new Label();
             label2 = new Label();
             tabPage1 = new TabPage();
+            lblProcessRamUsage = new Label();
+            lblProcessCpuUsage = new Label();
+            lblAppRamUsage = new Label();
+            lblAppCpuUsage = new Label();
+            DontShowAgainCheckbox = new CheckBox();
+            UpdateVersionLabel = new Label();
             label57 = new Label();
             DeleteProfile = new Button();
             loadFileToolStripMenu = new Button();
@@ -190,11 +261,19 @@ namespace DayZ_Server_Tool
             saveFileToolStripMenuItem = new Button();
             label1 = new Label();
             tabControl1 = new TabControl();
-            tabPage11 = new TabPage();
-            label55 = new Label();
-            tabPage12 = new TabPage();
-            label56 = new Label();
+            label70 = new Label();
+            label71 = new Label();
             menuStrip1.SuspendLayout();
+            tabPage12.SuspendLayout();
+            tabPage11.SuspendLayout();
+            tabControl3.SuspendLayout();
+            tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)RconPortNumeric).BeginInit();
+            tabPage14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxPingNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdminVolume).BeginInit();
+            tabPage15.SuspendLayout();
+            onlinePlayerContextMenu.SuspendLayout();
             tabPage7.SuspendLayout();
             tabControl2.SuspendLayout();
             tabPage8.SuspendLayout();
@@ -210,18 +289,16 @@ namespace DayZ_Server_Tool
             tabPage2.SuspendLayout();
             tabPage1.SuspendLayout();
             tabControl1.SuspendLayout();
-            tabPage11.SuspendLayout();
-            tabPage12.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.Gainsboro;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(619, 24);
+            menuStrip1.Size = new Size(916, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "Menu Strip Main";
             // 
@@ -274,6 +351,670 @@ namespace DayZ_Server_Tool
             VersionNumber.Size = new Size(176, 22);
             VersionNumber.Text = "Version 3.0.0";
             // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { youTubeTutorialVideoSoonToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(44, 20);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // youTubeTutorialVideoSoonToolStripMenuItem
+            // 
+            youTubeTutorialVideoSoonToolStripMenuItem.Enabled = false;
+            youTubeTutorialVideoSoonToolStripMenuItem.Name = "youTubeTutorialVideoSoonToolStripMenuItem";
+            youTubeTutorialVideoSoonToolStripMenuItem.Size = new Size(228, 22);
+            youTubeTutorialVideoSoonToolStripMenuItem.Text = "YouTube Tutorial Video Soon";
+            // 
+            // timerUpdateUsage
+            // 
+            timerUpdateUsage.Interval = 1000;
+            // 
+            // tabPage12
+            // 
+            tabPage12.Controls.Add(label62);
+            tabPage12.Controls.Add(label56);
+            tabPage12.Location = new Point(4, 29);
+            tabPage12.Name = "tabPage12";
+            tabPage12.Padding = new Padding(3);
+            tabPage12.Size = new Size(892, 674);
+            tabPage12.TabIndex = 8;
+            tabPage12.Text = "CFG";
+            tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // label62
+            // 
+            label62.AutoSize = true;
+            label62.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label62.Location = new Point(129, 294);
+            label62.Name = "label62";
+            label62.Size = new Size(362, 40);
+            label62.TabIndex = 1;
+            label62.Text = "XML Editor Coming Soon";
+            // 
+            // label56
+            // 
+            label56.AutoSize = true;
+            label56.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label56.Location = new Point(129, 160);
+            label56.Name = "label56";
+            label56.Size = new Size(354, 40);
+            label56.TabIndex = 1;
+            label56.Text = "CFG Editor Coming Soon";
+            // 
+            // tabPage11
+            // 
+            tabPage11.Controls.Add(tabControl3);
+            tabPage11.Location = new Point(4, 29);
+            tabPage11.Name = "tabPage11";
+            tabPage11.Padding = new Padding(3);
+            tabPage11.Size = new Size(892, 674);
+            tabPage11.TabIndex = 7;
+            tabPage11.Text = "Console";
+            tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            tabControl3.Controls.Add(tabPage13);
+            tabControl3.Controls.Add(tabPage14);
+            tabControl3.Controls.Add(tabPage15);
+            tabControl3.Location = new Point(2, 2);
+            tabControl3.Name = "tabControl3";
+            tabControl3.SelectedIndex = 0;
+            tabControl3.Size = new Size(887, 667);
+            tabControl3.TabIndex = 0;
+            tabControl3.SelectedIndexChanged += tabControl3_SelectedIndexChanged;
+            // 
+            // tabPage13
+            // 
+            tabPage13.Controls.Add(label68);
+            tabPage13.Controls.Add(RconConfigFileComboBox);
+            tabPage13.Controls.Add(RconPortNumeric);
+            tabPage13.Controls.Add(OverWriteButtonRcon);
+            tabPage13.Controls.Add(WriteRconCFG);
+            tabPage13.Controls.Add(RandomGeneratePassowrd);
+            tabPage13.Controls.Add(ShowRconPass);
+            tabPage13.Controls.Add(label65);
+            tabPage13.Controls.Add(label61);
+            tabPage13.Controls.Add(label60);
+            tabPage13.Controls.Add(RestrictRcoComboBox);
+            tabPage13.Controls.Add(RconPasswordTextBox);
+            tabPage13.Controls.Add(label59);
+            tabPage13.Controls.Add(label58);
+            tabPage13.Controls.Add(label66);
+            tabPage13.Controls.Add(label55);
+            tabPage13.Controls.Add(AntiDupeCheckbox);
+            tabPage13.Controls.Add(RconEnableCheckBox);
+            tabPage13.Location = new Point(4, 24);
+            tabPage13.Name = "tabPage13";
+            tabPage13.Padding = new Padding(3);
+            tabPage13.Size = new Size(879, 639);
+            tabPage13.TabIndex = 0;
+            tabPage13.Text = "Rcon Settings";
+            tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // label68
+            // 
+            label68.AutoSize = true;
+            label68.BackColor = Color.Black;
+            label68.ForeColor = Color.Red;
+            label68.Location = new Point(293, 185);
+            label68.Name = "label68";
+            label68.Size = new Size(127, 15);
+            label68.TabIndex = 9;
+            label68.Text = "Requires Rcon Enabled";
+            // 
+            // RconConfigFileComboBox
+            // 
+            RconConfigFileComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            RconConfigFileComboBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            RconConfigFileComboBox.FormattingEnabled = true;
+            RconConfigFileComboBox.Location = new Point(6, 185);
+            RconConfigFileComboBox.Name = "RconConfigFileComboBox";
+            RconConfigFileComboBox.Size = new Size(242, 23);
+            RconConfigFileComboBox.TabIndex = 8;
+            RconConfigFileComboBox.SelectedIndexChanged += RconConfigFileComboBox_SelectedIndexChanged;
+            // 
+            // RconPortNumeric
+            // 
+            RconPortNumeric.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            RconPortNumeric.Location = new Point(5, 66);
+            RconPortNumeric.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            RconPortNumeric.Name = "RconPortNumeric";
+            RconPortNumeric.Size = new Size(243, 23);
+            RconPortNumeric.TabIndex = 7;
+            // 
+            // OverWriteButtonRcon
+            // 
+            OverWriteButtonRcon.BackColor = Color.Crimson;
+            OverWriteButtonRcon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            OverWriteButtonRcon.Location = new Point(6, 258);
+            OverWriteButtonRcon.Name = "OverWriteButtonRcon";
+            OverWriteButtonRcon.Size = new Size(242, 23);
+            OverWriteButtonRcon.TabIndex = 6;
+            OverWriteButtonRcon.Text = "Delete All and Overwrite / Create CFG";
+            OverWriteButtonRcon.UseVisualStyleBackColor = false;
+            OverWriteButtonRcon.Click += OverWriteRconCFG_Click;
+            // 
+            // WriteRconCFG
+            // 
+            WriteRconCFG.BackColor = Color.Lime;
+            WriteRconCFG.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            WriteRconCFG.Location = new Point(6, 229);
+            WriteRconCFG.Name = "WriteRconCFG";
+            WriteRconCFG.Size = new Size(78, 23);
+            WriteRconCFG.TabIndex = 6;
+            WriteRconCFG.Text = "Write CFG";
+            WriteRconCFG.UseVisualStyleBackColor = false;
+            WriteRconCFG.Click += WriteRconCFG_Click;
+            // 
+            // RandomGeneratePassowrd
+            // 
+            RandomGeneratePassowrd.BackColor = Color.Fuchsia;
+            RandomGeneratePassowrd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RandomGeneratePassowrd.Location = new Point(90, 229);
+            RandomGeneratePassowrd.Name = "RandomGeneratePassowrd";
+            RandomGeneratePassowrd.Size = new Size(158, 23);
+            RandomGeneratePassowrd.TabIndex = 6;
+            RandomGeneratePassowrd.Text = "Random StrongPassowrd";
+            RandomGeneratePassowrd.UseVisualStyleBackColor = false;
+            RandomGeneratePassowrd.Click += RandomGeneratePassowrd_Click;
+            // 
+            // ShowRconPass
+            // 
+            ShowRconPass.BackColor = Color.CornflowerBlue;
+            ShowRconPass.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ShowRconPass.ForeColor = Color.Black;
+            ShowRconPass.Location = new Point(191, 120);
+            ShowRconPass.Name = "ShowRconPass";
+            ShowRconPass.Size = new Size(57, 23);
+            ShowRconPass.TabIndex = 6;
+            ShowRconPass.Text = "Show";
+            ShowRconPass.UseVisualStyleBackColor = false;
+            // 
+            // label65
+            // 
+            label65.AutoSize = true;
+            label65.BackColor = Color.Black;
+            label65.ForeColor = Color.Red;
+            label65.Location = new Point(293, 46);
+            label65.Name = "label65";
+            label65.Size = new Size(127, 15);
+            label65.TabIndex = 5;
+            label65.Text = "Requires Rcon Enabled";
+            // 
+            // label61
+            // 
+            label61.AutoSize = true;
+            label61.BackColor = Color.Black;
+            label61.ForeColor = Color.Red;
+            label61.Location = new Point(290, 250);
+            label61.Name = "label61";
+            label61.Size = new Size(259, 30);
+            label61.TabIndex = 5;
+            label61.Text = "Yes = Only Network LAN can acces RCON\r\nNo = Everyone Ourside of LAN can acces RCON\r\n";
+            // 
+            // label60
+            // 
+            label60.AutoSize = true;
+            label60.BackColor = Color.Black;
+            label60.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label60.ForeColor = Color.Red;
+            label60.Location = new Point(290, 69);
+            label60.Name = "label60";
+            label60.Size = new Size(366, 78);
+            label60.TabIndex = 4;
+            label60.Text = resources.GetString("label60.Text");
+            // 
+            // RestrictRcoComboBox
+            // 
+            RestrictRcoComboBox.FormattingEnabled = true;
+            RestrictRcoComboBox.Items.AddRange(new object[] { "NO", "YES" });
+            RestrictRcoComboBox.Location = new Point(290, 224);
+            RestrictRcoComboBox.Name = "RestrictRcoComboBox";
+            RestrictRcoComboBox.Size = new Size(159, 23);
+            RestrictRcoComboBox.TabIndex = 3;
+            // 
+            // RconPasswordTextBox
+            // 
+            RconPasswordTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RconPasswordTextBox.Location = new Point(5, 120);
+            RconPasswordTextBox.Name = "RconPasswordTextBox";
+            RconPasswordTextBox.Size = new Size(180, 23);
+            RconPasswordTextBox.TabIndex = 2;
+            // 
+            // label59
+            // 
+            label59.AutoSize = true;
+            label59.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            label59.ForeColor = Color.Red;
+            label59.Location = new Point(290, 196);
+            label59.Name = "label59";
+            label59.Size = new Size(119, 25);
+            label59.TabIndex = 1;
+            label59.Text = "RestrictRcon";
+            // 
+            // label58
+            // 
+            label58.AutoSize = true;
+            label58.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            label58.Location = new Point(6, 38);
+            label58.Name = "label58";
+            label58.Size = new Size(96, 25);
+            label58.TabIndex = 1;
+            label58.Text = "Rcon Port";
+            // 
+            // label66
+            // 
+            label66.AutoSize = true;
+            label66.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            label66.Location = new Point(6, 154);
+            label66.Name = "label66";
+            label66.Size = new Size(95, 25);
+            label66.TabIndex = 1;
+            label66.Text = "Rcon CFG";
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            label55.Location = new Point(6, 92);
+            label55.Name = "label55";
+            label55.Size = new Size(139, 25);
+            label55.TabIndex = 1;
+            label55.Text = "Rcon Password";
+            // 
+            // AntiDupeCheckbox
+            // 
+            AntiDupeCheckbox.AutoSize = true;
+            AntiDupeCheckbox.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AntiDupeCheckbox.ForeColor = Color.Red;
+            AntiDupeCheckbox.Location = new Point(293, 6);
+            AntiDupeCheckbox.Name = "AntiDupeCheckbox";
+            AntiDupeCheckbox.Size = new Size(167, 29);
+            AntiDupeCheckbox.TabIndex = 0;
+            AntiDupeCheckbox.Text = "⚠ AntiDupe ⚠";
+            AntiDupeCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // RconEnableCheckBox
+            // 
+            RconEnableCheckBox.AutoSize = true;
+            RconEnableCheckBox.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RconEnableCheckBox.ForeColor = Color.Black;
+            RconEnableCheckBox.Location = new Point(6, 6);
+            RconEnableCheckBox.Name = "RconEnableCheckBox";
+            RconEnableCheckBox.Size = new Size(136, 29);
+            RconEnableCheckBox.TabIndex = 0;
+            RconEnableCheckBox.Text = "Enable Rcon";
+            RconEnableCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // tabPage14
+            // 
+            tabPage14.Controls.Add(label69);
+            tabPage14.Controls.Add(label67);
+            tabPage14.Controls.Add(MaxPingNumericUpDown);
+            tabPage14.Controls.Add(checkBox1);
+            tabPage14.Controls.Add(RConsoleOutput);
+            tabPage14.Controls.Add(AdminSoundTest);
+            tabPage14.Controls.Add(AdminVolume);
+            tabPage14.Controls.Add(ConsoleSendButton);
+            tabPage14.Controls.Add(RconCommandLineTextBox);
+            tabPage14.Controls.Add(ClearConsoleButton);
+            tabPage14.Controls.Add(RconDisconnectButton);
+            tabPage14.Controls.Add(SetMaxPingButton);
+            tabPage14.Controls.Add(UnlockServerButton);
+            tabPage14.Controls.Add(ServerShutdownViaRcon);
+            tabPage14.Controls.Add(LockServerButton);
+            tabPage14.Controls.Add(RconConnectButton);
+            tabPage14.Location = new Point(4, 24);
+            tabPage14.Name = "tabPage14";
+            tabPage14.Padding = new Padding(3);
+            tabPage14.Size = new Size(879, 639);
+            tabPage14.TabIndex = 1;
+            tabPage14.Text = "Console";
+            tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // label69
+            // 
+            label69.AutoSize = true;
+            label69.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label69.ForeColor = Color.Red;
+            label69.Location = new Point(712, 357);
+            label69.Name = "label69";
+            label69.Size = new Size(118, 23);
+            label69.TabIndex = 12;
+            label69.Text = "Coming Soon";
+            // 
+            // label67
+            // 
+            label67.AutoSize = true;
+            label67.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label67.Location = new Point(691, 172);
+            label67.Name = "label67";
+            label67.Size = new Size(148, 20);
+            label67.TabIndex = 11;
+            label67.Text = "Max Ping Allowance";
+            // 
+            // MaxPingNumericUpDown
+            // 
+            MaxPingNumericUpDown.Location = new Point(712, 206);
+            MaxPingNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            MaxPingNumericUpDown.Name = "MaxPingNumericUpDown";
+            MaxPingNumericUpDown.Size = new Size(102, 23);
+            MaxPingNumericUpDown.TabIndex = 10;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Enabled = false;
+            checkBox1.Location = new Point(687, 394);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(172, 34);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "Notify When word \"Admin\"\r\n      is detected in chat";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // RConsoleOutput
+            // 
+            RConsoleOutput.Location = new Point(6, 6);
+            RConsoleOutput.Multiline = true;
+            RConsoleOutput.Name = "RConsoleOutput";
+            RConsoleOutput.ReadOnly = true;
+            RConsoleOutput.ScrollBars = ScrollBars.Vertical;
+            RConsoleOutput.Size = new Size(658, 575);
+            RConsoleOutput.TabIndex = 8;
+            // 
+            // AdminSoundTest
+            // 
+            AdminSoundTest.Enabled = false;
+            AdminSoundTest.Location = new Point(721, 434);
+            AdminSoundTest.Name = "AdminSoundTest";
+            AdminSoundTest.Size = new Size(75, 23);
+            AdminSoundTest.TabIndex = 5;
+            AdminSoundTest.Text = "Sound Test";
+            AdminSoundTest.UseVisualStyleBackColor = true;
+            // 
+            // AdminVolume
+            // 
+            AdminVolume.BackColor = Color.White;
+            AdminVolume.Enabled = false;
+            AdminVolume.LargeChange = 2;
+            AdminVolume.Location = new Point(672, 463);
+            AdminVolume.Name = "AdminVolume";
+            AdminVolume.Size = new Size(187, 45);
+            AdminVolume.TabIndex = 4;
+            // 
+            // ConsoleSendButton
+            // 
+            ConsoleSendButton.BackColor = Color.MediumTurquoise;
+            ConsoleSendButton.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ConsoleSendButton.Location = new Point(589, 587);
+            ConsoleSendButton.Name = "ConsoleSendButton";
+            ConsoleSendButton.Size = new Size(75, 34);
+            ConsoleSendButton.TabIndex = 3;
+            ConsoleSendButton.Text = "Send";
+            ConsoleSendButton.UseVisualStyleBackColor = false;
+            ConsoleSendButton.Click += ConsoleSendButton_Click;
+            // 
+            // RconCommandLineTextBox
+            // 
+            RconCommandLineTextBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RconCommandLineTextBox.Location = new Point(6, 593);
+            RconCommandLineTextBox.Name = "RconCommandLineTextBox";
+            RconCommandLineTextBox.Size = new Size(577, 25);
+            RconCommandLineTextBox.TabIndex = 2;
+            // 
+            // ClearConsoleButton
+            // 
+            ClearConsoleButton.BackColor = Color.DodgerBlue;
+            ClearConsoleButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ClearConsoleButton.ForeColor = SystemColors.ActiveCaptionText;
+            ClearConsoleButton.Location = new Point(725, 35);
+            ClearConsoleButton.Name = "ClearConsoleButton";
+            ClearConsoleButton.Size = new Size(75, 23);
+            ClearConsoleButton.TabIndex = 1;
+            ClearConsoleButton.Text = "Clear";
+            ClearConsoleButton.UseVisualStyleBackColor = false;
+            ClearConsoleButton.Click += ClearConsoleButton_Click;
+            // 
+            // RconDisconnectButton
+            // 
+            RconDisconnectButton.BackColor = Color.Red;
+            RconDisconnectButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RconDisconnectButton.ForeColor = SystemColors.ActiveCaptionText;
+            RconDisconnectButton.Location = new Point(768, 6);
+            RconDisconnectButton.Name = "RconDisconnectButton";
+            RconDisconnectButton.Size = new Size(75, 23);
+            RconDisconnectButton.TabIndex = 1;
+            RconDisconnectButton.Text = "Disconnect";
+            RconDisconnectButton.UseVisualStyleBackColor = false;
+            RconDisconnectButton.Click += RconDisconnectButton_Click;
+            // 
+            // SetMaxPingButton
+            // 
+            SetMaxPingButton.BackColor = Color.CornflowerBlue;
+            SetMaxPingButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SetMaxPingButton.ForeColor = SystemColors.ActiveCaptionText;
+            SetMaxPingButton.Location = new Point(712, 235);
+            SetMaxPingButton.Name = "SetMaxPingButton";
+            SetMaxPingButton.Size = new Size(102, 23);
+            SetMaxPingButton.TabIndex = 1;
+            SetMaxPingButton.Text = "Set Max Ping";
+            SetMaxPingButton.UseVisualStyleBackColor = false;
+            SetMaxPingButton.Click += SetMaxPingButton_Click;
+            // 
+            // UnlockServerButton
+            // 
+            UnlockServerButton.BackColor = Color.Fuchsia;
+            UnlockServerButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UnlockServerButton.ForeColor = SystemColors.ActiveCaptionText;
+            UnlockServerButton.Location = new Point(712, 133);
+            UnlockServerButton.Name = "UnlockServerButton";
+            UnlockServerButton.Size = new Size(102, 23);
+            UnlockServerButton.TabIndex = 1;
+            UnlockServerButton.Text = "Unlock Server";
+            UnlockServerButton.UseVisualStyleBackColor = false;
+            UnlockServerButton.Click += UnlockServerButton_Click;
+            // 
+            // ServerShutdownViaRcon
+            // 
+            ServerShutdownViaRcon.BackColor = Color.Red;
+            ServerShutdownViaRcon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ServerShutdownViaRcon.ForeColor = SystemColors.ActiveCaptionText;
+            ServerShutdownViaRcon.Location = new Point(687, 64);
+            ServerShutdownViaRcon.Name = "ServerShutdownViaRcon";
+            ServerShutdownViaRcon.Size = new Size(156, 23);
+            ServerShutdownViaRcon.TabIndex = 1;
+            ServerShutdownViaRcon.Text = "⚠ Shutdown Server ⚠";
+            ServerShutdownViaRcon.UseVisualStyleBackColor = false;
+            ServerShutdownViaRcon.Click += ServerShutdownViaRcon_Click;
+            // 
+            // LockServerButton
+            // 
+            LockServerButton.BackColor = Color.Fuchsia;
+            LockServerButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LockServerButton.ForeColor = Color.Black;
+            LockServerButton.Location = new Point(712, 93);
+            LockServerButton.Name = "LockServerButton";
+            LockServerButton.Size = new Size(102, 23);
+            LockServerButton.TabIndex = 1;
+            LockServerButton.Text = "Lock Server";
+            LockServerButton.UseVisualStyleBackColor = false;
+            LockServerButton.Click += LockServerButton_Click;
+            // 
+            // RconConnectButton
+            // 
+            RconConnectButton.BackColor = Color.Lime;
+            RconConnectButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RconConnectButton.ForeColor = SystemColors.ActiveCaptionText;
+            RconConnectButton.Location = new Point(687, 6);
+            RconConnectButton.Name = "RconConnectButton";
+            RconConnectButton.Size = new Size(75, 23);
+            RconConnectButton.TabIndex = 1;
+            RconConnectButton.Text = "Connect";
+            RconConnectButton.UseVisualStyleBackColor = false;
+            RconConnectButton.Click += RconConnectButton_Click;
+            // 
+            // tabPage15
+            // 
+            tabPage15.Controls.Add(label71);
+            tabPage15.Controls.Add(label70);
+            tabPage15.Controls.Add(offlinePlayerListView);
+            tabPage15.Controls.Add(label64);
+            tabPage15.Controls.Add(label63);
+            tabPage15.Controls.Add(onlinePlayerListView);
+            tabPage15.Location = new Point(4, 24);
+            tabPage15.Name = "tabPage15";
+            tabPage15.Padding = new Padding(3);
+            tabPage15.Size = new Size(879, 639);
+            tabPage15.TabIndex = 2;
+            tabPage15.Text = "Players";
+            tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // offlinePlayerListView
+            // 
+            offlinePlayerListView.ContextMenuStrip = onlinePlayerContextMenu;
+            offlinePlayerListView.FullRowSelect = true;
+            offlinePlayerListView.GridLines = true;
+            offlinePlayerListView.Location = new Point(6, 421);
+            offlinePlayerListView.Name = "offlinePlayerListView";
+            offlinePlayerListView.Size = new Size(761, 200);
+            offlinePlayerListView.TabIndex = 2;
+            offlinePlayerListView.UseCompatibleStateImageBehavior = false;
+            offlinePlayerListView.View = View.Details;
+            // 
+            // onlinePlayerContextMenu
+            // 
+            onlinePlayerContextMenu.Items.AddRange(new ToolStripItem[] { ActionsHeader, KickMenueItem, BanMenueItem, TimedBanMenueItem, PrivateMessageMenuteItem, CopyHeader, CopyNameMenueItem, CopyGUID, CopyIP, ProfilesHeader, VPNChekerMenueItem });
+            onlinePlayerContextMenu.Name = "onlinePlayerContextMenu";
+            onlinePlayerContextMenu.Size = new Size(322, 246);
+            // 
+            // ActionsHeader
+            // 
+            ActionsHeader.Name = "ActionsHeader";
+            ActionsHeader.Size = new Size(321, 22);
+            ActionsHeader.Text = "=====Actions===== (Beta View Only)";
+            // 
+            // KickMenueItem
+            // 
+            KickMenueItem.Name = "KickMenueItem";
+            KickMenueItem.Size = new Size(321, 22);
+            KickMenueItem.Text = "Kick";
+            // 
+            // BanMenueItem
+            // 
+            BanMenueItem.Name = "BanMenueItem";
+            BanMenueItem.Size = new Size(321, 22);
+            BanMenueItem.Text = "Ban";
+            // 
+            // TimedBanMenueItem
+            // 
+            TimedBanMenueItem.Name = "TimedBanMenueItem";
+            TimedBanMenueItem.Size = new Size(321, 22);
+            TimedBanMenueItem.Text = "Timed Ban";
+            // 
+            // PrivateMessageMenuteItem
+            // 
+            PrivateMessageMenuteItem.Name = "PrivateMessageMenuteItem";
+            PrivateMessageMenuteItem.Size = new Size(321, 22);
+            PrivateMessageMenuteItem.Text = "Send Private Message";
+            // 
+            // CopyHeader
+            // 
+            CopyHeader.Name = "CopyHeader";
+            CopyHeader.Size = new Size(321, 22);
+            CopyHeader.Text = "=====Copy===== (Working Examples)";
+            // 
+            // CopyNameMenueItem
+            // 
+            CopyNameMenueItem.Name = "CopyNameMenueItem";
+            CopyNameMenueItem.Size = new Size(321, 22);
+            CopyNameMenueItem.Text = "Copy Name";
+            CopyNameMenueItem.Click += CopyNameMenueItem_Click;
+            // 
+            // CopyGUID
+            // 
+            CopyGUID.Name = "CopyGUID";
+            CopyGUID.Size = new Size(321, 22);
+            CopyGUID.Text = "Copy GUID";
+            CopyGUID.Click += CopyGUID_Click;
+            // 
+            // CopyIP
+            // 
+            CopyIP.Name = "CopyIP";
+            CopyIP.Size = new Size(321, 22);
+            CopyIP.Text = "Copy IP";
+            CopyIP.Click += CopyIP_Click;
+            // 
+            // ProfilesHeader
+            // 
+            ProfilesHeader.Name = "ProfilesHeader";
+            ProfilesHeader.Size = new Size(321, 22);
+            ProfilesHeader.Text = "=====Profiles===== (Working VPN Checker)";
+            // 
+            // VPNChekerMenueItem
+            // 
+            VPNChekerMenueItem.Name = "VPNChekerMenueItem";
+            VPNChekerMenueItem.Size = new Size(321, 22);
+            VPNChekerMenueItem.Text = "VPN Checker";
+            VPNChekerMenueItem.Click += VPNChekerMenueItem_Click;
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label64.Location = new Point(6, 397);
+            label64.Name = "label64";
+            label64.Size = new Size(60, 21);
+            label64.TabIndex = 1;
+            label64.Text = "Offline";
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label63.Location = new Point(6, 3);
+            label63.Name = "label63";
+            label63.Size = new Size(57, 21);
+            label63.TabIndex = 1;
+            label63.Text = "Online";
+            // 
+            // onlinePlayerListView
+            // 
+            onlinePlayerListView.Columns.AddRange(new ColumnHeader[] { PlayerIDHeader, PlayerNameHeader, GUIDHeadder, PlayersIP, PlayerPingHeader });
+            onlinePlayerListView.ContextMenuStrip = onlinePlayerContextMenu;
+            onlinePlayerListView.FullRowSelect = true;
+            onlinePlayerListView.GridLines = true;
+            onlinePlayerListView.Location = new Point(6, 27);
+            onlinePlayerListView.Name = "onlinePlayerListView";
+            onlinePlayerListView.Size = new Size(761, 358);
+            onlinePlayerListView.TabIndex = 0;
+            onlinePlayerListView.UseCompatibleStateImageBehavior = false;
+            onlinePlayerListView.View = View.Details;
+            onlinePlayerListView.MouseClick += OnlinePlayerListView_MouseClick;
+            // 
+            // PlayerIDHeader
+            // 
+            PlayerIDHeader.Text = "ID";
+            // 
+            // PlayerNameHeader
+            // 
+            PlayerNameHeader.Text = "Player Name";
+            PlayerNameHeader.Width = 190;
+            // 
+            // GUIDHeadder
+            // 
+            GUIDHeadder.Text = "GUID";
+            GUIDHeadder.Width = 220;
+            // 
+            // PlayersIP
+            // 
+            PlayersIP.Text = "IP";
+            PlayersIP.Width = 95;
+            // 
+            // PlayerPingHeader
+            // 
+            PlayerPingHeader.Text = "Ping";
+            // 
             // tabPage7
             // 
             tabPage7.Controls.Add(label28);
@@ -287,7 +1028,7 @@ namespace DayZ_Server_Tool
             tabPage7.Controls.Add(RestartWebhookCheckbox);
             tabPage7.Location = new Point(4, 29);
             tabPage7.Name = "tabPage7";
-            tabPage7.Size = new Size(588, 599);
+            tabPage7.Size = new Size(892, 674);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "Discord Webhook";
             tabPage7.UseVisualStyleBackColor = true;
@@ -493,7 +1234,7 @@ namespace DayZ_Server_Tool
             label32.AutoSize = true;
             label32.Location = new Point(393, 181);
             label32.Name = "label32";
-            label32.Size = new Size(72, 15);
+            label32.Size = new Size(73, 15);
             label32.TabIndex = 3;
             label32.Text = "Bottom Title";
             // 
@@ -509,7 +1250,7 @@ namespace DayZ_Server_Tool
             label31.AutoSize = true;
             label31.Location = new Point(393, 106);
             label31.Name = "label31";
-            label31.Size = new Size(53, 15);
+            label31.Size = new Size(54, 15);
             label31.TabIndex = 3;
             label31.Text = "Title URL";
             // 
@@ -527,7 +1268,7 @@ namespace DayZ_Server_Tool
             label27.AutoSize = true;
             label27.Location = new Point(393, 44);
             label27.Name = "label27";
-            label27.Size = new Size(29, 15);
+            label27.Size = new Size(30, 15);
             label27.TabIndex = 3;
             label27.Text = "Title";
             // 
@@ -609,7 +1350,7 @@ namespace DayZ_Server_Tool
             OnStartDisplayTime.AutoSize = true;
             OnStartDisplayTime.Location = new Point(10, 328);
             OnStartDisplayTime.Name = "OnStartDisplayTime";
-            OnStartDisplayTime.Size = new Size(128, 19);
+            OnStartDisplayTime.Size = new Size(129, 19);
             OnStartDisplayTime.TabIndex = 2;
             OnStartDisplayTime.Text = "Display Server Time";
             OnStartDisplayTime.UseVisualStyleBackColor = true;
@@ -708,7 +1449,7 @@ namespace DayZ_Server_Tool
             OnRestartDisplayTime.AutoSize = true;
             OnRestartDisplayTime.Location = new Point(10, 328);
             OnRestartDisplayTime.Name = "OnRestartDisplayTime";
-            OnRestartDisplayTime.Size = new Size(128, 19);
+            OnRestartDisplayTime.Size = new Size(129, 19);
             OnRestartDisplayTime.TabIndex = 32;
             OnRestartDisplayTime.Text = "Display Server Time";
             OnRestartDisplayTime.UseVisualStyleBackColor = true;
@@ -796,7 +1537,7 @@ namespace DayZ_Server_Tool
             label40.AutoSize = true;
             label40.Location = new Point(393, 181);
             label40.Name = "label40";
-            label40.Size = new Size(72, 15);
+            label40.Size = new Size(73, 15);
             label40.TabIndex = 15;
             label40.Text = "Bottom Title";
             // 
@@ -812,7 +1553,7 @@ namespace DayZ_Server_Tool
             label41.AutoSize = true;
             label41.Location = new Point(393, 106);
             label41.Name = "label41";
-            label41.Size = new Size(53, 15);
+            label41.Size = new Size(54, 15);
             label41.TabIndex = 16;
             label41.Text = "Title URL";
             // 
@@ -830,7 +1571,7 @@ namespace DayZ_Server_Tool
             label43.AutoSize = true;
             label43.Location = new Point(393, 44);
             label43.Name = "label43";
-            label43.Size = new Size(29, 15);
+            label43.Size = new Size(30, 15);
             label43.TabIndex = 12;
             label43.Text = "Title";
             // 
@@ -1006,7 +1747,7 @@ namespace DayZ_Server_Tool
             tabPage6.Controls.Add(checkBoxEnableTimer);
             tabPage6.Location = new Point(4, 29);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(588, 599);
+            tabPage6.Size = new Size(892, 674);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Restart";
             tabPage6.UseVisualStyleBackColor = true;
@@ -1016,7 +1757,7 @@ namespace DayZ_Server_Tool
             label15.AutoSize = true;
             label15.Location = new Point(11, 123);
             label15.Name = "label15";
-            label15.Size = new Size(366, 15);
+            label15.Size = new Size(367, 15);
             label15.TabIndex = 6;
             label15.Text = "Automaticaly Sets Restart Timer in your XML For Restart Countdown";
             // 
@@ -1036,6 +1777,7 @@ namespace DayZ_Server_Tool
             RestartProgressBar.Location = new Point(11, 303);
             RestartProgressBar.Name = "RestartProgressBar";
             RestartProgressBar.Size = new Size(541, 33);
+            RestartProgressBar.Style = ProgressBarStyle.Continuous;
             RestartProgressBar.TabIndex = 4;
             // 
             // numericUpDownSeconds
@@ -1118,7 +1860,7 @@ namespace DayZ_Server_Tool
             tabPage5.Controls.Add(label9);
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(588, 599);
+            tabPage5.Size = new Size(892, 674);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Parameters";
             tabPage5.UseVisualStyleBackColor = true;
@@ -1160,7 +1902,7 @@ namespace DayZ_Server_Tool
             tabPage4.Controls.Add(checkBoxDoLogs);
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(588, 599);
+            tabPage4.Size = new Size(892, 674);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Logs";
             tabPage4.UseVisualStyleBackColor = true;
@@ -1205,7 +1947,7 @@ namespace DayZ_Server_Tool
             tabPage3.Controls.Add(label14);
             tabPage3.Controls.Add(label8);
             tabPage3.Controls.Add(ServerKeys);
-            tabPage3.Controls.Add(Keys);
+            tabPage3.Controls.Add(ModKeys);
             tabPage3.Controls.Add(progressBar3);
             tabPage3.Controls.Add(progressBar1);
             tabPage3.Controls.Add(ServerMods);
@@ -1219,7 +1961,7 @@ namespace DayZ_Server_Tool
             tabPage3.Controls.Add(ModsCheckedListBox);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(588, 599);
+            tabPage3.Size = new Size(892, 674);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Mods";
             tabPage3.UseVisualStyleBackColor = true;
@@ -1300,16 +2042,16 @@ namespace DayZ_Server_Tool
             ServerKeys.UseVisualStyleBackColor = true;
             ServerKeys.Click += ServerKeys_Click;
             // 
-            // Keys
+            // ModKeys
             // 
-            Keys.Enabled = false;
-            Keys.Location = new Point(129, 147);
-            Keys.Name = "Keys";
-            Keys.Size = new Size(261, 29);
-            Keys.TabIndex = 8;
-            Keys.Text = "Copy Paste Keys Of Selected Mods";
-            Keys.UseVisualStyleBackColor = true;
-            Keys.Click += Keys_Click;
+            ModKeys.Enabled = false;
+            ModKeys.Location = new Point(129, 147);
+            ModKeys.Name = "ModKeys";
+            ModKeys.Size = new Size(261, 29);
+            ModKeys.TabIndex = 8;
+            ModKeys.Text = "Copy Paste Keys Of Selected Mods";
+            ModKeys.UseVisualStyleBackColor = true;
+            ModKeys.Click += Keys_Click;
             // 
             // progressBar3
             // 
@@ -1414,7 +2156,6 @@ namespace DayZ_Server_Tool
             tabPage2.Controls.Add(label21);
             tabPage2.Controls.Add(label20);
             tabPage2.Controls.Add(label19);
-            tabPage2.Controls.Add(enableRconCheckBox);
             tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(comboBoxCpu);
             tabPage2.Controls.Add(textBoxConfig);
@@ -1422,7 +2163,7 @@ namespace DayZ_Server_Tool
             tabPage2.Controls.Add(textBoxPort);
             tabPage2.Controls.Add(textboxBePath);
             tabPage2.Controls.Add(textBoxExePath);
-            tabPage2.Controls.Add(checkBox1);
+            tabPage2.Controls.Add(FreezeCheckbox);
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(ConfigLabel);
             tabPage2.Controls.Add(label4);
@@ -1434,7 +2175,7 @@ namespace DayZ_Server_Tool
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(588, 599);
+            tabPage2.Size = new Size(892, 674);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Main";
             tabPage2.UseVisualStyleBackColor = true;
@@ -1456,7 +2197,7 @@ namespace DayZ_Server_Tool
             label21.ForeColor = Color.Red;
             label21.Location = new Point(68, 228);
             label21.Name = "label21";
-            label21.Size = new Size(388, 15);
+            label21.Size = new Size(391, 15);
             label21.TabIndex = 13;
             label21.Text = "NOT RECOMENDED TO USE UNLESS YOU KNOW WHAT YOU ARE DOING";
             // 
@@ -1474,19 +2215,9 @@ namespace DayZ_Server_Tool
             label19.AutoSize = true;
             label19.Location = new Point(98, 18);
             label19.Name = "label19";
-            label19.Size = new Size(317, 15);
+            label19.Size = new Size(315, 15);
             label19.TabIndex = 12;
             label19.Text = "Your steamapps\\common\\DayZServer\\DayZServer_x64.exe";
-            // 
-            // enableRconCheckBox
-            // 
-            enableRconCheckBox.AutoSize = true;
-            enableRconCheckBox.Location = new Point(641, 314);
-            enableRconCheckBox.Name = "enableRconCheckBox";
-            enableRconCheckBox.Size = new Size(137, 19);
-            enableRconCheckBox.TabIndex = 11;
-            enableRconCheckBox.Text = "Enable Rcon Console";
-            enableRconCheckBox.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -1499,6 +2230,7 @@ namespace DayZ_Server_Tool
             // 
             // comboBoxCpu
             // 
+            comboBoxCpu.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCpu.FormattingEnabled = true;
             comboBoxCpu.Location = new Point(632, 220);
             comboBoxCpu.Name = "comboBoxCpu";
@@ -1542,15 +2274,15 @@ namespace DayZ_Server_Tool
             textBoxExePath.Size = new Size(571, 23);
             textBoxExePath.TabIndex = 1;
             // 
-            // checkBox1
+            // FreezeCheckbox
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(641, 284);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(95, 19);
-            checkBox1.TabIndex = 6;
-            checkBox1.Text = "Freeze Check";
-            checkBox1.UseVisualStyleBackColor = true;
+            FreezeCheckbox.AutoSize = true;
+            FreezeCheckbox.Location = new Point(642, 299);
+            FreezeCheckbox.Name = "FreezeCheckbox";
+            FreezeCheckbox.Size = new Size(95, 19);
+            FreezeCheckbox.TabIndex = 6;
+            FreezeCheckbox.Text = "Freeze Check";
+            FreezeCheckbox.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -1642,6 +2374,12 @@ namespace DayZ_Server_Tool
             // tabPage1
             // 
             tabPage1.BackColor = Color.Transparent;
+            tabPage1.Controls.Add(lblProcessRamUsage);
+            tabPage1.Controls.Add(lblProcessCpuUsage);
+            tabPage1.Controls.Add(lblAppRamUsage);
+            tabPage1.Controls.Add(lblAppCpuUsage);
+            tabPage1.Controls.Add(DontShowAgainCheckbox);
+            tabPage1.Controls.Add(UpdateVersionLabel);
             tabPage1.Controls.Add(label57);
             tabPage1.Controls.Add(DeleteProfile);
             tabPage1.Controls.Add(loadFileToolStripMenu);
@@ -1655,19 +2393,81 @@ namespace DayZ_Server_Tool
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(588, 599);
+            tabPage1.Size = new Size(892, 674);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Server";
+            // 
+            // lblProcessRamUsage
+            // 
+            lblProcessRamUsage.AutoSize = true;
+            lblProcessRamUsage.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblProcessRamUsage.Location = new Point(375, 218);
+            lblProcessRamUsage.Name = "lblProcessRamUsage";
+            lblProcessRamUsage.Size = new Size(75, 17);
+            lblProcessRamUsage.TabIndex = 14;
+            lblProcessRamUsage.Text = "Loading .....";
+            // 
+            // lblProcessCpuUsage
+            // 
+            lblProcessCpuUsage.AutoSize = true;
+            lblProcessCpuUsage.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblProcessCpuUsage.Location = new Point(375, 192);
+            lblProcessCpuUsage.Name = "lblProcessCpuUsage";
+            lblProcessCpuUsage.Size = new Size(75, 17);
+            lblProcessCpuUsage.TabIndex = 14;
+            lblProcessCpuUsage.Text = "Loading .....";
+            // 
+            // lblAppRamUsage
+            // 
+            lblAppRamUsage.AutoSize = true;
+            lblAppRamUsage.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblAppRamUsage.Location = new Point(118, 218);
+            lblAppRamUsage.Name = "lblAppRamUsage";
+            lblAppRamUsage.Size = new Size(75, 17);
+            lblAppRamUsage.TabIndex = 14;
+            lblAppRamUsage.Text = "Loading .....";
+            // 
+            // lblAppCpuUsage
+            // 
+            lblAppCpuUsage.AutoSize = true;
+            lblAppCpuUsage.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblAppCpuUsage.Location = new Point(118, 192);
+            lblAppCpuUsage.Name = "lblAppCpuUsage";
+            lblAppCpuUsage.Size = new Size(75, 17);
+            lblAppCpuUsage.TabIndex = 14;
+            lblAppCpuUsage.Text = "Loading .....";
+            // 
+            // DontShowAgainCheckbox
+            // 
+            DontShowAgainCheckbox.AutoSize = true;
+            DontShowAgainCheckbox.Location = new Point(17, 134);
+            DontShowAgainCheckbox.Name = "DontShowAgainCheckbox";
+            DontShowAgainCheckbox.Size = new Size(118, 19);
+            DontShowAgainCheckbox.TabIndex = 13;
+            DontShowAgainCheckbox.Text = "Dont Show Again";
+            DontShowAgainCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // UpdateVersionLabel
+            // 
+            UpdateVersionLabel.AutoSize = true;
+            UpdateVersionLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UpdateVersionLabel.ForeColor = Color.Red;
+            UpdateVersionLabel.Location = new Point(3, 76);
+            UpdateVersionLabel.Name = "UpdateVersionLabel";
+            UpdateVersionLabel.Size = new Size(170, 21);
+            UpdateVersionLabel.TabIndex = 2;
+            UpdateVersionLabel.Text = "Checking For Updates";
             // 
             // label57
             // 
             label57.AutoSize = true;
-            label57.ForeColor = Color.Gray;
-            label57.Location = new Point(335, 135);
+            label57.BackColor = Color.Red;
+            label57.ForeColor = Color.Black;
+            label57.Location = new Point(325, 122);
             label57.Name = "label57";
-            label57.Size = new Size(199, 30);
+            label57.Size = new Size(199, 45);
             label57.TabIndex = 12;
-            label57.Text = "Do Not Use My Config As Your Main\r\nIt Get's Replaced By AutoUpdater\r\n";
+            label57.Text = "Do Not Use My Config As Your Main\r\nIt Will Get Replaced By AutoUpdater\r\nIn The Next Update";
             // 
             // DeleteProfile
             // 
@@ -1774,57 +2574,37 @@ namespace DayZ_Server_Tool
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(596, 632);
+            tabControl1.Size = new Size(900, 707);
             tabControl1.TabIndex = 1;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
-            // tabPage11
+            // label70
             // 
-            tabPage11.Controls.Add(label55);
-            tabPage11.Location = new Point(4, 29);
-            tabPage11.Name = "tabPage11";
-            tabPage11.Padding = new Padding(3);
-            tabPage11.Size = new Size(588, 599);
-            tabPage11.TabIndex = 7;
-            tabPage11.Text = "Console";
-            tabPage11.UseVisualStyleBackColor = true;
+            label70.AutoSize = true;
+            label70.BackColor = Color.Black;
+            label70.ForeColor = Color.Red;
+            label70.Location = new Point(176, 8);
+            label70.Name = "label70";
+            label70.Size = new Size(278, 15);
+            label70.TabIndex = 3;
+            label70.Text = "NOT WORKING YET ONLY FOR PREVIEW PURPOSES";
             // 
-            // label55
+            // label71
             // 
-            label55.AutoSize = true;
-            label55.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label55.Location = new Point(95, 288);
-            label55.Name = "label55";
-            label55.Size = new Size(368, 40);
-            label55.TabIndex = 0;
-            label55.Text = "CONSOLE COMING SOON";
-            // 
-            // tabPage12
-            // 
-            tabPage12.Controls.Add(label56);
-            tabPage12.Location = new Point(4, 29);
-            tabPage12.Name = "tabPage12";
-            tabPage12.Padding = new Padding(3);
-            tabPage12.Size = new Size(588, 599);
-            tabPage12.TabIndex = 8;
-            tabPage12.Text = "XML Editor";
-            tabPage12.UseVisualStyleBackColor = true;
-            // 
-            // label56
-            // 
-            label56.AutoSize = true;
-            label56.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label56.Location = new Point(102, 288);
-            label56.Name = "label56";
-            label56.Size = new Size(362, 40);
-            label56.TabIndex = 1;
-            label56.Text = "XML Editor Coming Soon";
+            label71.AutoSize = true;
+            label71.BackColor = Color.Black;
+            label71.ForeColor = Color.Red;
+            label71.Location = new Point(176, 402);
+            label71.Name = "label71";
+            label71.Size = new Size(278, 15);
+            label71.TabIndex = 4;
+            label71.Text = "NOT WORKING YET ONLY FOR PREVIEW PURPOSES";
             // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.DarkGray;
-            ClientSize = new Size(619, 669);
+            ClientSize = new Size(916, 743);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -1834,9 +2614,22 @@ namespace DayZ_Server_Tool
             SizeGripStyle = SizeGripStyle.Hide;
             Tag = "";
             Text = "DaBoiJason's DayZ Server Tool";
-            Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            tabPage12.ResumeLayout(false);
+            tabPage12.PerformLayout();
+            tabPage11.ResumeLayout(false);
+            tabControl3.ResumeLayout(false);
+            tabPage13.ResumeLayout(false);
+            tabPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)RconPortNumeric).EndInit();
+            tabPage14.ResumeLayout(false);
+            tabPage14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxPingNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdminVolume).EndInit();
+            tabPage15.ResumeLayout(false);
+            tabPage15.PerformLayout();
+            onlinePlayerContextMenu.ResumeLayout(false);
             tabPage7.ResumeLayout(false);
             tabPage7.PerformLayout();
             tabControl2.ResumeLayout(false);
@@ -1861,10 +2654,6 @@ namespace DayZ_Server_Tool
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabControl1.ResumeLayout(false);
-            tabPage11.ResumeLayout(false);
-            tabPage11.PerformLayout();
-            tabPage12.ResumeLayout(false);
-            tabPage12.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1881,13 +2670,114 @@ namespace DayZ_Server_Tool
         private ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private ToolStripMenuItem VersionNumber;
         private Label webhookColor;
-        private TextBox OnStartServerNameURL;
         private ToolTip toolTip;
+        private ToolStripMenuItem UpdateChecker;
+        private TextBox ConsoleOutputTextBox;
+        private Button button4;
+        private System.Windows.Forms.Timer timerUpdateUsage;
+        private TabPage tabPage12;
+        private Label label62;
+        private Label label56;
+        private TabPage tabPage11;
+        private TabControl tabControl3;
+        private TabPage tabPage13;
+        private Button WriteRconCFG;
+        private Button RandomGeneratePassowrd;
+        private Button ShowRconPass;
+        private Label label61;
+        private Label label60;
+        private ComboBox RestrictRcoComboBox;
+        private TextBox RconPasswordTextBox;
+        private Label label59;
+        private Label label58;
+        private Label label55;
+        private CheckBox AntiDupeCheckbox;
+        private CheckBox RconEnableCheckBox;
+        private TabPage tabPage14;
+        private TextBox RConsoleOutput;
+        private Button AdminSoundTest;
+        private TrackBar AdminVolume;
+        private Button ConsoleSendButton;
+        private TextBox RconCommandLineTextBox;
+        private Button RconDisconnectButton;
+        private Button RconConnectButton;
+        private TabPage tabPage15;
         private TabPage tabPage7;
+        private Label label28;
+        private Label label22;
+        private TabControl tabControl2;
+        private TabPage tabPage8;
+        private Label label33;
+        private Label label29;
+        private TextBox OnStartBottomTextURL;
+        private TextBox OnStartEmbedColor;
+        private TextBox OnStartBottomText;
+        private TextBox OnStartBottomTitle;
+        private TextBox OnStartTitleURL;
+        private Label label35;
+        private Label label49;
+        private TextBox OnStartContentImage;
+        private TextBox OnStartTitle;
+        private Label label52;
+        private Label label51;
+        private Label label34;
+        private TextBox OnStartBigLogo;
+        private TextBox OnStartMessagePrior;
+        private Label label32;
+        private TextBox OnStartServerName;
+        private Label label31;
+        private Label label30;
+        private Label label27;
+        private Label label24;
+        private TextBox OnStartServerNameURL;
+        private TextBox OnStartBotAvatar;
+        private Label label26;
+        private Label label23;
+        private TextBox OnStartServerIcon;
+        private Label label25;
+        private TextBox OnStartBotName;
+        private Label label16;
+        private CheckBox OnStartDisplayTime;
+        private TabPage tabPage9;
+        private TextBox OnRestartContentImage;
+        private Label label53;
+        private Label label54;
+        private TextBox OnRestartBigLogo;
+        private TextBox OnRestartEmbedColor;
+        private Label label50;
+        private CheckBox OnRestartDisplayTime;
+        private Label label36;
+        private Label label37;
+        private TextBox OnRestartBottomTextURL;
+        private TextBox OnRestartBottomText;
+        private TextBox OnRestartBottomTitle;
+        private TextBox OnRestartTitleURL;
+        private Label label38;
+        private TextBox OnRestartTitle;
+        private Label label39;
+        private TextBox OnRestartMessagePrior;
+        private Label label40;
+        private TextBox OnRestartServerName;
+        private Label label41;
+        private Label label42;
+        private Label label43;
+        private Label label44;
+        private TextBox OnRestartServerNameURL;
+        private TextBox OnRestartBotAvatar;
+        private Label label45;
+        private Label label46;
+        private TextBox OnRestartServerIcon;
+        private Label label47;
+        private TextBox OnRestartBotName;
+        private Label label48;
+        private TabPage tabPage10;
+        private Panel panel1;
         private Label label7;
         private TextBox webhookTextBox;
+        private CheckBox StartWebhookCheckbox;
         private Label label12;
         private CheckBox EnableWebhookCheckbox;
+        private CheckBox RestartWebhookCheckbox;
         private TabPage tabPage6;
         private Label label15;
         private Label timeremaininglabel;
@@ -1916,7 +2806,7 @@ namespace DayZ_Server_Tool
         private Label label14;
         private Label label8;
         private Button ServerKeys;
-        private Button Keys;
+        private Button ModKeys;
         private ProgressBar progressBar3;
         private ProgressBar progressBar1;
         private Button ServerMods;
@@ -1933,7 +2823,6 @@ namespace DayZ_Server_Tool
         private Label label21;
         private Label label20;
         private Label label19;
-        private CheckBox enableRconCheckBox;
         private Label label3;
         private ComboBox comboBoxCpu;
         private TextBox textBoxConfig;
@@ -1941,7 +2830,7 @@ namespace DayZ_Server_Tool
         private TextBox textBoxPort;
         private TextBox textboxBePath;
         private TextBox textBoxExePath;
-        private CheckBox checkBox1;
+        private CheckBox FreezeCheckbox;
         private Label label5;
         private Label ConfigLabel;
         private Label label4;
@@ -1951,6 +2840,13 @@ namespace DayZ_Server_Tool
         private Label label17;
         private Label label2;
         private TabPage tabPage1;
+        private Label lblProcessRamUsage;
+        private Label lblProcessCpuUsage;
+        private Label lblAppRamUsage;
+        private Label lblAppCpuUsage;
+        private CheckBox DontShowAgainCheckbox;
+        private Label UpdateVersionLabel;
+        private Label label57;
         private Button DeleteProfile;
         private Button loadFileToolStripMenu;
         private ComboBox comboBoxProfiles;
@@ -1960,81 +2856,45 @@ namespace DayZ_Server_Tool
         private Button saveFileToolStripMenuItem;
         private Label label1;
         private TabControl tabControl1;
-        private CheckBox StartWebhookCheckbox;
-        private CheckBox RestartWebhookCheckbox;
-        private TabControl tabControl2;
-        private TabPage tabPage8;
-        private TabPage tabPage9;
-        private Label label22;
-        private CheckBox OnStartDisplayTime;
-        private Label label28;
-        private TabPage tabPage10;
-        private Panel panel1;
-        private TextBox OnStartServerName;
-        private Label label24;
-        private TextBox OnStartBotAvatar;
-        private Label label23;
-        private TextBox OnStartBotName;
-        private Label label16;
-        private Label label29;
-        private TextBox OnStartTitle;
-        private Label label27;
-        private Label label26;
-        private TextBox OnStartServerIcon;
-        private Label label25;
-        private TextBox OnStartMessagePrior;
-        private Label label30;
-        private TextBox OnStartBottomTitle;
-        private TextBox OnStartTitleURL;
-        private Label label32;
-        private Label label31;
-        private Label label33;
-        private TextBox OnStartBottomTextURL;
-        private TextBox OnStartBottomText;
-        private Label label35;
-        private Label label34;
-        private Label label36;
-        private Label label37;
-        private TextBox OnRestartBottomTextURL;
-        private TextBox OnRestartBottomText;
-        private TextBox OnRestartBottomTitle;
-        private TextBox OnRestartTitleURL;
-        private Label label38;
-        private TextBox OnRestartTitle;
-        private Label label39;
-        private TextBox OnRestartMessagePrior;
-        private Label label40;
-        private TextBox OnRestartServerName;
-        private Label label41;
-        private Label label42;
-        private Label label43;
-        private Label label44;
-        private TextBox OnRestartServerNameURL;
-        private TextBox OnRestartBotAvatar;
-        private Label label45;
-        private Label label46;
-        private TextBox OnRestartServerIcon;
-        private Label label47;
-        private TextBox OnRestartBotName;
-        private Label label48;
-        private TextBox OnStartEmbedColor;
-        private Label label49;
-        private TextBox OnRestartEmbedColor;
-        private Label label50;
-        private CheckBox OnRestartDisplayTime;
-        private TextBox OnStartBigLogo;
-        private Label label51;
-        private TextBox OnStartContentImage;
-        private Label label52;
-        private TextBox OnRestartContentImage;
-        private Label label53;
-        private Label label54;
-        private TextBox OnRestartBigLogo;
-        private TabPage tabPage11;
-        private Label label55;
-        private TabPage tabPage12;
-        private Label label56;
-        private ToolStripMenuItem UpdateChecker;
-        private Label label57;
+        private Button ClearConsoleButton;
+        private NumericUpDown RconPortNumeric;
+        private ListView onlinePlayerListView;
+        private Label label63;
+        private ListView offlinePlayerListView;
+        private Label label64;
+        private ContextMenuStrip onlinePlayerContextMenu;
+        private ToolStripMenuItem CopyHeader;
+        private ToolStripMenuItem CopyIP;
+        private ToolStripMenuItem CopyGUID;
+        private ToolStripMenuItem TimedBanMenueItem;
+        private ToolStripMenuItem ActionsHeader;
+        private ToolStripMenuItem KickMenueItem;
+        private ToolStripMenuItem BanMenueItem;
+        private ToolStripMenuItem PrivateMessageMenuteItem;
+        private ToolStripMenuItem ProfilesHeader;
+        private ToolStripMenuItem VPNChekerMenueItem;
+        private ColumnHeader PlayerNameHeader;
+        private ColumnHeader GUIDHeadder;
+        private ColumnHeader PlayersIP;
+        private Label label65;
+        private ToolStripMenuItem CopyNameMenueItem;
+        private Label label66;
+        private ComboBox RconConfigFileComboBox;
+        private Button OverWriteButtonRcon;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem youTubeTutorialVideoSoonToolStripMenuItem;
+        private CheckBox checkBox1;
+        private Button UnlockServerButton;
+        private Button LockServerButton;
+        private Button ServerShutdownViaRcon;
+        private Label label67;
+        private NumericUpDown MaxPingNumericUpDown;
+        private Button SetMaxPingButton;
+        private Label label68;
+        private ColumnHeader PlayerIDHeader;
+        private ColumnHeader PlayerPingHeader;
+        private Label label69;
+        private Label label71;
+        private Label label70;
     }
 }

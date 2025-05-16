@@ -1,6 +1,6 @@
 # DayZ Server Tool
 
-The **DayZ Server Tool** is a Windows application designed to facilitate the configuration and management of DayZ server instances. With an intuitive user interface, users can easily set various server parameters, manage mods, and save their configurations in JSON format. The tool also provides logging functionality to help with server diagnostics and monitoring.
+The **DayZ Server Tool** is a Windows application designed to facilitate the configuration and management of DayZ server instances. With an intuitive user interface, users can easily set various server parameters, manage mods, and save their configurations in JSON format. The tool also provides logging functionality to help with server diagnostics and monitoring and full RCON access.
 
 ## Features
 
@@ -11,8 +11,10 @@ The **DayZ Server Tool** is a Windows application designed to facilitate the con
 - **Mod Management**: Add mods to launch parameters with a simple interface.
 - **Extra Mod Management**: Adds Mods and Keys with a simple interface and also has progress bars to check on the progress of the procedure.
 - **Logging Options**: Enable various logging options to capture server logs.
-- **Process Management**: Start and stop the DayZ server executable from the UI.
+- **Process Management**: Start and stop the DayZ server executable from the UI (Including resource monitor on the Server tab).
 - **Discord Integration**: Links to Discord server for community support and updates.
+- **Rcon Integration**: Allows for full RCON support on the server (playerlist coming soon).
+
 
 ## Installation
 
@@ -36,11 +38,19 @@ The **DayZ Server Tool** is a Windows application designed to facilitate the con
 
 4. **Enable logging options**: Check the boxes for the desired logging options.
 
-5. **Save your profile**: Name your profile and click the save button to store the settings in a JSON file.
+5. **Enable Extra Parameters (Not recommended unless you know what you are doing)**: Allow for more launch params in the server executable (be cautious with the use of it).
 
-6. **Start/Stop the server**: Use the respective buttons to start or stop the DayZ server process.
+6. **Restart Timer**: Enable restart timer (later on I will implement for mpmission XLM managment).
 
-7. **Refresh profiles**: You can refresh the list of profiles to load any new configurations you have saved.
+7. **Discord Webhook Integration**: Allowing for discord messages for start/restart (fully customisable).
+
+8. **Full Rcon Integration**: Rcon implementation into the tool for full managment of the server inside of the tool.
+
+9. **Save your profile**: Name your profile and click the save button to store the settings in a JSON file.
+
+10. **Start/Stop the server**: Use the respective buttons to start or stop the DayZ server process.
+
+11. **Refresh profiles**: You can refresh the list of profiles to load any new configurations you have saved.
 
 ## Screenshot
 
@@ -60,6 +70,7 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 ## Acknowledgments
 
 - Special thanks to the DayZ community for their ongoing support and feedback.
+- Special thanks to Ryan Torzynski for the [Battleye Rcon library](https://github.com/BytexDigital/BytexDigital.BattlEye.Rcon) that is utilised in this project
 
 ## Contact
 
